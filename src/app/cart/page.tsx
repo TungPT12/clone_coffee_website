@@ -4,17 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import ProvisionalInvoice from "@/components/ProvisionalInvoice/ProvisionalInvoice";
+import Banner from "@/components/Banner/Banner";
 export default function Cart() {
   return (
     <div className="position-relative">
       <Navbar />
-      <div
-        className={`${styles["banner"]} d-flex justify-content-center align-items-center text-center w-100`}
-      >
-        <h1 className={` text-light text-uppercase ${styles["title-page"]}`}>
-          Cart
-        </h1>
-      </div>
+      <Banner title={`cart`} />
       <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
         <div className="cart-product">
           <div className={`${styles["t-head"]} `}>
