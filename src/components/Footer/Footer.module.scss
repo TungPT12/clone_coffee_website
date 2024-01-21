@@ -1,0 +1,70 @@
+.footer {
+  padding-left: 7rem;
+  padding-right: 7rem;
+  background-color: rgba(255, 233, 196, 0.075);
+  background-image: url("https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/h1-bacground-img-1.jpg");
+}
+.text-title {
+  white-space: nowrap;
+
+  margin-top: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #262626;
+  font-family: Marcellus, sans-serif;
+}
+.text-copyright {
+  display: flex;
+}
+.text-dot {
+  /* Viền màu nâu */
+  margin-top: 1%;
+  white-space: nowrap;
+}
+.star-icon {
+  display: flex;
+}
+.star {
+  margin-right: 5px; /* Khoảng cách giữa các icon */
+  height: 100px; /* Kích thước của icon */
+  width: 50px; /* Kích thước của icon */
+}
+.text-left {
+  margin-top: 2.2%;
+  font-size: 20px;
+}
+.text-description {
+  font-family: Marcellus, sans-serif;
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+.dot {
+  margin-top: 0.5%;
+  height: 30px; /* Kích thước của icon */
+  width: 40px; /* Kích thước của icon */
+}
+.infor {
+  margin-top: 1rem;
+  display: flex;
+  gap: 3rem;
+  border-bottom: 1px solid black;
+}
+
+.text-map {
+  column-width: auto;
+  max-width: 20ch;
+  border-bottom: 1px solid black;
+}
+.text-info {
+  font-family: Marcellus, sans-serif;
+  margin-top: -1rem;
+  column-width: auto;
+  max-width: 100ch;
+  margin-bottom: 1rem;
+}
+.logo {
+  border-radius: 100px;
+}

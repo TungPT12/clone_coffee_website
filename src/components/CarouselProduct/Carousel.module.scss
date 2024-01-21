@@ -1,0 +1,53 @@
+.product {
+  user-select: none;
+}
+.tiltle {
+  font-family: Marcellus, sans-serif;
+  text-align: center;
+}
+.sub-text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 300;
+  color: #656565;
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrapper-add-to-cart {
+  &:hover .overlay-add-to-cart {
+    opacity: 1;
+  }
+  &:hover .image-product {
+    opacity: 0.6;
+  }
+}
+.overlay-add-to-cart,
+.image-product {
+  transition: all 0.5s ease;
+}
+
+.overlay-add-to-cart {
+  opacity: 0;
+  background: #ffffff05;
+}
+
+.add-to-cart-btn {
+  color: #fff;
+  background-color: #be9c79;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 1.15em;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease;
+  padding: 19px 35px;
+
+  &:hover {
+    color: #fff;
+    background-color: #262626;
+  }
+}
+  

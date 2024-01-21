@@ -1,0 +1,51 @@
+.sub {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 1.55em;
+  font-style: normal;
+  font-weight: 300;
+  text-transform: none;
+}
+.title-big {
+  margin-top: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 40px;
+  color: #262626;
+}
+.header {
+  font-family: Marcellus, sans-serif;
+  text-align: center;
+}
+.category {
+  background: 0 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  outline: 0;
+}
+.tiltle {
+  font-family: Marcellus, sans-serif;
+  text-align: center;
+}
+.sub-text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 300;
+  color: #656565;
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.number {
+  display: inline-block !important;
+  vertical-align: middle;
+  font-size: 55px;
+  font-family: Marcellus, sans-serif;
+  color: #be9c79;
+  letter-spacing: 0.05em;
+  line-height: 0.9em;
+  overflow: hidden;
+}

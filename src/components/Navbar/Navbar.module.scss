@@ -1,0 +1,86 @@
+.navbar {
+  height: 100px;
+  position: relative;
+  z-index: 9999;
+}
+
+.item-outer:hover {
+  align-items: flex-start;
+}
+
+.item-outer {
+  align-items: flex-end;
+  color: #fff;
+}
+
+.item-outer {
+  font-family: Marcellus, sans-serif;
+}
+
+.item-outer::after {
+  right: 0;
+  content: "";
+  height: 2px;
+  border-bottom: 1px solid #fff;
+  width: 0%;
+  display: block;
+  transition: all 0.2s linear;
+}
+
+.item-outer:hover::after {
+  right: 0;
+  content: "";
+  height: 2px;
+  border-bottom: 1px solid #fff;
+  display: block;
+  width: 100%;
+  animation: showBorder 0.2s linear;
+}
+
+@keyframes showBorder {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.second-navbar {
+  left: -3rem;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.15s ease-out;
+}
+
+.nav-item:hover .second-navbar {
+  max-height: 154px;
+  transition: max-height 0.15s ease-in;
+}
+
+.number {
+  position: absolute;
+  top: 1.7rem; /* Điều chỉnh vị trí theo nhu cầu của bạn */
+  left: 1rem; /* Điều chỉnh vị trí theo nhu cầu của bạn */
+  color: white; /* Màu chữ */
+  font-size: 12px; /* Kích thước chữ */
+  padding: 2px 5px; /* Khoảng cách giữa số và viền */
+  border-radius: 50%; /* Bo tròn viền */
+}
+
+.second-navbar-cart {
+  overflow: hidden;
+  max-height: 0px;
+  margin-left: -5rem;
+  transition: max-height 0.15s ease-out;
+}
+
+.second-navbar-cart::-webkit-scrollbar {
+  display: none;
+}
+
+.cart-icon:hover .second-navbar-cart {
+  max-height: 500px;
+  overflow-y: auto;
+  transition: max-height 0.15s ease;
+}

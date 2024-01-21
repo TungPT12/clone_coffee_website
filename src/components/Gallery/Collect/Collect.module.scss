@@ -1,0 +1,28 @@
+.overlay-collect {
+  background-color: #fff0;
+  color: #fff;
+  font-family: Marcellus, sans-serif;
+  transition: all 0.3s ease;
+  display: flex;
+}
+
+.text-title {
+  font-size: 2rem;
+}
+
+.text-title,
+.text-link {
+  display: none;
+}
+
+.collect {
+  &:hover .overlay-collect {
+    transition: all 0.4s ease;
+    background-color: #0000009c;
+  }
+
+  &:hover .text-title,
+  &:hover .text-link {
+    display: block;
+  }
+}

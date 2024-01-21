@@ -1,0 +1,93 @@
+.content {
+  position: absolute;
+  top: 70%;
+  right: -15%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+@keyframes fadeInUp {
+  0% {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 100%);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(-50%, 100%);
+    opacity: 1;
+  }
+}
+
+.content h1 {
+  font-size: 80px;
+  font-family: Marcellus, sans-serif;
+  border-bottom: 1px white solid;
+}
+.content h2 {
+  font-weight: lighter;
+  font-size: 20px;
+  font-family: Marcellus, sans-serif;
+  word-wrap: break-word;
+  width: 700px;
+}
+
+.button {
+  margin-top: 2rem;
+}
+.button button {
+  text-align: center;
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px white solid;
+  height: 50px;
+  width: 200px;
+}
+
+.button button:hover {
+  background-color: #563b27;
+}
+
+.logo {
+  border-radius: 50%;
+}
+
+.logo,
+.button,
+.title,
+.text {
+  position: relative;
+  top: 0%;
+}
+
+.top-to-bottom {
+  animation: fromBottomToTop 0.8s ease;
+}
+
+.top-to-bottom-first {
+  animation: fromBottomToTop 1s ease;
+}
+
+.top-to-bottom-second {
+  animation: fromBottomToTop 1.5s ease;
+}
+
+.top-to-bottom-third {
+  animation: fromBottomToTop 1.7s ease;
+}
+
+@keyframes fromBottomToTop {
+  0% {
+    top: 150%;
+  }
+
+  100% {
+    top: 0%;
+  }
+}

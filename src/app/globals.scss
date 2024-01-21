@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Open+Sans:wght@300&display=swap");
+
+li {
+  list-style: none;
+}
+
+.show {
+  display: none;
+}
+
+.active .show {
+  display: block;
+}
+
+.active .show {
+  display: block;
+}
+
+.active .image-slide-show {
+  animation: zoomOut 60s ease;
+}
+
+@keyframes zoomOut {
+  0% {
+    scale: 1;
+  }
+
+  100% {
+    scale: 2;
+  }
+}
+
+.f-1 {
+  flex: 1;
+}
+
+.f-2 {
+  flex: 2;
+}
+
+.f-3 {
+  flex: 3;
+}
+
+.f-4 {
+  flex: 4;
+}
+
+.f-5 {
+  flex: 5;
+}

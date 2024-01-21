@@ -1,0 +1,110 @@
+@import "../variable.scss";
+.banner {
+  background-image: url("https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/shop-list-title-img-1.jpg");
+  height: 480px;
+  background-position-x: center;
+}
+
+.title-page {
+  line-height: 100%;
+  font-family: Marcellus, sans-serif;
+  font-weight: 400;
+  font-size: 60px;
+}
+
+.cart-wrapper {
+  padding-left: 7rem;
+  padding-right: 7rem;
+  color: #262626;
+  font-weight: 200;
+}
+
+.th {
+  font-weight: 500;
+  border-bottom: 1px solid #ccc;
+}
+
+.t-row {
+  border-bottom: 1px solid #ccc;
+}
+
+.icon-close {
+  cursor: pointer;
+  color: #ccc;
+}
+
+.wrapper-quantity {
+  border: 1px solid #ccc;
+}
+
+.input-quantity {
+  position: relative;
+  height: 53px;
+  font-weight: 200;
+  text-align: center;
+  width: 53px;
+  padding: 0;
+  border: none;
+  color: #262626;
+  border-right: 1px solid #ccc;
+  font-family: inherit;
+  line-height: 42px;
+  outline: 0;
+}
+
+.wrapper-btn {
+  height: 53px;
+}
+
+.increase-btn,
+.decrease-btn {
+  width: 100%;
+  border: none;
+  background: none;
+  &:hover {
+    color: #cf71b6;
+  }
+}
+
+.increase-btn {
+  border-bottom: 1px solid #ccc;
+}
+
+.input-coupon {
+  padding: 15px 23px;
+  font-weight: 200;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: inherit;
+  color: #656565;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  outline: 0;
+  transition: border-color 0.2s ease-in-out;
+  margin-right: 22px;
+  &:focus {
+    border: 1px solid #000;
+  }
+}
+
+.apply-coupon-btn {
+  font-family: inherit;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  outline: 0;
+  font-size: 12px;
+  line-height: 1.15em;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: $colorButton;
+  padding: 18px 35px;
+  border: none;
+  transition: all 0.2s linear;
+  &:hover {
+    background: $colorButtonHover;
+  }
+}
