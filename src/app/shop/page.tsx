@@ -102,7 +102,6 @@ const Shop = () => {
                 </div>
               </div>
               <div className="col-4">
-                {" "}
                 <div className={`${styles["product"]} w-100`}>
                   <div
                     className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -128,39 +127,42 @@ const Shop = () => {
                 </div>
               </div>
             </div>
-            <div
-              className={`${styles["pagination"]} pagination d-flex justify-content-center`}
-            >
-              <a href="#" className="page-link active">
-                1
-              </a>
-              <a href="#" className="page-link">
-                2
-              </a>
-              <a href="#" className="page-link">
-                3
-              </a>
+            <div className={styles.paging}>
+              <span className={`${styles.icon} ${styles.smallerIcon}`}>
+                &#8249;
+              </span>
+              <div className={styles.pagingItem}>
+                <span>1</span>
+              </div>
+              <div className={styles.pagingItem}>
+                <span>2</span>
+              </div>
+              <span className={`${styles.icon} ${styles.smallerIcon}`}>
+                &#8250;
+              </span>
             </div>
           </div>
           <div className="col-2">
             <div>
-              <span className={`${styles["title-category"]}`}>
-                PRODUCT CATEGORIES
+              <span className={`${styles["title-category"]} text-uppercase`}>
+                product categorys
               </span>
-              <div className={`${styles["category"]}`}>
-                <span>Coffee</span>
+              <div className={`${styles["category"]} text-capitalize`}>
+                <span>coffee house</span>
                 <span>Drink</span>
                 <span>Breakfast</span>
                 <span>Tea</span>
               </div>
             </div>
-            <div className={`${styles["tag-category"]}`}>
-              <span className={`${styles["title-category"]}`}>PRODUCT TAG</span>
-              <div className={`${styles["tag-tile-category"]}`}>
-                <span>Coffee,</span>
-                <span>Drink,</span>
-                <span>Breakfast,</span>
-                <span>Tea.</span>
+            <div className={`${styles["tag-category"]} text-uppercase`}>
+              <span className={`${styles["title-category"]}`}>
+                PRODUCT TAGS
+              </span>
+              <div className={`${styles["tag-tile-category"]} text-capitalize`}>
+                <span>Coffee</span>
+                <span>Drink</span>
+                <span>Breakfast</span>
+                <span>Tea</span>
               </div>
             </div>
           </div>

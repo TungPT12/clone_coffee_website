@@ -1,6 +1,5 @@
 import Analysis from "@/components/Analysis/Analysis";
 import Category from "@/components/Category/Category";
-import CountdownTimer from "@/components/CountDown/CountDown";
 import Footer from "@/components/Footer/Footer";
 import Gallery from "@/components/Gallery/Gallery";
 import Navbar from "@/components/Navbar/Navbar";

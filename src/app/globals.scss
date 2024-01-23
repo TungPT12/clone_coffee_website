@@ -50,3 +50,8 @@ li {
 .f-5 {
   flex: 5;
 }
+
+::selection {
+  background: #be9c79;
+  color: #fff;
+}
