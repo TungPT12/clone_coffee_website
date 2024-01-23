@@ -62,13 +62,13 @@ function Navbar() {
                 className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
               >
                 <Link
-                  href="/"
+                  href="/shop"
                   className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
                 >
                   <span
                     className={`d-flex flex-column ${styles["item-outer"]} `}
                   >
-                    PAGES
+                    Shop
                   </span>
                 </Link>
                 <div
