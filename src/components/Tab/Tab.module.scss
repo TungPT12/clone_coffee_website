@@ -1,0 +1,48 @@
+.tabContainer {
+  display: flex;
+  flex-direction: column;
+}
+.tabCtroll {
+  display: flex;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+  font-family: Marcellus, sans-serif;
+  font-weight: 300;
+}
+
+.tab:hover {
+  background-color: #916840;
+  color: white;
+}
+
+.tab.active {
+  background-color: #916840;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+  background-color: #f9f9f9;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+.tab-content.show {
+  display: block;
+  opacity: 1;
+}
+.tabContent{
+  font-family: Marcellus, sans-serif;
+  font-weight: 300;
+}

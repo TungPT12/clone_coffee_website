@@ -1,4 +1,4 @@
-@import "../variable.scss";
+@import "../../variable.scss";
 
 .cart-wrapper {
   padding-left: 7rem;
@@ -66,23 +66,16 @@
   margin-top: 20px;
 }
 
-.paging {
-  display: flex;
-  justify-content: center;
+.page-link {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  text-decoration: none;
 }
 
-.pagingItem {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
-.pagingItem span {
-  font-size: 18px;
-  line-height: 1;
+.page-link.active {
+  background-color: #ccc;
 }
 .category {
   margin-top: 1rem;
@@ -100,6 +93,10 @@
 .title-category {
   font-family: Marcellus, sans-serif;
   font-weight: 400;
+  font-size: 35px;
+  line-height: 1.28em;
+  letter-spacing: 1.75px;
+  text-transform: uppercase;
 }
 .tag-category {
   margin-top: 2rem;
@@ -135,11 +132,32 @@
     color: #999;
   }
 }
-.icon {
-  font-size: 40px;
-  line-height: 1;
+.styles.qualityInput {
+  width: 10px;
 }
+.spanButton {
+  gap: 3rem;
+}
+.add-to-cart-btn {
+  color: #fff;
+  background-color: #be9c79;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 1.15em;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease;
+  padding: 10px 30px;
 
-.smallerIcon {
-  font-size: 27px;
+  &:hover {
+    color: #fff;
+    background-color: #262626;
+  }
+}
+.buttonQuality {
+  height: 3rem;
+}
+.related-product {
+  margin-top: 5rem;
 }
