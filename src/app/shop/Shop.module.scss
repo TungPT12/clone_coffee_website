@@ -1,0 +1,128 @@
+@import "../variable.scss";
+
+.cart-wrapper {
+  padding-left: 7rem;
+  padding-right: 7rem;
+  color: #262626;
+  font-weight: 200;
+}
+
+.product {
+  user-select: none;
+}
+
+.wrapper-btn {
+  height: 53px;
+}
+.wrapper-add-to-cart {
+  &:hover .overlay-add-to-cart {
+    opacity: 1;
+  }
+  &:hover .image-product {
+    opacity: 0.6;
+  }
+}
+.overlay-add-to-cart,
+.image-product {
+  transition: all 0.5s ease;
+}
+.overlay-add-to-cart {
+  opacity: 0;
+  background: #ffffff05;
+}
+
+.add-to-cart-btn {
+  color: #fff;
+  background-color: #be9c79;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 1.15em;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease;
+  padding: 19px 35px;
+
+  &:hover {
+    color: #fff;
+    background-color: #262626;
+  }
+}
+.tiltle {
+  font-family: Marcellus, sans-serif;
+  text-align: center;
+}
+.sub-text {
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 300;
+  color: #656565;
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.page-link {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+}
+
+.page-link.active {
+  background-color: #ccc;
+}
+.category {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  line-height: 26px;
+  font-weight: 300;
+  color: #656565;
+  overflow-x: hidden !important;
+  -webkit-font-smoothing: antialiased;
+}
+.title-category {
+  font-family: Marcellus, sans-serif;
+  font-weight: 400;
+}
+.tag-category {
+  margin-top: 1rem;
+}
+.tag-tile-category {
+  display: flex;
+  gap: 0.5rem;
+}
+.search-container {
+  position: relative;
+  display: inline-block;
+  font-family: Marcellus, sans-serif;
+  font-weight: 400;
+
+  .search-input {
+    padding: 10px 30px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 20px;
+    width: 200px;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+
+  .fa-search {
+    
+    color: #999;
+  }
+}
