@@ -15,7 +15,6 @@
   background-color: #e0e0e0;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  text-transform: uppercase;
   font-family: Marcellus, sans-serif;
   font-weight: 300;
 }
@@ -38,6 +37,7 @@
   top: 100%;
   left: 0;
   width: 100%;
+  border: 1px solid #656565;
 }
 
 .tab-content.show {
@@ -45,6 +45,15 @@
   opacity: 1;
 }
 .tabContent {
-  font-family: Marcellus, sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-size: 15px;
+  line-height: 26px;
   font-weight: 300;
+  color: #656565;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+  padding: 1.2rem;
+  border: 1px solid #ebebeb;
+}
+.tab-description {
 }

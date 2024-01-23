@@ -4,6 +4,7 @@ import styles from "./Shop.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
+import Link from "next/link";
 const Shop = () => {
   return (
     <div className="position-relative">
@@ -45,10 +46,13 @@ const Shop = () => {
                       </button>
                     </div>
                   </div>
-                  <div className={`w-100 text-center mt-2`}>
+                  <Link
+                    href={`/product/${1}`}
+                    className={`w-100 text-center mt-2 text-decoration-none `}
+                  >
                     <h5 className={`${styles["tiltle"]}`}>TYPES OF COFFEE</h5>
                     <h6 className={`${styles["sub-text"]}`}>$15.00</h6>
-                  </div>
+                  </Link>
                 </div>
               </div>
               <div className="col-4">
@@ -70,10 +74,13 @@ const Shop = () => {
                       </button>
                     </div>
                   </div>
-                  <div className={`w-100 text-center mt-2`}>
+                  <Link
+                    href={`/product/${1}`}
+                    className={`w-100 text-center mt-2 text-decoration-none `}
+                  >
                     <h5 className={`${styles["tiltle"]}`}>TYPES OF COFFEE</h5>
                     <h6 className={`${styles["sub-text"]}`}>$15.00</h6>
-                  </div>
+                  </Link>
                 </div>
               </div>
               <div className="col-4">
@@ -95,10 +102,13 @@ const Shop = () => {
                       </button>
                     </div>
                   </div>
-                  <div className={`w-100 text-center mt-2`}>
+                  <Link
+                    href={`/product/${1}`}
+                    className={`w-100 text-center mt-2 text-decoration-none `}
+                  >
                     <h5 className={`${styles["tiltle"]}`}>TYPES OF COFFEE</h5>
                     <h6 className={`${styles["sub-text"]}`}>$15.00</h6>
-                  </div>
+                  </Link>
                 </div>
               </div>
               <div className="col-4">
@@ -120,10 +130,13 @@ const Shop = () => {
                       </button>
                     </div>
                   </div>
-                  <div className={`w-100 text-center mt-2`}>
+                  <Link
+                    href={`/product/${1}`}
+                    className={`w-100 text-center mt-2 text-decoration-none `}
+                  >
                     <h5 className={`${styles["tiltle"]}`}>TYPES OF COFFEE</h5>
                     <h6 className={`${styles["sub-text"]}`}>$15.00</h6>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -12,8 +12,7 @@ const Tabs = () => {
     if (activeTab.isShowDescription) {
       return (
         <div className={`${styles.tabContent}`}>
-          <h3>Content for Tab 1</h3>
-          <span>
+          <span className={`${styles["tab-description"]}`}>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
             commodo ligula eget dolor. Aenean massa. Cum sociis natoque
             penatibus et magnis dis parturient montes, nascetur ridiculus mus.
@@ -44,7 +43,7 @@ const Tabs = () => {
         <div
           className={`${styles["tab"]} ${
             activeTab.isShowDescription ? styles["active"] : ""
-          } `}
+          } text-uppercase`}
           onClick={() => {
             setActiveTab({
               isShowInformation: false,
@@ -58,7 +57,7 @@ const Tabs = () => {
         <div
           className={`${styles["tab"]} ${
             activeTab.isShowInformation ? styles["active"] : ""
-          }`}
+          }text-uppercase`}
           onClick={() => {
             setActiveTab({
               isShowDescription: false,
@@ -72,7 +71,7 @@ const Tabs = () => {
         <div
           className={`${styles["tab"]} ${
             activeTab.isShowReview ? styles["active"] : ""
-          }`}
+          } text-uppercase`}
           onClick={() => {
             setActiveTab({
               isShowDescription: false,
