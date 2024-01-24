@@ -44,7 +44,7 @@ function CarouselProduct() {
         <div className={`position-relative ${styles["wrapper-add-to-cart"]}`}>
           <img
             className={`w-100 ${styles["image-product"]}`}
-            src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
+            src="https://i.pinimg.com/564x/f8/81/ad/f881ad2778cc7d7c88791e14c9419b52.jpg"
           />
           <div
             className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}

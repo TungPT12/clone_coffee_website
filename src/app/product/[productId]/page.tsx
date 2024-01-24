@@ -83,14 +83,14 @@ const Shop = () => {
               </span>
               <div className={`${styles["category"]} text-capitalize`}>
                 <span className={`${styles["price"]}`}>$15.00</span>
-                {/* <span>
+                <span>
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   (1 customer review)
-                </span> */}
+                </span>
                 <span>
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                   Aenean commodo ligula eget dolor. Aenean massa. Cum sociis

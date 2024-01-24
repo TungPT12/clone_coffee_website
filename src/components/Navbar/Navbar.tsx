@@ -131,7 +131,7 @@ function Navbar() {
                 className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
               >
                 <Link
-                  href="/"
+                  href="/login"
                   className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
                 >
                   <span
