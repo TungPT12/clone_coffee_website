@@ -21,10 +21,6 @@ const Product = () => {
         </div>
         <div className={`overflow-hidden`}>
           <CarouselProduct />
-          {/* <CarouselProduct />
-          <CarouselProduct /> */}
-          {/* <CarouselProduct />
-          <CarouselProduct /> */}
         </div>
       </div>
     </>

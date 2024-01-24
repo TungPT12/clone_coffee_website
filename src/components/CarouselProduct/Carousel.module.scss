@@ -16,6 +16,7 @@
 }
 
 .wrapper-add-to-cart {
+  height: 250px;
   &:hover .overlay-add-to-cart {
     opacity: 1;
   }
@@ -50,4 +51,3 @@
     background-color: #262626;
   }
 }
-  
