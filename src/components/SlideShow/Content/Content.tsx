@@ -9,11 +9,9 @@ function Content({ title, text }: any) {
     <div
       className={`${styles["content"]} show position-absolute align-items-center h-100 justify-content-center  text-white text-decoration-none`}
     >
-      <Image
+      <img
         className={`${styles["logo"]} ${styles["top-to-bottom"]}`}
-        height={100}
-        width={100}
-        src={logo}
+        src={`http://localhost:3000/_next/static/media/Brown%20White%20Modern%20Elegant%20Round%20Coffee%20Shop%20Logo.4c8c583c.svg`}
         alt="helo"
       />
 

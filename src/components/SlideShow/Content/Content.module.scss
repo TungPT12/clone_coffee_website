@@ -1,10 +1,5 @@
 .content {
   position: absolute;
-  top: 70%;
-  right: -15%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
 }
 
 @keyframes fadeInUp {
@@ -24,7 +19,6 @@
 }
 
 .content h1 {
-  font-size: 80px;
   font-family: Marcellus, sans-serif;
   border-bottom: 1px white solid;
 }
@@ -38,6 +32,7 @@
 
 .button {
   margin-top: 2rem;
+  height: 50%;
 }
 .button button {
   text-align: center;
@@ -46,8 +41,9 @@
   font-size: 15px;
   font-weight: 500;
   border: 1px white solid;
-  height: 50px;
-  width: 200px;
+  padding: 1rem 3rem;
+  // height: 10%;
+  // width: 50%;
 }
 
 .button button:hover {
@@ -55,7 +51,9 @@
 }
 
 .logo {
+  height: 30%;
   border-radius: 50%;
+  margin-bottom: 1rem;
 }
 
 .logo,
@@ -89,5 +87,52 @@
 
   100% {
     top: 0%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    top: 70%;
+    right: -15%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .content {
+    top: 70%;
+    right: -15%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+}
+
+@media (max-width: 767px) {
+  .content {
+    margin-top: 1rem;
+    width: 100%;
+    top: 25%;
+    text-align: center;
+    color: white;
+  }
+
+  .content h1 {
+    border: none;
+  }
+
+  .content h2 {
+    display: none;
+  }
+
+  .title {
+    font-size: 50px;
+  }
+
+  .button {
+    height: 12%;
+    margin-top: 0rem;
   }
 }

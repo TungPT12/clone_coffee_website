@@ -1,31 +1,47 @@
 "use client";
 import Link from "next/link";
-import styles from "./Navbar.module.scss";
-import SecondNavBar from "./SecondNavBar/SecondNavBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartArrowDown, faSearch } from "@fortawesome/free-solid-svg-icons";
+import styles from "./Navbar.module.scss";
+import stylesMobile from "./NavbarMobile.module.scss";
+import SecondNavBar from "./SecondNavBar/SecondNavBar";
+import {
+  faAlignJustify,
+  faCartArrowDown,
+  faList,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 import CartNavBar from "./CartNavBar/CartNavBar";
 
 function Navbar() {
   return (
-    <div className="position-relative">
-      <div className={`${styles["navbar"]} position-absolute  w-100 px-5`}>
-        <ul className={`d-flex justify-content-between h-100 mb-0 ps-0 `}>
-          <li className="h-100 d-flex align-items-center">
+    <div className={`position-relative ${styles["container"]}`}>
+      <div
+        className={`${stylesMobile["wrapper-icon-navbar"]} ${styles["wrapper-icon-navbar"]}`}
+      >
+        <FontAwesomeIcon
+          icon={faAlignJustify}
+          className={`${stylesMobile["icon"]}`}
+        />
+      </div>
+      <div className={`${styles["navbar"]} position-absolute  w-100`}>
+        <ul className={`${styles["wrap-logo-navlink"]} mb-0 ps-0 `}>
+          <li
+            className={`h-100 d-flex align-items-center ${styles["wrap-logo"]}`}
+          >
             <img
-              className={`h-75`}
+              className={`h-75 ${styles["logo"]}`}
               src="https://corretto.qodeinteractive.com/wp-content/themes/corretto/assets/img/logo-light.png"
               alt="light logo"
             />
           </li>
           <li className={`h-100`}>
-            <ul className={`d-flex h-100 d-flex gap-5`}>
+            <ul className={`${styles["nav-list"]}`}>
               <li
                 className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
               >
                 <Link
                   href="/"
-                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex  text-decoration-none`}
                 >
                   <span
                     className={`d-flex flex-column ${styles["item-outer"]} `}
@@ -40,11 +56,11 @@ function Navbar() {
                 </div>
               </li>
               <li
-                className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
+                className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
               >
                 <Link
                   href="/"
-                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-decoration-none`}
                 >
                   <span
                     className={`d-flex flex-column ${styles["item-outer"]} `}
@@ -59,7 +75,7 @@ function Navbar() {
                 </div>
               </li>
               <li
-                className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
+                className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
               >
                 <Link
                   href="/shop"
@@ -73,16 +89,14 @@ function Navbar() {
                 </Link>
                 <div
                   className={` ${styles["second-navbar"]} position-absolute`}
-                >
-                  {/* <SecondNavBar /> */}
-                </div>
+                ></div>
               </li>
               <li
-                className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
+                className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
               >
                 <Link
                   href="/"
-                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-decoration-none`}
                 >
                   <span
                     className={`d-flex flex-column ${styles["item-outer"]} `}
@@ -92,11 +106,11 @@ function Navbar() {
                 </Link>
               </li>
               <li
-                className={`${styles["nav-item"]} ${styles["cart-icon"]}  position-relative text-uppercase text-white h-100`}
+                className={`${styles["nav-item"]} ${styles["cart-icon"]}  position-relative text-uppercase h-100`}
               >
                 <Link
                   href="/cart"
-                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-decoration-none`}
                 >
                   <span
                     className={`d-flex flex-column ${styles["item-outer"]}`}

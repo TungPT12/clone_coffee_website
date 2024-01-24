@@ -39,6 +39,7 @@
 //   transform: scale(1.3); /* Phóng to hình ảnh lên 100% khi rê chuột vào */
 // }
 .image-slide-show {
+  width: 100%;
   animation: zoomOut 15s ease;
 }
 
@@ -49,5 +50,11 @@
 
   100% {
     scale: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .image-slide-show {
+    width: 2000px;
   }
 }

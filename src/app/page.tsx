@@ -11,11 +11,11 @@ export default function Home() {
     <main>
       <Navbar />
       <SlideShow />
-      <Category />
-      <Analysis />
+      {/* <Categor  y /> */}
+      {/* <Analysis /> */}
       <Product />
       <Gallery />
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 }

@@ -47,10 +47,11 @@ function SlideShow() {
     <div className="w-100 h-100 overflow-hidden position-relative">
       <Slide canSwipe={false} {...properties} arrows={true}>
         <div className="each-slide-effect ">
-          <div className={`position-relative`}>
+          <div
+            className={`position-relative ${styles["wrapper-content"]} overflow-hidden`}
+          >
             <img
-              style={{ width: "100%" }}
-              className={`image-slide-show`}
+              className={`${styles["image-slide-show"]} image-slide-show`}
               src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
               alt="Description of the image"
             />
@@ -63,10 +64,11 @@ function SlideShow() {
           </div>
         </div>
         <div className="each-slide-effect">
-          <div className={`position-relative overflow-hidden`}>
+          <div
+            className={`position-relative ${styles["wrapper-content"]} overflow-hidden`}
+          >
             <img
-              style={{ width: "100%" }}
-              className={`image-slide-show`}
+              className={`${styles["image-slide-show"]} image-slide-show`}
               src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
               alt="Description of the image"
             />
@@ -79,10 +81,11 @@ function SlideShow() {
           </div>
         </div>
         <div className="each-slide-effect">
-          <div className={`position-relative`}>
+          <div
+            className={`position-relative overflow-hidden ${styles["wrapper-content"]}`}
+          >
             <img
-              style={{ width: "100%" }}
-              className={`image-slide-show`}
+              className={`${styles["image-slide-show"]} image-slide-show`}
               src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
               alt="Description of the image"
             />
@@ -95,7 +98,7 @@ function SlideShow() {
           </div>
         </div>
       </Slide>
-      <CountDown targetDate={targetDate} />
+      {/* <CountDown targetDate={targetDate} /> */}
     </div>
   );
 }
