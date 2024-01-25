@@ -2,7 +2,6 @@
 "use client";
 import logo from "../../../assets/Brown White Modern Elegant Round Coffee Shop Logo.svg";
 import "react-slideshow-image/dist/styles.css";
-import Image from "next/image";
 import styles from "./Content.module.scss";
 function Content({ title, text }: any) {
   return (
@@ -11,7 +10,7 @@ function Content({ title, text }: any) {
     >
       <img
         className={`${styles["logo"]} ${styles["top-to-bottom"]}`}
-        src={`http://localhost:3000/_next/static/media/Brown%20White%20Modern%20Elegant%20Round%20Coffee%20Shop%20Logo.4c8c583c.svg`}
+        src={logo}
         alt="helo"
       />
 

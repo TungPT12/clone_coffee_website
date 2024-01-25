@@ -66,7 +66,7 @@
   left: 1rem; /* Điều chỉnh vị trí theo nhu cầu của bạn */
   color: white; /* Màu chữ */
   font-size: 12px; /* Kích thước chữ */
-  padding: 2px 5px; /* Khoảng cách giữa số và viền */
+  padding: 2px 10px; /* Khoảng cách giữa số và viền */
   border-radius: 50%; /* Bo tròn viền */
 }
 
@@ -148,7 +148,7 @@
     // display: block;
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 10px;
   }
 
   .logo {
