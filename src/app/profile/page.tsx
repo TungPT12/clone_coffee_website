@@ -16,18 +16,21 @@ const Profile = () => {
           <div className={`${styles["image-user"]}`}>
             <img
               className={`${styles["avatar"]}`}
-              src="https://thumbs.dreamstime.com/b/businessman-icon-vector-male-avatar-profile-image-profile-businessman-icon-vector-male-avatar-profile-image-182095609.jpg"
-            ></img>
+              src="https://cdn.lazi.vn/storage/uploads/users/avatar/1600694988_lazi_5f68aacc91498.jpg"
+            />
           </div>
           <div className={`${styles["main-detail"]}`}>
-            <h2>Liemtroller</h2>
-            <div className={`${styles["info-detail"]}`}>
-              <div className={`${styles["info"]}`}>
+            <div>
+              <h2 className={`${styles["title-name"]}`}>Liemtroller</h2>
+              <div className={`${styles["info-detail"]}`}>
                 <span>abc@gmail</span>
+                {/* <span>
+                
+              </span> */}
               </div>
-              <div className={`${styles["button-edit"]}`}>
-                <button className={`${styles["button"]}`}>Edit Profile</button>
-              </div>
+            </div>
+            <div className={`${styles["button-edit"]}`}>
+              <button className={`${styles["button"]}`}>Edit Profile</button>
             </div>
           </div>
         </div>
