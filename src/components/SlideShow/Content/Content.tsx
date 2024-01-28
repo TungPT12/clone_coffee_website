@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import logo from "../../../assets/Brown White Modern Elegant Round Coffee Shop Logo.svg";
+import logo from "../../../assets/avatar.svg";
 import "react-slideshow-image/dist/styles.css";
 import styles from "./Content.module.scss";
 function Content({ title, text }: any) {
@@ -10,7 +10,7 @@ function Content({ title, text }: any) {
     >
       <img
         className={`${styles["logo"]} ${styles["top-to-bottom"]}`}
-        src={logo}
+        src="./avatar.svg"
         alt="helo"
       />
 

@@ -145,10 +145,14 @@
 
   .nav-list {
     background: #fff;
-    // display: block;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: -2rem;
+    margin-left: -2rem;
+  }
+  .nav-container {
+    margin-top: 1rem;
   }
 
   .logo {

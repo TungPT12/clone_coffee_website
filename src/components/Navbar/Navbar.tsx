@@ -11,19 +11,29 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import CartNavBar from "./CartNavBar/CartNavBar";
+import { useState } from "react";
 
 function Navbar() {
+  const [navListOpen, setNavListOpen] = useState(true);
+
+  const toggleNavList = () => {
+    setNavListOpen(!navListOpen);
+  };
   return (
     <div className={`position-relative ${styles["container"]}`}>
       <div
         className={`${stylesMobile["wrapper-icon-navbar"]} ${styles["wrapper-icon-navbar"]}`}
+        onClick={toggleNavList}
       >
         <FontAwesomeIcon
           icon={faAlignJustify}
           className={`${stylesMobile["icon"]}`}
         />
       </div>
-      <div className={`${styles["navbar"]} position-absolute  w-100`}>
+      <div
+        className={`${styles["navbar"]} position-absolute  w-100`}
+        style={{ display: navListOpen ? "block" : "none" }}
+      >
         <ul className={`${styles["wrap-logo-navlink"]} mb-0 ps-0 `}>
           <li
             className={`h-100 d-flex align-items-center ${styles["wrap-logo"]}`}
@@ -34,7 +44,7 @@ function Navbar() {
               alt="light logo"
             />
           </li>
-          <li className={`h-100`}>
+          <li className={`${styles["nav-container"]}h-100`}>
             <ul className={`${styles["nav-list"]}`}>
               <li
                 className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}

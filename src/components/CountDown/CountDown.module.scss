@@ -10,15 +10,13 @@
   font-family: Marcellus, sans-serif;
   background-color: #ef2853;
   color: white;
-  letter-spacing: 0.1em;
   border-radius: 1px;
   line-height: 0.9em;
-  overflow: hidden;
   text-align: center;
   font-weight: 200;
   padding: 0.3rem;
-  // width: 5rem; /* Đặt giá trị cố định cho chiều rộng */
-  // height: 30px; /* Đặt giá trị cố định cho chiều cao */
+  width: 3rem; /* Đặt giá trị cố định cho chiều rộng */
+  height: 2rem; /* Đặt giá trị cố định cho chiều cao */
 }
 .countdown-timer {
   position: absolute;
@@ -33,25 +31,24 @@
   background-color: transparent;
   border-radius: 5px;
   border: 1px solid white;
-  animation: fromRightToLeft 12s ease-in;
+  animation: fromRightToLeft 1s ease-in;
 }
 .countdown-label {
   color: white;
+  font-family: Marcellus, sans-serif;
 }
 .countdown-item {
   text-align: center;
-  padding: 10px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
 }
-.countdown-label {
-  font-family: Marcellus, sans-serif;
-}
+
 .countdown-title {
   display: flex;
   justify-content: center;
   font-family: Marcellus, sans-serif;
-  font-size: 10px;
+  font-size: 9px;
   color: white;
 }
 .countdown {
@@ -68,5 +65,56 @@
   }
   100% {
     right: 0.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .countdown-timer {
+    position: absolute;
+    padding: 0.3rem;
+    bottom: 0;
+    right: 1rem;
+    // margin-right: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: translateY(-20%);
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid white;
+    animation: fromRightToLeft 1s ease-in;
+  }
+  .countdown-text {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .countdown-title {
+    display: flex;
+    justify-content: center;
+    font-family: Marcellus, sans-serif;
+    font-size: 10px;
+    color: white;
+  }
+
+  .countdown-value {
+    padding: 0.5rem;
+    vertical-align: middle;
+    font-size: 15px;
+    font-family: Marcellus, sans-serif;
+    background-color: #ef2853;
+    color: white;
+    letter-spacing: 0.1em;
+    border-radius: 1px;
+    line-height: 0.9em;
+    text-align: center;
+    font-weight: 200;
+    width: 4rem; /* Đặt giá trị cố định cho chiều rộng */
+    height: 30px; /* Đặt giá trị cố định cho chiều cao */
+  }
+
+  .countdown-label {
+    color: white;
+    font-family: Marcellus, sans-serif;
+    margin-top: 0.2rem;
   }
 }

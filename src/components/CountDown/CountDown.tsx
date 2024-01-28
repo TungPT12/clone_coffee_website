@@ -70,7 +70,7 @@ const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
           <span className={`${styles["countdown-value"]}`}>
             {timeLeft.minutes}
           </span>
-          <span className={styles["countdown-label"]}>Minutes</span>
+          <span className={styles["countdown-label"]}>Mins</span>
         </div>
         <div className={styles["countdown-item"]}>
           <span
@@ -78,7 +78,7 @@ const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
           >
             {timeLeft.seconds}
           </span>
-          <span className={styles["countdown-label"]}>Seconds</span>
+          <span className={styles["countdown-label"]}>Secs</span>
         </div>
       </div>
     </div>

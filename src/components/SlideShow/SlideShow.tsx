@@ -44,7 +44,9 @@ function SlideShow() {
   };
 
   return (
-    <div className="w-100 h-100 overflow-hidden position-relative">
+    <div
+      className={` ${styles["sider"]} w-100 hoverflow-hidden position-relative`}
+    >
       <Slide canSwipe={false} {...properties} arrows={true}>
         <div className="each-slide-effect ">
           <div
@@ -98,7 +100,7 @@ function SlideShow() {
           </div>
         </div>
       </Slide>
-      {/* <CountDown targetDate={targetDate} /> */}
+      <CountDown targetDate={targetDate} />
     </div>
   );
 }
