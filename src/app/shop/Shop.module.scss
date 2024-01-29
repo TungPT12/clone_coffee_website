@@ -145,3 +145,11 @@
 .smallerIcon {
   font-size: 27px;
 }
+@media (max-width: 767px) 
+{
+  .product{
+    display: flex;
+    flex-direction: column;
+  }
+
+}

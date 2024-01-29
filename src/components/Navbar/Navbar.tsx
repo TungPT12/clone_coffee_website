@@ -101,7 +101,7 @@ function Navbar() {
                   className={` ${styles["second-navbar"]} position-absolute`}
                 ></div>
               </li>
-              <li
+              {/* <li
                 className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
               >
                 <Link
@@ -114,7 +114,7 @@ function Navbar() {
                     About
                   </span>
                 </Link>
-              </li>
+              </li> */}
               <li
                 className={`${styles["nav-item"]} ${styles["cart-icon"]}  position-relative text-uppercase h-100`}
               >

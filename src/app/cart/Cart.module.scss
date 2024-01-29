@@ -96,3 +96,39 @@
     background: $colorButtonHover;
   }
 }
+@media (max-width: 767px) {
+  .t-head {
+    display: none;
+  }
+  .t-body {
+    display: flex;
+    flex-direction: column;
+  }
+  .t-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .apply-coupon-btn {
+    margin-top: 2rem;
+    text-wrap: nowrap;
+    font-family: inherit;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    outline: 0;
+    font-size: 12px;
+    line-height: 1.15em;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: $colorButton;
+    padding: 18px 35px;
+    border: none;
+    transition: all 0.2s linear;
+    &:hover {
+      background: $colorButtonHover;
+    }
+  }
+}

@@ -32,7 +32,7 @@ export default function Cart() {
                   className={`${styles["icon-close"]}`}
                 />
               </div>
-              <div className={`f-1 py-3 d-flex align-items-center`}>
+              <div className={`${styles["image"]}f-1 py-3 d-flex align-items-center`}>
                 <img
                   className="w-100"
                   src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-5.png"

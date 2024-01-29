@@ -73,4 +73,8 @@
     width: 100%;
     background-image: url("https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/h1-bacground-img-1.jpg");
   }
+  .collections {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -6,6 +6,14 @@
   font-weight: 300;
   text-transform: none;
 }
+
+.mobile-product {
+  display: none;
+}
+
+.desk-product {
+  display: block;
+}
 .title-big {
   margin-top: 1rem;
   letter-spacing: 2px;
@@ -55,6 +63,14 @@
   font-size: 30px;
 }
 @media (max-width: 767px) {
+  .mobile-product {
+    display: block;
+  }
+
+  .desk-product {
+    display: none;
+  }
+
   .title-big {
     margin-top: -6rem;
     letter-spacing: 2px;
@@ -80,5 +96,8 @@
     background-size: cover;
     width: 100%;
     background-image: url("https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/h1-bacground-img-1.jpg");
+  }
+  .title-category {
+    font-size: 24px;
   }
 }
