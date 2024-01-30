@@ -60,7 +60,9 @@
     margin-top: 2%;
   }
   .category {
-    display: flex;
-    flex-direction: column;
+    display: none;
+  }
+  .container {
+    display: none;
   }
 }

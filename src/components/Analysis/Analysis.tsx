@@ -2,7 +2,7 @@ import styles from "./Analysis.module.scss";
 const Analysis = () => {
   return (
     <>
-      <div>
+      <div className={`${styles["container"]}`}>
         <div className={`${styles["header"]}`}>
           <h2 className={`${styles["title-big"]} wpb_wrapper`}>Analaysis</h2>
           <img

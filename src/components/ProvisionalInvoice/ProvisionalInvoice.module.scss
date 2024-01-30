@@ -29,3 +29,33 @@
     background: $colorButtonHover;
   }
 }
+@media (max-width: 767px) {
+  .proceed-checkout {
+    margin-top: -1rem;
+    margin-right: 10rem;
+    text-wrap: nowrap;
+    font-size: 12px;
+    line-height: 1.15em;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    background: $colorButton;
+    padding: 19px 10px;
+    display: block;
+    width: fit-content;
+    transition: all 0.2s linear;
+
+    &:active {
+      background: $colorButtonHover;
+    }
+  }
+  .provisional-invoice-row {
+    display: flex;
+    gap: 1rem;
+  }
+  .title-provisional-invoice {
+    text-wrap: nowrap;
+  }
+  .image {
+    margin-left: -2rem;
+  }
+}

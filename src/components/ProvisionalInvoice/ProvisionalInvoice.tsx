@@ -12,7 +12,7 @@ function ProvisionalInvoice() {
           >
             Subtotal
           </span>
-          <span className={`f-3`}>$247.000</span>
+          <span className={`f-3`}> $247.000</span>
         </div>
         <div className={`d-flex ${styles["provisional-invoice-row"]}`}>
           <span
