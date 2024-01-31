@@ -18,15 +18,17 @@ const Product = () => {
         </div>
         <div className={`${styles["mobile-product"]}`}>
           <div
-            className={`position-relative ${styles["wrapper-add-to-cart"]} w-100 d-flex justify-content-center text-center px-3`}
+            className={`${styles["wrapper-add-to-cart"]}`}
           >
             <img
               className={`w-100 ${styles["image-product"]} h-100`}
               src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
             />
             <div
-              className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
+              className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 top-0`}
             >
+              <h1 className={`${styles["title-product"]}`}>coffee</h1>
+              <span className={`${styles["title-price"]}`}>$15.00</span>
               <button
                 className={`${styles["add-to-cart-btn"]} border-0 text-uppercase `}
               >
@@ -34,40 +36,8 @@ const Product = () => {
               </button>
             </div>
           </div>
-          <div
-            className={`position-relative ${styles["wrapper-add-to-cart"]} w-100 d-flex justify-content-center text-center px-3`}
-          >
-            <img
-              className={`w-100 ${styles["image-product"]} h-100`}
-              src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-            />
-            <div
-              className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
-            >
-              <button
-                className={`${styles["add-to-cart-btn"]} border-0 text-uppercase `}
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
-          <div
-            className={`position-relative ${styles["wrapper-add-to-cart"]} w-100 d-flex justify-content-center text-center px-3`}
-          >
-            <img
-              className={`w-100 ${styles["image-product"]} h-100`}
-              src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-            />
-            <div
-              className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
-            >
-              <button
-                className={`${styles["add-to-cart-btn"]} border-0 text-uppercase `}
-              >
-                Add to cart
-              </button>
-            </div>
-          </div>
+        
+         
         </div>
         <div className={`${styles["desk-product"]} overflow-hidden`}>
           <div className={`overflow-hidden`}>

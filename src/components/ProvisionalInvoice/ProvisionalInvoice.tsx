@@ -3,7 +3,7 @@ import styles from "./ProvisionalInvoice.module.scss";
 
 function ProvisionalInvoice() {
   return (
-    <div>
+    <div className={`${styles["cart"]}`}>
       <h1 className={`${styles["title-provisional-invoice"]}`}>CART TOTALS</h1>
       <div>
         <div className={`d-flex ${styles["provisional-invoice-row"]}`}>
@@ -25,7 +25,7 @@ function ProvisionalInvoice() {
       </div>
       <Link
         href={"/"}
-        className={`${styles["proceed-checkout"]} mt-5 text-white text-decoration-none`}
+        className={`${styles["proceed-checkout"]} mt-4 text-white text-decoration-none`}
       >
         PROCEED TO CHECKOUT
       </Link>

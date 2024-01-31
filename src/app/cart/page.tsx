@@ -15,11 +15,11 @@ export default function Cart() {
           <div className={`${styles["t-head"]} `}>
             <div className={`d-flex ${styles["th"]}`}>
               <div className={`f-1 py-3 ${styles[""]}`}></div>
-              <div className={`f-1 py-3 ${styles[""]}`}></div>
+              <div className={`f-1 py-3 ${styles["image-header"]}`}></div>
               <div className="f-3 py-3">Product</div>
-              <div className="f-2 py-3">Price</div>
-              <div className="f-2 py-3">Quantity</div>
-              <div className="f-2 py-3">Subtotal</div>
+              <div className="f-1-sm f-2 py-3 px-1">Price</div>
+              <div className="f-2 py-3 px-1">Quantity</div>
+              <div className="f-2 py-3 px-1">Subtotal</div>
             </div>
           </div>
           <div className={`${styles["t-body"]} `}>
@@ -32,7 +32,7 @@ export default function Cart() {
                   className={`${styles["icon-close"]}`}
                 />
               </div>
-              <div className={`${styles["image"]}f-1 py-3 d-flex align-items-center`}>
+              <div className={`${styles["image"]} f-1 py-3 align-items-center`}>
                 <img
                   className="w-100"
                   src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-5.png"
@@ -41,8 +41,8 @@ export default function Cart() {
               <div className={`f-3  py-3 d-flex align-items-center`}>
                 <span className="f-2">Columnbia Coffe</span>
               </div>
-              <div className="f-2 py-3 d-flex align-items-center">$123</div>
-              <div className={`d-flex py-3 f-2 d-flex align-items-center`}>
+              <div className=" f-1-sm f-2 py-3 px-1 d-flex align-items-center">$123</div>
+              <div className={`d-flex py-3 f-2 px-1 d-flex align-items-center`}>
                 <div
                   className={`d-flex align-items-center ${styles["wrapper-quantity"]}`}
                 >
@@ -59,7 +59,7 @@ export default function Cart() {
             </div>
           </div>
         </div>
-        <div className="coupon py-5">
+        <div className={`${styles["coupon"]} py-5`}>
           <input
             type="text"
             className={`${styles["input-coupon"]}`}

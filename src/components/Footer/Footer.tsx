@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "./Footer.module.scss";
 // import logo from "./";
 const Footer = () => {
@@ -15,6 +14,7 @@ const Footer = () => {
               // height={150}
             />
           </div>
+          <div className={styles["title"]}>
           <div className={styles["text-intro"]}>
             <div className={styles["text-title"]}>Giới thiệu</div>
             <div className={styles["text-dot"]}>Về chúng tôi.</div>
@@ -50,6 +50,7 @@ const Footer = () => {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
+          </div>
           </div>
         </div>
       </div>

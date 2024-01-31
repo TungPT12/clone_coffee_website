@@ -1,61 +1,66 @@
 @import "../../app/variable.scss";
-
 .title-provisional-invoice {
-  color: #262626;
-  font-family: Marcellus, sans-serif;
-  font-weight: 400;
+    color: #262626;
+    font-family: Marcellus, sans-serif;
+    font-weight: 400;
 }
 
 .provisional-invoice-title {
-  font-weight: 500;
+    font-weight: 500;
 }
+
 .provisional-invoice-row {
-  padding: 14px 0px;
-  border-bottom: 1px solid #ccc;
+    padding: 14px 0px;
+    border-bottom: 1px solid #ccc;
 }
 
 .proceed-checkout {
-  font-size: 12px;
-  line-height: 1.15em;
-  letter-spacing: 0.15em;
-  font-weight: 600;
-  background: $colorButton;
-  padding: 19px 35px;
-  display: block;
-  width: fit-content;
-  transition: all 0.2s linear;
-
-  &:hover {
-    background: $colorButtonHover;
-  }
-}
-@media (max-width: 767px) {
-  .proceed-checkout {
-    margin-top: -1rem;
-    margin-right: 10rem;
-    text-wrap: nowrap;
     font-size: 12px;
     line-height: 1.15em;
     letter-spacing: 0.15em;
     font-weight: 600;
     background: $colorButton;
-    padding: 19px 10px;
+    padding: 19px 35px;
     display: block;
     width: fit-content;
     transition: all 0.2s linear;
-
-    &:active {
-      background: $colorButtonHover;
+    &:hover {
+        background: $colorButtonHover;
     }
-  }
-  .provisional-invoice-row {
-    display: flex;
-    gap: 1rem;
-  }
-  .title-provisional-invoice {
-    text-wrap: nowrap;
-  }
-  .image {
-    margin-left: -2rem;
-  }
+}
+
+@media (max-width: 767px) {
+    .proceed-checkout {
+        width: 100%;
+        margin: 0;
+        text-wrap: nowrap;
+        font-size: 12px;
+        line-height: 1.15em;
+        letter-spacing: 0.15em;
+        font-weight: 600;
+        background: $colorButton;
+        padding: 19px 35px;
+        display: block;
+        transition: all 0.2s linear;
+        &:active {
+            background: $colorButtonHover;
+        }
+    }
+    .provisional-invoice-row {
+        display: flex;
+        gap: 1rem;
+    }
+    .title-provisional-invoice {
+        text-wrap: nowrap;
+    }
+    .image {
+        margin-left: -2rem;
+    }
+    .cart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
