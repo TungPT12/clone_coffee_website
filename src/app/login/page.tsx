@@ -6,8 +6,8 @@ const Login = () => {
     <div>
       <Navbar />
       <div className={`${style.loginpage}`}>
-        <div className={`${style.form} w-25`}>
-          <h3 className="mb-4 text-capitalize">Đăng nhập</h3>
+        <div className={`${style.form}`}>
+          <h3 className={`${style.text} mb-4 text-capitalize`}>Đăng nhập</h3>
           <label className="text-white text-capitalize mb-2">Tài khoản</label>
           <input
             className="text-white ps-2 py-1"
