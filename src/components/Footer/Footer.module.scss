@@ -1,95 +1,109 @@
 .footer {
-  padding: 0rem 1rem;
-  // overflow: auto;
-  width: 100%;
-  background-color: rgba(255, 233, 196, 0.075);
-  background-image: url("https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/h1-bacground-img-1.jpg");
+    padding: 0rem 1rem;
+    // overflow: auto;
+    width: 100%;
+    background-color: rgba(255, 233, 196, 0.075);
+    background-image: url("https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/h1-bacground-img-1.jpg");
 }
+
 .text-title {
-  word-wrap: break-word;
-  margin-top: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-size: 100%;
-  color: #262626;
-  font-family: Marcellus, sans-serif;
+    word-wrap: break-word;
+    margin-top: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 100%;
+    color: #262626;
+    font-family: Marcellus, sans-serif;
 }
+
 .text-copyright {
-  display: flex;
+    display: flex;
 }
+
 .text-dot {
-  // flex: 1;
-  /* Viền màu nâu */
-  margin-top: 1%;
-  width: 100%;
-  font-size: 85%;
-  word-wrap: break-word;
-  // word-break: break-all;
-  // white-space: nowrap;
+    // flex: 1;
+    /* Viền màu nâu */
+    margin-top: 1%;
+    width: 100%;
+    font-size: 85%;
+    word-wrap: break-word;
+    // word-break: break-all;
+    // white-space: nowrap;
 }
+
 .star-icon {
-  display: flex;
+    display: flex;
 }
+
 .star {
-  margin-right: 5px; /* Khoảng cách giữa các icon */
-  height: 100px; /* Kích thước của icon */
-  width: 50px; /* Kích thước của icon */
+    margin-right: 5px;
+    /* Khoảng cách giữa các icon */
+    height: 100px;
+    /* Kích thước của icon */
+    width: 50px;
+    /* Kích thước của icon */
 }
+
 .text-left {
-  margin-top: 2.2%;
-  font-size: 20px;
+    margin-top: 2.2%;
+    font-size: 20px;
 }
+
 .text-description {
-  font-family: Marcellus, sans-serif;
-  // margin-top: 3rem;
-  display: flex;
-  justify-content: center;
-  gap: 1%;
-  width: 100%;
+    font-family: Marcellus, sans-serif;
+    // margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 1%;
+    width: 100%;
 }
+
 .dot {
-  margin-top: 0.5%;
-  // height: 30px; /* Kích thước của icon */
-  width: 100%; /* Kích thước của icon */
+    margin-top: 0.5%;
+    // height: 30px; /* Kích thước của icon */
+    width: 100%;
+    /* Kích thước của icon */
 }
+
 .infor {
-  margin-top: 1rem;
-  display: flex;
-  gap: 1%;
-  border-bottom: 1px solid black;
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.1%;
+    border-bottom: 1px solid black;
 }
 
 .text-map {
-  column-width: auto;
-  font-size: 85%;
-  // max-width: 20ch;
-  border-bottom: 1px solid black;
+    column-width: auto;
+    font-size: 85%;
+    // max-width: 20ch;
+    border-bottom: 1px solid black;
 }
+
 .text-info {
-  font-family: Marcellus, sans-serif;
-  // margin-top: -1rem;
-  column-width: auto;
-  max-width: 100ch;
-  margin-bottom: 1rem;
-  font-size: 100%;
+    font-family: Marcellus, sans-serif;
+    // margin-top: -1rem;
+    column-width: auto;
+    max-width: 100ch;
+    margin-bottom: 1rem;
+    font-size: 100%;
 }
 
 .wrap-map {
-  height: 60%;
-  .map {
-    // height: 55%;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    margin-bottom: 1rem;
-  }
+    height: 60%;
+    .map {
+        // height: 55%;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        margin-bottom: 1rem;
+    }
 }
 
 .logo {
-  // height:;
-  width: 73%;
-  margin-bottom: 1rem;
-  border-radius: 50%;
+    // height:;
+    width: 60%;
+    margin-bottom: 1rem;
+    border-radius: 50%;
 }
 
 .image,
@@ -97,33 +111,47 @@
 .text-email,
 .text-team,
 .text-address {
-  flex: 1;
+    flex: 1;
+}
+
+.title {
+    display: flex;
 }
 
 @media (max-width: 767px) {
-  .text-info {
-    font-size: 50%;
-  }
-
-  .footer {
-    padding: 0rem 0.2rem;
-  }
-
-  .text-title {
-    font-size: 60%;
-  }
-
-  .text-dot {
-    font-size: 44%;
-  }
-
-  .text-map {
-    font-size: 44%;
-  }
-
-  .logo {
-    width: 100%;
-  }
+    .text-info {
+        font-size: 80%;
+        column-width: auto;
+        max-width: 25ch;
+    }
+    .footer {
+        padding: 0rem 0.5rem;
+    }
+    .text-title {
+        font-size: 80%;
+    }
+    .text-dot {
+        font-size: 60%;
+    }
+    .text-map {
+        font-size: 80%;
+    }
+    .logo {
+        width: 30%;
+        left: 10rem;
+        position: absolute;
+    }
+    .infor {
+        width: 70%;
+        display: flex;
+        gap: 0.5rem
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+        font-size: 20px;
+    }
 }
 
 // @media (max-width: 767px) {
@@ -133,7 +161,6 @@
 //     background-color: rgba(255, 233, 196, 0.075);
 //     background-image: url("https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/h1-bacground-img-1.jpg");
 //   }
-
 //   .text-description {
 //     font-family: Marcellus, sans-serif;
 //     margin-top: 3rem;
@@ -141,7 +168,6 @@
 //     align-items: center;
 //     gap: 3rem;
 //   }
-
 //   .infor {
 //     margin-top: 1rem;
 //     display: flex;
@@ -151,7 +177,6 @@
 //   .text-foter {
 //     display: flex;
 //   }
-
 //   .map {
 //     height: 55%;
 //     width: 300%;
@@ -159,11 +184,9 @@
 //     margin-left: -1rem;
 //     margin-bottom: 1rem;
 //   }
-
 //   .text-description {
 //     padding: 1rem;
 //   }
-
 //   .text-title {
 //     white-space: nowrap;
 //     margin-top: 1rem;
@@ -173,7 +196,6 @@
 //     color: #262626;
 //     font-family: Marcellus, sans-serif;
 //   }
-
 //   .text-dot {
 //     /* Viền màu nâu */
 //     font-size: 10px;

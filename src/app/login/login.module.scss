@@ -1,41 +1,54 @@
 @import "../variable.scss";
-.form h3 {
-  color: #beba64;
-  text-align: center;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  background-color: #0000008f;
-  height: fit-content;
-  padding: 3rem 1.5rem;
-  border-radius: 10px;
+@media (min-width:768px) {
+    .form h3 {
+        color: #beba64;
+        text-align: center;
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        background-color: #0000008f;
+        height: fit-content;
+        padding: 3rem 1.5rem;
+        border-radius: 10px;
+    }
+    .form input {
+        background: none;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #dfdee0;
+        margin-bottom: 2rem;
+    }
+    .loginpage {
+        background-image: url("../../assets/4536e153-5357-4018-8902-dfbd62e9985d.png");
+        //   background-color: aqua;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .button-login {
+        background: $colorButton;
+        border: none;
+        border-radius: 1rem;
+        font-weight: 600;
+    }
+    .forgot {
+        width: 100%;
+        text-align: end;
+    }
 }
 
-.form input {
-  background: none;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #dfdee0;
-  margin-bottom: 2rem;
-}
-.loginpage {
-  background-image: url("../../assets/4536e153-5357-4018-8902-dfbd62e9985d.png");
-  //   background-color: aqua;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.button-login {
-  background: $colorButton;
-  border: none;
-  border-radius: 1rem;
-  font-weight: 600;
-}
-.forgot {
-  width: 100%;
-  text-align: end;
+@media (max-width:767px) {
+    .loginpage {
+        background-image: url("../../assets/backgroud_login_mobile.jpg");
+        height: 100vh;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .form {
+        width: 100%;
+    }
 }

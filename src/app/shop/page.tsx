@@ -12,7 +12,7 @@ const Shop = () => {
       <Banner title={`shop`} />
       <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
         <div className="row">
-          <div className="col-10">
+          <div className={`${styles["cart"]} col-10`}>
             <div className={styles["search-container"]}>
               <input
                 type="text"
@@ -26,8 +26,8 @@ const Shop = () => {
                 />
               </span>
             </div>
-            <div className="row">
-              <div className="col-4">
+            <div className={`${styles["list-product"]} row`}>
+              <div className={`${styles["product-item"]} col-4`}>
                 <div className={`${styles["product"]} w-100`}>
                   <div
                     className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -55,7 +55,7 @@ const Shop = () => {
                   </Link>
                 </div>
               </div>
-              <div className="col-4">
+              <div className={`${styles["product-item"]} col-4`}>
                 <div className={`${styles["product"]} w-100`}>
                   <div
                     className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -83,7 +83,7 @@ const Shop = () => {
                   </Link>
                 </div>
               </div>
-              <div className="col-4">
+              <div className={`${styles["product-item"]} col-4`}>
                 <div className={`${styles["product"]} w-100`}>
                   <div
                     className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -111,7 +111,7 @@ const Shop = () => {
                   </Link>
                 </div>
               </div>
-              <div className="col-4">
+              <div className={`${styles["product-item"]} col-4`}>
                 <div className={`${styles["product"]} w-100`}>
                   <div
                     className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -155,7 +155,7 @@ const Shop = () => {
               </span>
             </div>
           </div>
-          <div className="col-2">
+          <div className={`${styles["category-item"]} col-2`}>
             <div>
               <span className={`${styles["title-category"]} text-uppercase`}>
                 product categorys
