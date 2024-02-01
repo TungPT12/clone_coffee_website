@@ -47,8 +47,24 @@
         height: 100vh;
         background-size: cover;
         background-repeat: no-repeat;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        text-wrap: nowrap;
     }
     .form {
+        display: flex;
+        flex-direction: column;
         width: 100%;
+        padding-top: 7rem;
+    }
+    .button-login {
+        margin-top: 2rem;
+        background: $colorButton;
+        border: none;
+        border-radius: 1rem;
+        font-weight: 600;
+    }
+    .text {
+        display: none;
     }
 }
