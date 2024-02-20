@@ -1,5 +1,4 @@
 import styles from "./Footer.module.scss";
-// import logo from "./";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
@@ -8,7 +7,7 @@ const Footer = () => {
           <div className={styles["image"]}>
             <img
               className={`${styles.logo}`}
-              src="./avatar.svg"
+              src="./../avatar.svg"
               alt="Logo"
               // width={150}
               // height={150}
