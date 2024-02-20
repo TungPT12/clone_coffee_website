@@ -1,9 +1,8 @@
 @import "../../variable.scss";
 .cart-wrapper {
-    padding-left: 7rem;
-    padding-right: 7rem;
     color: #262626;
     font-weight: 200;
+    padding-right: 2rem;
 }
 
 .product {
@@ -62,22 +61,6 @@
     color: #656565;
     overflow-x: hidden !important;
     -webkit-font-smoothing: antialiased;
-}
-
-.pagination {
-    margin-top: 20px;
-}
-
-.page-link {
-    display: inline-block;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border: 1px solid #ccc;
-    text-decoration: none;
-}
-
-.page-link.active {
-    background-color: #ccc;
 }
 
 .category {
@@ -186,4 +169,41 @@
 .price {
     font-size: 22px;
     font-family: "Open Sans", sans-serif;
+}
+
+@media (max-width: 767px) {
+    .cart-wrapper {
+        width: 100%;
+        color: #262626;
+        text-align: center;
+    }
+    .product-list {
+        padding: 0px 10px;
+    }
+    .increase-btn {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+    .contai {
+        display: flex;
+        flex-direction: column;
+    }
+    .add-to-cart-btn {
+        font-size: 9px;
+    }
+    .detail {
+        display: flex;
+        flex-direction: column;
+    }
+    .title-product {
+        display: flex;
+        justify-items: center;
+        flex-direction: column;
+    }
+    .tiltle {
+        font-size: 20px;
+    }
+    .title-category {
+        font-size: 20px;
+    }
 }

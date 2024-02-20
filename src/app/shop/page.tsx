@@ -5,7 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
+import { useEffect } from "react";
+import { getCategoryAPI } from "@/api/category";
 const Shop = () => {
+  
+   
+
   return (
     <div className="position-relative">
       <Navbar />
@@ -167,7 +172,7 @@ const Shop = () => {
                 <span>Tea</span>
               </div>
             </div>
-            <div className={`${styles["tag-category"]} text-uppercase`}>
+            {/* <div className={`${styles["tag-category"]} text-uppercase`}>
               <span className={`${styles["title-category"]}`}>
                 PRODUCT TAGS
               </span>
@@ -177,7 +182,7 @@ const Shop = () => {
                 <span>Breakfast</span>
                 <span>Tea</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -74,6 +74,8 @@
 
 .text-map {
     column-width: auto;
+    width: 200px;
+    word-wrap: break-word;
     font-size: 85%;
     // max-width: 20ch;
     border-bottom: 1px solid black;
@@ -101,7 +103,7 @@
 
 .logo {
     // height:;
-    width: 60%;
+    width: 50%;
     margin-bottom: 1rem;
     border-radius: 50%;
 }
@@ -116,6 +118,7 @@
 
 .title {
     display: flex;
+    flex: 3;
 }
 
 @media (max-width: 767px) {
@@ -131,9 +134,6 @@
         font-size: 80%;
     }
     .text-dot {
-        font-size: 60%;
-    }
-    .text-map {
         font-size: 80%;
     }
     .logo {

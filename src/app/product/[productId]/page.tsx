@@ -12,8 +12,8 @@ const Shop = () => {
       <Navbar />
       <Banner title={`product Detail`} />
       <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
-        <div className="row">
-          <div className="col-6">
+        <div className={`${styles["contai"]} row`}>
+          <div className={`${styles["image"]} col-lg-6 col-md-1`}>
             <div className={`${styles["product"]} w-100`}>
               <div
                 className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -76,8 +76,8 @@ const Shop = () => {
             </div>
           </div>
 
-          <div className="col-6">
-            <div>
+          <div className={`${styles["detail"]} col-lg-6 col-md-1`}>
+            <div className={`${styles["product-list"]}`}>
               <span className={`${styles["title-category"]} text-uppercase`}>
                 ETHIOPIA COFFEE
               </span>
@@ -146,8 +146,8 @@ const Shop = () => {
           <h1 className={`${styles["title-category"]} text-uppercase`}>
             RELATED PRODUCTS
           </h1>
-          <div className="row">
-            <div className="col-3">
+          <div className={`${styles["title-product"]} row`}>
+            <div className="col-lg-3">
               <div className={`${styles["product"]} w-100`}>
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -172,7 +172,7 @@ const Shop = () => {
                 </div>
               </div>
             </div>
-            <div className="col-3">
+            <div className="col-lg-3">
               <div className={`${styles["product"]} w-100`}>
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -197,7 +197,7 @@ const Shop = () => {
                 </div>
               </div>
             </div>
-            <div className="col-3">
+            <div className="col-lg-3">
               <div className={`${styles["product"]} w-100`}>
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
@@ -222,7 +222,7 @@ const Shop = () => {
                 </div>
               </div>
             </div>
-            <div className="col-3">
+            <div className="col-lg-3">
               <div className={`${styles["product"]} w-100`}>
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
