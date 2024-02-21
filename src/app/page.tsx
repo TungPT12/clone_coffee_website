@@ -1,4 +1,5 @@
 import Analysis from "@/components/Analysis/Analysis";
+import Blog from "@/components/Blog/Blog";
 import Category from "@/components/Category/Category";
 import Footer from "@/components/Footer/Footer";
 import Gallery from "@/components/Gallery/Gallery";
@@ -12,7 +13,8 @@ export default function Home() {
       <Navbar />
       <SlideShow />
       <Category />
-      <Analysis />
+      <Blog/>
+      {/* <Analysis /> */}
       <Product />
       <Gallery />
       <Footer />

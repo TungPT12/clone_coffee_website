@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./CountDown.module.scss";
+import Link from "next/link";
 interface TimeLeft {
   days: number;
   hours: number;
@@ -47,7 +48,9 @@ const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
   return (
     <div className={styles["countdown-timer"]}>
       <div className={styles["countdown-title"]}>
+        <Link style={{textDecoration:"none", color:"white" }}href={"/event"}>
         <span className={styles["countdown-text"]}>Event Title</span>
+        </Link>
       </div>
       <div className={styles["countdown"]}>
         <div className={styles["countdown-item"]}>
