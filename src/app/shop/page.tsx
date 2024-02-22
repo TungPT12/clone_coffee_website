@@ -1,3 +1,4 @@
+"use client"
 import Banner from "@/components/Banner/Banner";
 import Navbar from "@/components/Navbar/Navbar";
 import styles from "./Shop.module.scss";
@@ -14,9 +15,10 @@ const Shop = () => {
   const [categories, setCategories] = useState([]);
 
   const getCategories = (token: string) => {
+    console.log(token);
     getCategoryAPI(token)
       .then((response: any) => {
-        if (response.state !== 200) {
+        if (response.status !== 200) {
           throw new Error("Lỗi");
         }
         const data = response.data;
@@ -32,7 +34,7 @@ const Shop = () => {
 
   const renderCategories = (categories: any) => {
     return categories.map((category: any, index: number) => {
-      return <span key={category._id}>coffee house</span>;
+      return <span key={category._id}>{category.name}</span>;
     });
   };
 
