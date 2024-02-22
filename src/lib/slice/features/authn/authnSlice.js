@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initAuthnSlice = {
-    isAdmin: false,
+    isAuthn: false,
     token: "",
     refreshToken: "",
 }
@@ -11,9 +11,10 @@ const authnSlice = createSlice({
     initialState: initAuthnSlice,
     reducers: {
         login(state, payload) {
-            console.log(payload)
-            const { isAdmin } = payload.payload;
-            state.isAdmin = isAdmin;
+
+            const { access_token } = payload.payload;
+            state.token = access_token;
+            state.isAuthn = true;
         }
     }
 })

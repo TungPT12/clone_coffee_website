@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styles from "./Category.module.scss";
 const Category = () => {
   return (
