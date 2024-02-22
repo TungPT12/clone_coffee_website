@@ -5,11 +5,40 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCategoryAPI } from "@/api/category";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 const Shop = () => {
-  
-   
+  const { token } = useSelector((state: RootState) => state.authn);
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = (token: string) => {
+    getCategoryAPI(token)
+      .then((response: any) => {
+        if (response.state !== 200) {
+          throw new Error("Lỗi");
+        }
+        const data = response.data;
+        return data;
+      })
+      .then((data: any) => {
+        setCategories(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const renderCategories = (categories: any) => {
+    return categories.map((category: any, index: number) => {
+      return <span key={category._id}>coffee house</span>;
+    });
+  };
+
+  useEffect(() => {
+    getCategories(token);
+  }, [token]);
 
   return (
     <div className="position-relative">
@@ -166,10 +195,11 @@ const Shop = () => {
                 product categorys
               </span>
               <div className={`${styles["category"]} text-capitalize`}>
-                <span>coffee house</span>
+                {/* <span>coffee house</span>
                 <span>Drink</span>
                 <span>Breakfast</span>
-                <span>Tea</span>
+                <span>Tea</span> */}
+                {renderCategories(categories)}
               </div>
             </div>
             {/* <div className={`${styles["tag-category"]} text-uppercase`}>

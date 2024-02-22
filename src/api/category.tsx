@@ -3,11 +3,11 @@ import setHeader from "@/utils/setheader";
 
 const getCategoryAPI = async (token: string) => {
   try {
-    const respone = await axiosInstance.get(
+    const response = await axiosInstance.get(
       "/category",
-      setHeader({ Authorization: "Bearer " + token })
+      setHeader({ Authorization: `Bearer ${token}` })
     );
-    return respone;
+    return response;
   } catch (error) {
     return error;
   }
