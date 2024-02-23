@@ -11,7 +11,7 @@ const ProductCard = ({
   id: string;
   imageUrl: string;
   name: string;
-  price: Number;
+  price: number;
 }) => {
   return (
     <div className={`${styles["product-item"]} col-4`}>
