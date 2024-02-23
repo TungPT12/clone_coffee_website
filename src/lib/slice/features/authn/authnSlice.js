@@ -1,9 +1,21 @@
+import { getToken } from "@/utils/cookie";
+
 const { createSlice } = require("@reduxjs/toolkit");
 
-const initAuthnSlice = {
+const token = getToken();
+
+
+let initAuthnSlice = {
     isAuthn: false,
     token: "",
     refreshToken: "",
+}
+
+if (token) {
+    initAuthnSlice = {
+        isAuthn: true,
+        token: token,
+    }
 }
 
 const authnSlice = createSlice({

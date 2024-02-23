@@ -2,6 +2,8 @@
 // import { useSelector } from "react-redux"
 
 // const getAuthn = () => {
-//     const { token } = useSelector((state: RootState) => state.authn);
+//     const { token, isAuthn } = useSelector((state: RootState) => state.authn);
 //     return
 // }
+
+// export default getAuthn;
