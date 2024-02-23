@@ -1,3 +1,4 @@
+"use client";
 import Banner from "@/components/Banner/Banner";
 import Navbar from "@/components/Navbar/Navbar";
 import styles from "./Shop.module.scss";
@@ -17,7 +18,6 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
 
   const getCategories = (token: string) => {
-    console.log(token);
     getCategoryAPI(token)
       .then((response: any) => {
         if (response.status !== 200) {
@@ -53,8 +53,22 @@ const Shop = () => {
   };
 
   const renderCategories = (categories: any) => {
-    return categories.map((category: any, index: number) => {
-      return <span key={category._id}>coffee house</span>;
+    return categories.map((category: any) => {
+      return <span key={category._id}>{category.name}</span>;
+    });
+  };
+
+  const renderProducts = (products: any) => {
+    return products.map((product: any) => {
+      return (
+        <ProductCard
+          key={product._id}
+          id={product._id}
+          imageUrl={product.image}
+          name={product.name}
+          price={product.price_original}
+        />
+      );
     });
   };
 
