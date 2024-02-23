@@ -7,10 +7,9 @@ const getCategoryAPI = async (token: string) => {
       "/category",
       setHeader({ Authorization: `Bearer ${token}` })
     );
-    console.log(response);
     return response;
-  } catch (error) {
-    return error;
+  } catch (error: any) {
+    return error.response;
   }
 };
 export { getCategoryAPI };
