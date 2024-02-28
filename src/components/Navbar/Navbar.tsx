@@ -11,10 +11,28 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import CartNavBar from "./CartNavBar/CartNavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import AuthorNavBar from "./AuthorNavBar/AuthorNavBar";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 
 function Navbar() {
   const [navListOpen, setNavListOpen] = useState(true);
+  const { token } = useSelector((state: RootState) => state.authn);
+  const [username, setUsername] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (token) {
+      const decodedToken: JwtPayload & { username: string } = jwtDecode(token);
+
+      // Extract the username from the decoded token
+      const { username } = decodedToken;
+
+      // Set the username in state
+      setUsername(username);
+    }
+  }, [token]);
 
   const toggleNavList = () => {
     setNavListOpen(!navListOpen);
@@ -150,21 +168,56 @@ function Navbar() {
                   </span>
                 </Link>
               </li>
-
-              <li
-                className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
-              >
-                <Link
-                  href="/login"
-                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+              {token ? (
+                <li
+                  className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
                 >
-                  <span
-                    className={`d-flex flex-column ${styles["item-outer"]} `}
+                  {/* <Link
+                    href="/login"
+                    className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+                  > */}
+                  <div
+                    className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white gap-2`}
                   >
-                    Login
-                  </span>
-                </Link>
-              </li>
+                    <div className="h-10 w-10">
+                      <img
+                        style={{
+                          height: "40px",
+                          width: "40px",
+                          backgroundColor: "white",
+                        }}
+                        src="https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_960_720.png"
+                      />
+                    </div>
+                    <span
+                      className={`d-flex flex-column mt-1 ${styles["item-outer"]} `}
+                    >
+                      {username}
+                    </span>
+                  </div>
+                  {/* </Link> */}
+                  <div
+                    className={` ${styles["second-navbar"]} position-absolute`}
+                  >
+                    <AuthorNavBar />
+                  </div>
+                </li>
+              ) : (
+                <li
+                  className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
+                >
+                  <Link
+                    href="/login"
+                    className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+                  >
+                    <span
+                      className={`d-flex flex-column ${styles["item-outer"]} `}
+                    >
+                      Login
+                    </span>
+                  </Link>
+                </li>
+              )}
             </ul>
           </li>
         </ul>

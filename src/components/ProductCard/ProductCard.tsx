@@ -20,7 +20,11 @@ const ProductCard = ({
           <img
             alt="áds"
             className={`w-100 ${styles["image-product"]}`}
-            src={imageUrl}
+            src={
+              imageUrl.includes("http")
+                ? imageUrl
+                : `${process.env.base_url}${imageUrl}`
+            }
           />
           <div
             className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}

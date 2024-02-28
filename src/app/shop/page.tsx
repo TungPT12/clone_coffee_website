@@ -12,11 +12,33 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { getProductsAPI } from "@/api/product";
+import useSWR from "swr";
+import axiosInstance from "@/config/axios";
+// import useSWRMutation from "swr/mutation";
+
 const Shop = () => {
   const { token } = useSelector((state: RootState) => state.authn);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  // const { data, error, isMutating } = useSWRMutation();
 
+  // const fetcher = async (url: string, token: string) => {
+  //   console.log(token);
+  //   const response = await axiosInstance.get(url, {
+  //     headers: {
+  //       Authorization: "Bearer " + token,
+  //     },
+  //   });
+  //   return response;
+  // };
+
+  // const { data } = useSWR("/category", (url: string) => {
+  //   return fetcher(url, token);
+  // });
+  // console.log(data);
+  // const getCategorys = async (url: string) => {
+  //   await fetch();
+  // };
   const getCategories = (token: string) => {
     getCategoryAPI(token)
       .then((response: any) => {
@@ -64,7 +86,7 @@ const Shop = () => {
         <ProductCard
           key={product._id}
           id={product._id}
-          imageUrl={product.image}
+          imageUrl={product.images[0]}
           name={product.name}
           price={product.price_original}
         />
