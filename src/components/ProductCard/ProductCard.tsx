@@ -38,7 +38,7 @@ const ProductCard = ({
         </div>
         <Link
           href={`/product/${id}`}
-          className={`w-100 text-center mt-2 text-decoration-none `}
+          className={`w-100 text-center mt-2 text-decoration-none ${styles["link-product"]}`}
         >
           <h5 className={`${styles["tiltle"]}`}>{name}</h5>
           <h6 className={`${styles["sub-text"]}`}>${price}</h6>

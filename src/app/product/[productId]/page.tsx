@@ -1,12 +1,80 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+"use client";
 import Banner from "@/components/Banner/Banner";
 import Navbar from "@/components/Navbar/Navbar";
 import styles from "./Product.module.scss";
-
 import Footer from "@/components/Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Tabs from "@/components/Tab/Tab";
-const Shop = () => {
+import { useParams } from "next/navigation";
+import { getProductDetailAPI } from "@/api/product";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+const ProductDetail = () => {
+  interface Product {
+    name: string;
+    price_new: number;
+    images: [string];
+    category: string;
+  }
+  // const { token } = useSelector((state: RootState) => state.authn);
+  const params = useParams();
+  const [product, setProduct] = useState<Product>({
+    name: "",
+    price_new: 0,
+    images: ["sdsdas"],
+    category: "",
+  });
+  const [image, setImage] = useState("");
+
+  const getDetailProduct = (id: any) => {
+    getProductDetailAPI(id)
+      .then((response: any) => {
+        if (response.status !== 200) {
+          throw new Error("Lỗi");
+        }
+        const data = response.data;
+        return data;
+      })
+      .then((data: any) => {
+        setProduct(data);
+        setImage(data.images[0]);
+        console.log(data.images[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getDetailProduct(params.productId);
+  }, [params]);
+
+  const renderListImageProducts = (images: any) => {
+    return images.map((image: any, index: number) => {
+      return (
+        <div key={index} className="col-4 mt-4">
+          <div className={`${styles["product"]} w-75`}>
+            <div
+              className={`position-relative ${styles["wrapper-add-to-cart"]}`}
+            >
+              <img
+                className={`w-100 ${styles["image-product"]}`}
+                src={
+                  image.includes("http")
+                    ? image
+                    : `${process.env.base_url}${image}`
+                }
+              />
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
   return (
     <div className="position-relative">
       <Navbar />
@@ -19,78 +87,39 @@ const Shop = () => {
                 className={`position-relative ${styles["wrapper-add-to-cart"]}`}
               >
                 <img
-                  className={`w-100 ${styles["image-product"]}`}
-                  src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
+                  className={` ${styles["image-product"]}`}
+                  src={
+                    image.includes("http")
+                      ? image
+                      : `${process.env.base_url}${image}`
+                  }
+                  alt={image}
                 />
                 <div
                   className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
                 ></div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-4">
-                <div className={`${styles["product"]} w-100`}>
-                  <div
-                    className={`position-relative ${styles["wrapper-add-to-cart"]}`}
-                  >
-                    <img
-                      className={`w-100 ${styles["image-product"]}`}
-                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-                    />
-                    <div
-                      className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-4">
-                <div className={`${styles["product"]} w-100`}>
-                  <div
-                    className={`position-relative ${styles["wrapper-add-to-cart"]}`}
-                  >
-                    <img
-                      className={`w-100 ${styles["image-product"]}`}
-                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-                    />
-                    <div
-                      className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-4">
-                <div className={`${styles["product"]} w-100`}>
-                  <div
-                    className={`position-relative ${styles["wrapper-add-to-cart"]}`}
-                  >
-                    <img
-                      className={`w-100 ${styles["image-product"]}`}
-                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-                    />
-                    <div
-                      className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div className="row">{renderListImageProducts(product.images)}</div>
           </div>
 
           <div className={`${styles["detail"]} col-lg-6 col-md-1`}>
             <div className={`${styles["product-list"]}`}>
               <span className={`${styles["title-category"]} text-uppercase`}>
-                ETHIOPIA COFFEE
+                {product.name}
               </span>
               <div className={`${styles["category"]} text-capitalize`}>
-                <span className={`${styles["price"]}`}>$15.00</span>
-                <span>
+                <span className={`${styles["price"]}`}>
+                  {product.price_new} VND
+                </span>
+                {/* <span>
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
                   (1 customer review)
-                </span>
+                </span> */}
                 <span>
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                   Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
@@ -133,7 +162,7 @@ const Shop = () => {
             <div className={`${styles["tag-category"]} `}>
               <div className={`${styles["tag-tile-category"]} text-capitalize`}>
                 <span>SKU: PR111</span>
-                <span>CATEGORY: Fresh Coffee</span>
+                <span>CATEGORY: {product.category}</span>
                 <span>TAGS: Black, Casual, Classic</span>
               </div>
               <div className="mt-3">
@@ -228,7 +257,7 @@ const Shop = () => {
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
                 >
                   <img
-                    className={`w-100 ${styles["image-product"]}`}
+                    className={`${styles["image-product"]}`}
                     src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
                   />
                   <div
@@ -254,4 +283,4 @@ const Shop = () => {
     </div>
   );
 };
-export default Shop;
+export default ProductDetail;

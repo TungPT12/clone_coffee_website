@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import Banner from "@/components/Banner/Banner";
 import Navbar from "@/components/Navbar/Navbar";
@@ -6,20 +7,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getCategoryAPI } from "@/api/category";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import ProductCard from "@/components/ProductCard/ProductCard";
-import { getProductsAPI } from "@/api/product";
+import { getProductsAPI, getProductsByCategoryAPI } from "@/api/product";
 import useSWR from "swr";
 import axiosInstance from "@/config/axios";
+import paging from "@/utils/paging";
 // import useSWRMutation from "swr/mutation";
 
 const Shop = () => {
   const { token } = useSelector((state: RootState) => state.authn);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [currentProducts, setCurrentProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const numberProducts = useMemo(() => 6, []);
+
   // const { data, error, isMutating } = useSWRMutation();
 
   // const fetcher = async (url: string, token: string) => {
@@ -39,8 +45,9 @@ const Shop = () => {
   // const getCategorys = async (url: string) => {
   //   await fetch();
   // };
+
   const getCategories = (token: string) => {
-    getCategoryAPI(token)
+    getCategoryAPI()
       .then((response: any) => {
         if (response.status !== 200) {
           throw new Error("Lỗi");
@@ -66,8 +73,26 @@ const Shop = () => {
         return data;
       })
       .then((data: any) => {
-        console.log(data);
         setProducts(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const searchByCategory = (name: string) => {
+    getProductsByCategoryAPI(name)
+      .then((response: any) => {
+        if (response.status !== 200) {
+          throw new Error("Lỗi");
+        }
+        const data = response.data;
+        return data;
+      })
+      .then((data: any) => {
+        // console.log(data);
+        // console.log(data[0].products);
+        setProducts(data[0].products);
       })
       .catch((error) => {
         console.log(error);
@@ -76,19 +101,27 @@ const Shop = () => {
 
   const renderCategories = (categories: any) => {
     return categories.map((category: any) => {
-      return <span key={category._id}>{category.name}</span>;
+      return (
+        <span
+          className={`${styles["category"]}`}
+          key={category._id}
+          onClick={() => searchByCategory(category.name)}
+        >
+          {category.name}
+        </span>
+      );
     });
   };
 
-  const renderProducts = (products: any) => {
-    return products.map((product: any) => {
+  const renderCurrentProducts = (currentProducts: any) => {
+    return currentProducts.map((currentProduct: any) => {
       return (
         <ProductCard
-          key={product._id}
-          id={product._id}
-          imageUrl={product.images[0]}
-          name={product.name}
-          price={product.price_original}
+          key={currentProduct._id}
+          id={currentProduct._id}
+          imageUrl={currentProduct.images[0]}
+          name={currentProduct.name}
+          price={currentProduct.price_original}
         />
       );
     });
@@ -98,6 +131,32 @@ const Shop = () => {
     getCategories(token);
     getProducts(token);
   }, [token]);
+  useEffect(() => {
+    setCurrentProducts(() => {
+      return paging(products, numberProducts, currentPage);
+    });
+  }, [products, currentPage]);
+
+  const renderPage = (products: any) => {
+    let pages = [];
+    for (
+      let index = 0;
+      index < Math.ceil(products.length / numberProducts);
+      index++
+    ) {
+      pages.push(
+        <div
+          onClick={() => {
+            setCurrentPage(index + 1);
+          }}
+          className={styles.pagingItem}
+        >
+          <span>{index + 1}</span>
+        </div>
+      );
+    }
+    return pages;
+  };
 
   return (
     <div className="position-relative">
@@ -119,19 +178,20 @@ const Shop = () => {
                 />
               </span>
             </div>
-            <div className={`${styles["list-product"]} row g-lg-5`}>
-              {renderProducts(products)}
+            <div className={`${styles["list-product"]} row g-lg-5 mt-1`}>
+              {renderCurrentProducts(currentProducts)}
             </div>
             <div className={styles.paging}>
               <span className={`${styles.icon} ${styles.smallerIcon}`}>
                 &#8249;
               </span>
-              <div className={styles.pagingItem}>
+              {/* <div className={styles.pagingItem}>
                 <span>1</span>
               </div>
               <div className={styles.pagingItem}>
                 <span>2</span>
-              </div>
+              </div> */}
+              {renderPage(products)}
               <span className={`${styles.icon} ${styles.smallerIcon}`}>
                 &#8250;
               </span>
