@@ -12,7 +12,6 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   const { token } = useSelector((state: RootState) => state.authn);
-  console.log(token);
   return (
     <main>
       <Navbar />

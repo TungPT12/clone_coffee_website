@@ -1,11 +1,11 @@
 import axiosInstance from "@/config/axios";
 import setHeader from "@/utils/setheader";
 
-const getCategoryAPI = async (token: string) => {
+const getCategoryAPI = async () => {
   try {
     const response = await axiosInstance.get(
-      "/category",
-      setHeader({ Authorization: `Bearer ${token}` })
+      "/category"
+      // setHeader({ Authorization: `Bearer ${token}` })
     );
     return response;
   } catch (error: any) {

@@ -13,3 +13,29 @@ const getProductsAPI = async (token: string) => {
   }
 };
 export { getProductsAPI };
+
+const getProductDetailAPI = async (id: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `/product/${id}`
+      // setHeader({ Authorization: `Bearer ${token}` })
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+export { getProductDetailAPI };
+
+const getProductsByCategoryAPI = async (name: string) => {
+  try {
+    const response = await axiosInstance.get(
+      `/category?name=${name}`
+      // setHeader({ Authorization: `Bearer ${token}` })
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+export { getProductsByCategoryAPI };

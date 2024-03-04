@@ -1,10 +1,15 @@
 .product {
   user-select: none;
 }
+
 .tiltle {
   font-family: Marcellus, sans-serif;
   text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  color: #656565;
 }
+
 .sub-text {
   font-family: "Open Sans", sans-serif;
   font-size: 15px;
@@ -13,6 +18,18 @@
   color: #656565;
   overflow-x: hidden !important;
   -webkit-font-smoothing: antialiased;
+}
+
+.origin-price {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.54);
+  text-decoration: line-through;
+}
+
+.new-price {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .wrapper-add-to-cart {
@@ -24,6 +41,7 @@
     opacity: 0.6;
   }
 }
+
 .overlay-add-to-cart,
 .image-product {
   transition: all 0.5s ease;
@@ -45,7 +63,6 @@
   transition: color 0.3s ease, background-color 0.3s ease,
     border-color 0.3s ease;
   padding: 19px 35px;
-
   &:hover {
     color: #fff;
     background-color: #262626;

@@ -11,7 +11,7 @@ const ProductCard = ({
   id: string;
   imageUrl: string;
   name: string;
-  price: Number;
+  price: number;
 }) => {
   return (
     <div className={`${styles["product-item"]} col-4`}>
@@ -20,7 +20,11 @@ const ProductCard = ({
           <img
             alt="áds"
             className={`w-100 ${styles["image-product"]}`}
-            src={imageUrl}
+            src={
+              imageUrl.includes("http")
+                ? imageUrl
+                : `${process.env.base_url}${imageUrl}`
+            }
           />
           <div
             className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
@@ -34,7 +38,7 @@ const ProductCard = ({
         </div>
         <Link
           href={`/product/${id}`}
-          className={`w-100 text-center mt-2 text-decoration-none `}
+          className={`w-100 text-center mt-2 text-decoration-none ${styles["link-product"]}`}
         >
           <h5 className={`${styles["tiltle"]}`}>{name}</h5>
           <h6 className={`${styles["sub-text"]}`}>${price}</h6>

@@ -1,6 +1,40 @@
+"use client";
+import { useEffect, useState } from "react";
 import CarouselProduct from "../CarouselProduct/CarouselProduct";
 import styles from "./Product.module.scss";
+import { getCategoryAPI } from "@/api/category";
 const Product = () => {
+  const [categories, setCategories] = useState([]);
+  const getCategories = () => {
+    getCategoryAPI()
+      .then((response) => {
+        if (response.status !== 200) {
+          throw Error();
+        }
+        return response.data;
+      })
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
+  const renderCategories = (categories: any) => {
+    return categories.map((category: any) => {
+      return (
+        <div key={category._id} className={`overflow-hidden`}>
+          <h2 className={`${styles["title-category"]} `}>{category.name}</h2>
+          <CarouselProduct products={category.products} />
+        </div>
+      );
+    });
+  };
+  useEffect(() => {
+    getCategories();
+  }, []);
+
   return (
     <>
       <div className={`${styles["container"]}`}>
@@ -17,9 +51,7 @@ const Product = () => {
           </div>
         </div>
         <div className={`${styles["mobile-product"]}`}>
-          <div
-            className={`${styles["wrapper-add-to-cart"]}`}
-          >
+          <div className={`${styles["wrapper-add-to-cart"]}`}>
             <img
               className={`w-100 ${styles["image-product"]} h-100`}
               src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
@@ -36,26 +68,9 @@ const Product = () => {
               </button>
             </div>
           </div>
-        
-         
         </div>
         <div className={`${styles["desk-product"]} overflow-hidden`}>
-          <div className={`overflow-hidden`}>
-            <h2 className={`${styles["title-category"]} `}>Coffee</h2>
-            <CarouselProduct />
-          </div>
-          <div className={`overflow-hidden`}>
-            <h2 className={`${styles["title-category"]} `}>Tea</h2>
-            <CarouselProduct />
-          </div>
-          <div className={`overflow-hidden`}>
-            <h2 className={`${styles["title-category"]} `}>Break Fast</h2>
-            <CarouselProduct />
-          </div>
-          <div className={`overflow-hidden`}>
-            <h2 className={`${styles["title-category"]} `}>Drinks</h2>
-            <CarouselProduct />
-          </div>
+          {renderCategories(categories  )}
         </div>
       </div>
     </>
