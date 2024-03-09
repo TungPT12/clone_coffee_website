@@ -3,8 +3,13 @@ import Link from "next/link";
 import style from "./Register.module.scss";
 import Navbar from "@/components/Navbar/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fa2, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import {
+  fa2,
+  faLock,
+  faUser,
+  faWarning,
+} from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import useInput from "@/hooks/use-input";
 import {
@@ -15,11 +20,13 @@ import {
   validatedEmail,
 } from "@/lib/input";
 import alertMessage from "@/lib/warningMessage";
+import useSWR, { mutate } from "swr";
+import { registerService } from "@/services/authn/authn.service";
 const Login = () => {
   const [isDuplicateUserName, setIsDuplicateUserName] = useState(false);
   const [isDuplicateEmail, setIsDuplicateEmail] = useState(false);
   const navigate = useRouter();
-
+  const router = useRouter();
   const {
     isValid: isValidFullName,
     input: inputFullName,
@@ -49,10 +56,41 @@ const Login = () => {
     setInput: setInputPhoneNumber,
   } = useInput(validatePhoneNumber, "");
 
-  const isValidSubmit =
-    isValidFullName && isValidPassword && isValidEmail && isValidPhoneNumber;
+  const register = (username: string, password: string) => {
+    registerService({ username: username, password: password })
+      .then((reponse) => {
+        router.push("/login");
+      })
+      .catch((error) => {
+        if (error.response.status === 409) {
+          setError(error.response.data.message);
+        } else {
+          setError("Something went wrong");
+        }
+        // console.log(error.r);
+      });
+  };
 
-  const onSubmitSignup = (e: any) => {};
+  const [error, setError] = useState("");
+
+  // const { data: registered } = useSWR(
+  //   "REGISTER",
+  //   inputPassword && inputFullName
+  //     ? () => {
+  //         return registerService({
+  //           username: inputFullName,
+  //           password: inputPassword,
+  //         });
+  //       }
+  //     : null
+  // );
+
+  const isValidSubmit = isValidFullName && isValidPassword;
+
+  const onSubmitSignup = (e: any) => {
+    e.preventDefault();
+    register(inputFullName, inputPassword);
+  };
   return (
     <div>
       <Navbar />
@@ -65,6 +103,7 @@ const Login = () => {
               : (e) => {
                   e.preventDefault();
                   onTouchedFullName();
+                  onTouchedPassword();
                 }
           }
         >
@@ -85,6 +124,11 @@ const Login = () => {
               <input
                 type="text"
                 placeholder="Tài khoản"
+                onBlur={onTouchedFullName}
+                value={inputFullName}
+                onChange={(e) => {
+                  setInputFullName(e.target.value);
+                }}
                 className={`${style["input-account"]} text-white `}
               />
               {isShowWarning(isValidFullName, isTouchFullName) ? (
@@ -107,6 +151,11 @@ const Login = () => {
               />
               <input
                 className={`${style["input-password"]} text-white`}
+                value={inputPassword}
+                onBlur={onTouchedPassword}
+                onChange={(e) => {
+                  setInputPassword(e.target.value);
+                }}
                 type="password"
                 placeholder="Mật khẩu"
               />
@@ -130,6 +179,14 @@ const Login = () => {
               />
             </div>
           </div>
+          {error ? (
+            <div className="d-flex text-warning fw-500 align-items-center ps-2 pb-2 mb-1 pt-0 ">
+              <FontAwesomeIcon icon={faWarning} className="icon-warning me-2" />
+              {error}
+            </div>
+          ) : (
+            ""
+          )}
           <button
             className={`${style["button-login"]} py-2 text-white`}
             type="submit"

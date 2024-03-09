@@ -9,7 +9,13 @@ interface TimeLeft {
   seconds: number;
 }
 
-const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
+const CountdownTimer = ({
+  targetDate,
+  name,
+}: {
+  targetDate: string;
+  name: string;
+}) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
   const [isClient, setIsClient] = useState(false);
 
@@ -48,8 +54,13 @@ const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
   return (
     <div className={styles["countdown-timer"]}>
       <div className={styles["countdown-title"]}>
-        <Link style={{textDecoration:"none", color:"white" }}href={"/event"}>
-        <span className={styles["countdown-text"]}>Event Title</span>
+        <Link
+          style={{ textDecoration: "none", color: "white" }}
+          href={"/event"}
+        >
+          <span className={styles["countdown-text"]}>
+            {name ? name : "Tilte"}
+          </span>
         </Link>
       </div>
       <div className={styles["countdown"]}>

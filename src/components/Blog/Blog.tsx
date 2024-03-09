@@ -1,5 +1,39 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+"use client";
+import useSWR from "swr";
 import styles from "./Blog.module.scss";
+import introductionService from "@/services/introduction/introduction.service";
 const Blog = () => {
+  const { data: introduction } = useSWR(
+    "GET_INTRODUCTION",
+    introductionService.getAll
+  );
+  const renderIntroduction = (introduction: any) => {
+    return introduction?.map((introduction: any) => {
+      return (
+        <div className={`${styles["blog-image"]}`} key={introduction._id}>
+          <img
+            className={`${styles["image-blog"]}`}
+            src={
+              introduction.image
+                ? introduction.image?.includes("http")
+                  ? introduction.image
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}${introduction.image}`
+                : ""
+            }
+          ></img>
+          <div
+            className={`${styles["text-blog"]}justify-content-center text-center`}
+          >
+            <h5 className={`${styles["tiltle"]}`}>{introduction.title}</h5>
+            <h6 className={`${styles["sub-text"]}`}>{introduction.content}</h6>
+          </div>
+        </div>
+      );
+    });
+  };
+
   return (
     <>
       <div className={`${styles["container"]}`}>
@@ -21,43 +55,10 @@ const Blog = () => {
         <div
           className={`${styles["category"]} d-flex justify-content-center text-center`}
         >
-          <div className={`${styles["blog-image"]}`}>
-            <img  className={`${styles["image-blog"]}`} src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/blog-1-img-1.jpg"></img>
-            <div className={`${styles["text-blog"]}`}>
-              <h5 className={`${styles["tiltle"]}`}>TYPES OF COFFEE</h5>
-              <h6 className={`${styles["sub-text"]}`}>
-                Lorem ipsum dolor sit ametal, consectetuer adipiscing elitus.
-                Aeneantos commodo
-              </h6>
-            </div>
-          </div>
-          <div className={`${styles["blog-image"]}`}>
-            <img  className={`${styles["image-blog"]}`} src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/blog-1-img-1.jpg"></img>
-            <div className={`${styles["text-blog"]}`}>
-              <h5 className={`${styles["tiltle"]}`}>TYPES OF COFFEE</h5>
-              <h6 className={`${styles["sub-text"]}`}>
-                Lorem ipsum dolor sit ametal, consectetuer adipiscing elitus.
-                Aeneantos commodo
-              </h6>
-            </div>
-          </div>
-          <div>
-          <div className={`${styles["blog-image"]}`}>
-            <img  className={`${styles["image-blog"]}`} src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/blog-1-img-1.jpg"></img>
-            <div className={`${styles["text-blog"]}`}>
-              <h5 className={`${styles["tiltle"]}`}>TYPES OF COFFEE</h5>
-              <h6 className={`${styles["sub-text"]}`}>
-                Lorem ipsum dolor sit ametal, consectetuer adipiscing elitus.
-                Aeneantos commodo
-              </h6>
-            </div>
-          </div>
-          </div>
-     
+          {renderIntroduction(introduction)}
         </div>
       </div>
     </>
   );
- 
 };
 export default Blog;

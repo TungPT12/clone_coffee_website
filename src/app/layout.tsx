@@ -7,6 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import Providers from "@/lib/StoreProvider";
+import { CartProvider } from "@/components/Context/CartContext";
+
 const isAdmin = true;
 
 // export const metadata: Metadata = {
@@ -22,8 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <Providers>{isAdmin ? admin : user}</Providers> */}
-        <Providers>{children}</Providers>
+        <CartProvider>
+          <Providers>{children}</Providers>
+        </CartProvider>
       </body>
     </html>
   );

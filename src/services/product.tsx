@@ -25,7 +25,6 @@ const getProductDetailAPI = async (id: string) => {
     return error.response;
   }
 };
-export { getProductDetailAPI };
 
 const getProductsByCategoryAPI = async (name: string) => {
   try {
@@ -38,4 +37,5 @@ const getProductsByCategoryAPI = async (name: string) => {
     return error.response;
   }
 };
-export { getProductsByCategoryAPI };
+
+export { getProductDetailAPI, getProductsByCategoryAPI };

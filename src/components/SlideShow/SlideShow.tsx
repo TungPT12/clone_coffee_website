@@ -11,16 +11,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const CountDown = dynamic(() => import("../CountDown/CountDown"), {
   ssr: false,
 });
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import useSWR, { mutate } from "swr";
+import { countdownService } from "@/services/countdown";
 function SlideShow() {
-  const [targetDate, settargetDate] = useState("2024-01-31T23:59:59");
-
+  const { data: countDownTime } = useSWR(
+    "GET_COUTNDOWN",
+    countdownService.getAll
+  );
   const properties = {
     prevArrow: (
       <button
         data-type="prev"
-        //   aria-label={}
         type="button"
         className={`${styles["arrow-button"]} ${styles["left-arrow"]} ms-3`}
       >
@@ -100,7 +103,22 @@ function SlideShow() {
           </div>
         </div>
       </Slide>
-      <CountDown targetDate={targetDate} />
+      <CountDown
+        name={
+          countDownTime
+            ? countDownTime.length !== 0
+              ? countDownTime[0].title.toString()
+              : countDownTime[0].title
+            : new Date().toString()
+        }
+        targetDate={
+          countDownTime
+            ? countDownTime.length !== 0
+              ? countDownTime[0].time_countdown.toString()
+              : new Date().toString()
+            : new Date().toString()
+        }
+      />
     </div>
   );
 }

@@ -3,33 +3,39 @@ import Link from "next/link";
 import style from "./login.module.scss";
 import Navbar from "@/components/Navbar/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fa2, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  fa2,
+  faLock,
+  faUser,
+  faWarning,
+} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { loginAPI } from "@/api/authn";
+import { loginService } from "@/services/authn/authn.service";
 import { useDispatch } from "react-redux";
-import {authnAction} from "@/lib/slice/features/authn/authnSlice"
+import { authnAction } from "@/lib/slice/features/authn/authnSlice";
 import { useRouter } from "next/navigation";
-
+import useSWR from "swr";
 
 const Login = () => {
-  const [password, setPassword] = useState("ttt@2000");
-  const [username, setUsername] = useState("tintran");
+  const [password, setPassword] = useState("123");
+  const [username, setUsername] = useState("123");
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
   const router = useRouter();
-
-
+  // const {data} = useSWR('LOGIN', )
   const login = (username: string, password: string) => {
-    loginAPI({ username: username, password: password })
-      .then((response) => {
-        const data = response.data;
+    loginService({ username: username, password: password })
+      .then((data: any) => {
         return data;
       })
-      .then((data) => {
-        dispatch(authnAction.login(data))
-        router.push('/'); // Chuyển hướng đến trang "home"
+      .then((data: any) => {
+        dispatch(authnAction.login(data));
       })
-      .catch((error) => {
-        console.log(error);
+      .then(() => {
+        window.location.href = "/";
+      })
+      .catch((error: Error) => {
+        setError("Sai tài khoản hoặc mật khẩu");
       });
   };
   return (
@@ -82,6 +88,14 @@ const Login = () => {
               />
             </div>
           </div>
+          {error ? (
+            <div className="d-flex text-warning fw-500 align-items-center ps-2 pb-2 mb-1 pt-0 ">
+              <FontAwesomeIcon icon={faWarning} className="icon-warning me-2" />
+              {error}
+            </div>
+          ) : (
+            ""
+          )}
           <button
             className={`${style["button-login"]} py-2 text-white`}
             onClick={() => {
