@@ -1,7 +1,7 @@
 .navbar {
   height: 100px;
   position: relative;
-  z-index: 9999;
+  z-index: 99;
   padding-left: 5rem;
   padding-right: 5rem;
 }
@@ -62,12 +62,18 @@
 
 .number {
   position: absolute;
-  top: 1.7rem; /* Điều chỉnh vị trí theo nhu cầu của bạn */
-  left: 1rem; /* Điều chỉnh vị trí theo nhu cầu của bạn */
-  color: white; /* Màu chữ */
-  font-size: 12px; /* Kích thước chữ */
-  padding: 2px 10px; /* Khoảng cách giữa số và viền */
-  border-radius: 50%; /* Bo tròn viền */
+  top: 1.7rem;
+  /* Điều chỉnh vị trí theo nhu cầu của bạn */
+  left: 1rem;
+  /* Điều chỉnh vị trí theo nhu cầu của bạn */
+  color: white;
+  /* Màu chữ */
+  font-size: 12px;
+  /* Kích thước chữ */
+  padding: 2px 10px;
+  /* Khoảng cách giữa số và viền */
+  border-radius: 50%;
+  /* Bo tròn viền */
 }
 
 .second-navbar-cart {
@@ -107,20 +113,16 @@
   .container {
     // display: none;
   }
-
   .wrap-logo {
     display: none;
   }
-
   .item-outer {
     color: #000;
   }
-
   .wrap-logo-navlink {
     width: 100%;
     height: fit-content;
   }
-
   .navbar {
     background-color: #fff;
     color: #000;
@@ -128,21 +130,17 @@
     width: 100%;
     // display: none;
   }
-
   .icon {
     font-size: 3rem;
   }
-
   .wrap-logo-navlink {
     justify-content: start;
     display: block;
   }
-
   .wrapper-icon-navbar {
     display: block;
     padding: 1.5rem 2rem;
   }
-
   .nav-list {
     background: #fff;
     display: flex;
@@ -160,7 +158,6 @@
     text-align: start;
     border-bottom: 1px solid #b5b5b5;
   }
-
   .logo {
     display: none;
   }
