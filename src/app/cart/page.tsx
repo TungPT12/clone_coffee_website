@@ -16,23 +16,30 @@ import CardProductCart from "@/components/CardProductCart/CardProductCart";
 import oderService from "@/services/order/order.service";
 import { Product } from "@/types/entities/product.entity";
 import productService from "@/services/product/product.service";
+import Modal from "@/components/Modal/Modal";
+import Bill from "@/components/Bill/Bill";
+// import CustomModal from "@/components/Modal/Modal";
 // const cartLocal = localStorage.getItem("cart");
 
 export default function Cart() {
+  const [open, setopen] = useState(false);
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
-  Promise.all(
-    products.map((product: any) => {
-      return productService.getProductId(product.productId);
-    })
-  )
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error: any) => {
-      console.log(error);
-    });
+  const [orderData, setOrder] = useState({
+    id: "123",
+  });
+  // Promise.all(
+  //   products.map((product: any) => {
+  //     return productService.getProductId(product.productId);
+  //   })
+  // )
+  //   .then((data) => {
+  //     console.log(data);
+  //   })
+  //   .catch((error: any) => {
+  //     console.log(error);
+  //   });
   const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState("");
   const order = (dataProduct: any) => {
@@ -50,7 +57,6 @@ export default function Cart() {
       },
       []
     );
-    console.log(formatProduct);
     const orderData = {
       products: formatProduct,
     };
@@ -168,12 +174,17 @@ export default function Cart() {
           />
           <button
             type="submit"
+            onClick={() => {
+              setopen(true);
+            }}
             className={`${styles["apply-coupon-btn"]} text-white`}
             value="Apply coupon"
           >
             Apply coupon
           </button>
         </div>
+        <Bill id="1333weweqwewq23" isOpen={open} setIsOpen={setopen} />
+
         <ProvisionalInvoice
           handleOrder={() => {
             order(products);

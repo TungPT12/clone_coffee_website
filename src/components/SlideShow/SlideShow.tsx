@@ -107,9 +107,9 @@ function SlideShow() {
         name={
           countDownTime
             ? countDownTime.length !== 0
-              ? countDownTime[0].title.toString()
+              ? countDownTime[0].title
               : countDownTime[0].title
-            : new Date().toString()
+            : "Tilte Event"
         }
         targetDate={
           countDownTime

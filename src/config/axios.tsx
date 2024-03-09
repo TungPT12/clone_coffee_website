@@ -8,7 +8,7 @@
 import axios from "axios";
 
 type Token = {
-  accessToken: string;
+  access_token: string;
   refreshToken: string;
 };
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
@@ -28,10 +28,10 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   (config) => {
     if (!config.headers["Authorization"]) {
-      const token: string =
-        // localStorage.getItem(authConfig.storageTokenKeyName) || "";
-        localStorage.getItem("token") || "";
-      config.headers["Authorization"] = `Bearer ${token}`;
+      // const token: Token =
+      //   // localStorage.getItem(authConfig.storageTokenKeyName) || "";
+      //   JSON.parse(localStorage.getItem("token") || "{}");
+      config.headers["Authorization"] = `Bearer ${token.access_token}`;
       // config.headers["Authorization"] = `${authConfig.TOKEN_TYPE} ${token}`;
     }
     return config;

@@ -93,7 +93,7 @@ function Navbar() {
                   {/* <SecondNavBar /> */}
                 </div>
               </li>
-              <li
+              {/* <li
                 className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
               >
                 <Link
@@ -111,7 +111,7 @@ function Navbar() {
                 >
                   <SecondNavBar />
                 </div>
-              </li>
+              </li> */}
               <li
                 className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
               >
@@ -175,7 +175,7 @@ function Navbar() {
                   <span
                     className={`d-flex flex-column ${styles["item-outer"]} `}
                   >
-                    Lịch sự gọi món
+                    Order
                   </span>
                 </Link>
                 <div

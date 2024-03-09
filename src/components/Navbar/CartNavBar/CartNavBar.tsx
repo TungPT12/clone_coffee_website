@@ -44,7 +44,7 @@ function CartNavBar() {
             <span className="me-3">Quantity:</span>
             <span>{product?.quantity}</span>
           </div>
-          <span>${product?.quantity * product.price_original}</span>
+          <span>${product?.quantity * product.price_new}</span>
         </div>
       </div>
     ));

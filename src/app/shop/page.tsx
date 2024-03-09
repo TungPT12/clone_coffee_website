@@ -18,6 +18,7 @@ import paging from "@/utils/paging";
 import categoryService from "@/services/category/category.service";
 import productService from "@/services/product/product.service";
 import { Product } from "@/types/entities/product.entity";
+import Modal from "@/components/Modal/Modal";
 
 const Shop = () => {
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
@@ -111,6 +112,9 @@ const Shop = () => {
 
   return (
     <div className="position-relative">
+      <Modal>
+        <div>sdsfdsf</div>
+      </Modal>
       <Navbar />
       <Banner title={`shop`} />
       <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>

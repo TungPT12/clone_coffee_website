@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+"use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./Profile.module.scss";
 import {
@@ -10,23 +13,42 @@ import {
   faPhone,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import useSWR from "swr";
+import profileService from "@/services/profile/profile.service";
+
+const ranks = {
+  copper: 100,
+  silver: 500,
+  gold: 1000,
+  plantium: 2000,
+};
+
 const Profile = () => {
+  const checkRanksClass = (score: number) => {
+    console.log(score);
+    if (score > 100 && score <= 500) {
+      return "item-siler";
+    } else if (score > 500 && score <= 1000) {
+      return "item-gold";
+    } else if (score > 1000) {
+      return "item-platium";
+    }
+    return "item-norank";
+  };
+  const { data: profile } = useSWR("GET_PROFILE", profileService.getProfile);
   return (
     <div>
       <div className={`${styles["profile"]}`}>
         <div className={`${styles["backgroud"]}`}></div>
         <div className={`${styles["avatar-image"]}`}>
           <div className={`${styles["image-user"]}`}>
-            <img
-              className={`${styles["avatar"]}`}
-              src="https://cdn.lazi.vn/storage/uploads/users/avatar/1600694988_lazi_5f68aacc91498.jpg"
-            />
+            <img className={`${styles["avatar"]}`} src={profile?.avatar} />
           </div>
           <div className={`${styles["main-detail"]}`}>
             <div>
               <div className={`${styles["name"]} `}>
                 <h2 className={`${styles["title-name"]} `}>
-                  Nguyễn Thanh Liêm
+                  {profile?.username}
                 </h2>
                 <div className={`${styles["icon-container"]} `}>
                   <FontAwesomeIcon
@@ -39,14 +61,22 @@ const Profile = () => {
                 <span className={`${styles["info-fullname"]}`}>
                   (Khách hàng tiềm năng)
                 </span>
-                <span className="">
-                  <FontAwesomeIcon icon={faGem} className={`${styles[""]}`} />
+                <span
+                  className={`${
+                    profile
+                      ? profile.score
+                        ? styles[checkRanksClass(profile.score)]
+                        : styles["item-norank"]
+                      : styles["item-norank"]
+                  }`}
+                >
+                  <FontAwesomeIcon
+                    icon={faGem}
+                    className={`${styles["icon"]}`}
+                  />
                 </span>
               </div>
             </div>
-            {/* <div className={`${styles["button-edit"]}`}>
-              <button className={`${styles["button"]}`}>Edit Profile</button>
-            </div> */}
           </div>
         </div>
       </div>
@@ -84,7 +114,7 @@ const Profile = () => {
                   icon={faEnvelope}
                 />
 
-                <p>Liemro9x@gmail.com </p>
+                <p>{profile?.email} </p>
               </span>
               <span className={`${styles["item-info"]}`}>
                 <FontAwesomeIcon
@@ -102,23 +132,27 @@ const Profile = () => {
             </div>
             <div className={`${styles["rank"]}`}>
               <div className={`${styles["rank-detail"]} row`}>
-                <div className={`${styles["item-norank"]} col-2`}>
+                <div
+                  className={`${styles["item-norank"]} ${styles["item-rank"]} col-2`}
+                >
                   Đồng
                   <FontAwesomeIcon
                     height={20}
                     icon={faGem}
                     className={`${styles["icon"]}`}
                   />
-                  <span>0</span>
+                  <span>100</span>
                   <progress
                     className={`${styles["progress"]}`}
-                    value="10"
-                    max="100"
+                    value={profile?.score}
+                    max={ranks.copper}
                     // onMouseEnter={handleMouseEnter}
                     // onMouseLeave={handleMouseLeave}
                   ></progress>
                 </div>
-                <div className={`${styles["item-siler"]} col-2`}>
+                <div
+                  className={`${styles["item-siler"]} ${styles["item-rank"]} col-2`}
+                >
                   Bạc
                   <FontAwesomeIcon
                     height={20}
@@ -128,11 +162,19 @@ const Profile = () => {
                   <span>500</span>
                   <progress
                     className={`${styles["progress"]}`}
-                    value="0"
-                    max="100"
+                    value={
+                      profile?.score
+                        ? profile?.score > 100
+                          ? profile.score - ranks.copper
+                          : 0
+                        : 0
+                    }
+                    max={ranks.silver}
                   ></progress>
                 </div>
-                <div className={`${styles["item-gold"]} col-2`}>
+                <div
+                  className={`${styles["item-gold"]} ${styles["item-rank"]} col-2`}
+                >
                   Vàng
                   <FontAwesomeIcon
                     height={20}
@@ -142,11 +184,19 @@ const Profile = () => {
                   <span>1000</span>
                   <progress
                     className={`${styles["progress"]}`}
-                    value="0"
-                    max="100"
+                    value={
+                      profile?.score
+                        ? profile?.score > 500
+                          ? profile.score - ranks.silver
+                          : 0
+                        : 0
+                    }
+                    max={ranks.gold}
                   ></progress>
                 </div>
-                <div className={`${styles["item-platium"]} col-2`}>
+                <div
+                  className={`${styles["item-platium"]} ${styles["item-rank"]} col-2`}
+                >
                   Bạch kim
                   <FontAwesomeIcon
                     height={20}
@@ -156,8 +206,14 @@ const Profile = () => {
                   <span>2000</span>
                   <progress
                     className={`${styles["progress"]}`}
-                    value="0"
-                    max="100"
+                    value={
+                      profile?.score
+                        ? profile?.score > 1000
+                          ? profile.score - ranks.gold
+                          : 0
+                        : 0
+                    }
+                    max={ranks.plantium}
                   ></progress>
                 </div>
               </div>

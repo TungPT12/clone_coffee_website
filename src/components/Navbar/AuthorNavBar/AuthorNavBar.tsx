@@ -8,7 +8,7 @@ const AuthorNavBar = () => {
     <ul className={`position-relative ${styles["second-navbar"]}`}>
       <li className={`${styles["second-item"]}`}>
         <Link
-          href={"/"}
+          href={"/profile"}
           className={`${styles["second-nav-link"]} text-decoration-none text-white`}
         >
           <span className={`${styles["outer"]}`}>Thông tin</span>
