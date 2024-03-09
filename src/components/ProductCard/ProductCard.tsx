@@ -21,9 +21,11 @@ const ProductCard = ({
             alt="áds"
             className={`w-100 ${styles["image-product"]}`}
             src={
-              imageUrl.includes("http")
-                ? imageUrl
-                : `${process.env.base_url}${imageUrl}`
+              imageUrl
+                ? imageUrl?.includes("http")
+                  ? imageUrl
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}${imageUrl}`
+                : ""
             }
           />
           <div

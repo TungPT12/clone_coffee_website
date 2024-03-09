@@ -1,11 +1,144 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+"use client";
 import Navbar from "@/components/Navbar/Navbar";
 import styles from "./Cart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faWarning } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import ProvisionalInvoice from "@/components/ProvisionalInvoice/ProvisionalInvoice";
 import Banner from "@/components/Banner/Banner";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { cartActions } from "@/lib/slice/features/cart/cartSlice";
+import CardProductCart from "@/components/CardProductCart/CardProductCart";
+import oderService from "@/services/order/order.service";
+import { Product } from "@/types/entities/product.entity";
+import productService from "@/services/product/product.service";
+// const cartLocal = localStorage.getItem("cart");
+
 export default function Cart() {
+  const { products, totalPrice } = useSelector(
+    (state: RootState) => state.cart
+  );
+  Promise.all(
+    products.map((product: any) => {
+      return productService.getProductId(product.productId);
+    })
+  )
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error: any) => {
+      console.log(error);
+    });
+  const dispatch = useDispatch();
+  const [couponCode, setCouponCode] = useState("");
+  const order = (dataProduct: any) => {
+    const formatProduct = dataProduct.reduce(
+      (initProducts: any[], product: any) => {
+        console.log(initProducts);
+        let newProduct = product;
+        if (newProduct.size === "N") {
+          newProduct = {
+            ...newProduct,
+            size: null,
+          };
+        }
+        return initProducts.concat([newProduct]);
+      },
+      []
+    );
+    console.log(formatProduct);
+    const orderData = {
+      products: formatProduct,
+    };
+
+    oderService(orderData)
+      .then((data: any) => {
+        return data;
+      })
+      .then((data: any) => {
+        alert("ban mua hang thanh cong");
+      })
+      .then(() => {
+        // localStorage.removeItem("cart");
+      })
+      .catch((error: Error) => {
+        alert("ban mua hang that bai");
+      });
+  };
+  // const order = (dataProduct: any) => {
+
+  //   const orderData = {
+  //     products: dataProduct,
+  //   };
+
+  //   oderService(orderData)
+  //     .then((data: any) => {
+  //       return data;
+  //     })
+  //     .then((data: any) => {
+  //       alert("ban mua hang thanh cong");
+  //     })
+  //     .then(() => {
+  //       // localStorage.removeItem("cart");
+  //     })
+  //     .catch((error: Error) => {
+  //       alert("ban mua hang that bai");
+  //     });
+  // };
+
+  // const inCreaseQuantity = (item: any) => {
+  //   dispatch(cartActions.addProductToCart(item));
+  // };
+
+  // const deCreaseQuantity = (item: any) => {
+  //   dispatch(cartActions.decreaseProduct(item));
+  // };
+
+  const renderCart = (products: any) => {
+    if (products.length === 0) {
+      return (
+        <div className="d-flex text-warning fw-500 align-items-center ps-2 pb-2 mb-1 pt-0  ">
+          <FontAwesomeIcon icon={faWarning} className="icon-warning me-2" />
+          Không có sản phẩm trong giỏ hàng
+        </div>
+      ); // No cart or empty cart
+    }
+    return products.map((product: any, index: number) => {
+      return (
+        <CardProductCart
+          key={`${product._id}-${product.size}`}
+          handleIncrease={() =>
+            dispatch(
+              cartActions.addProductToCart({
+                ...product,
+                quantity: 1,
+                // productId: product._id,
+              })
+            )
+          }
+          handleDecrease={() => {
+            if (product.quantity > 1) {
+              dispatch(
+                cartActions.decreaseProduct({
+                  ...product,
+                  quantity: 1,
+                  // productId: product._id,
+                })
+              );
+            }
+          }}
+          handleDelete={() => {
+            dispatch(cartActions.deleteProductsInCart(product));
+          }}
+          product={product}
+        />
+      );
+    });
+  };
   return (
     <div className="position-relative">
       <Navbar />
@@ -17,54 +150,21 @@ export default function Cart() {
               <div className={`f-1 py-3 ${styles[""]}`}></div>
               <div className={`f-1 py-3 ${styles["image-header"]}`}></div>
               <div className="f-3 py-3">Product</div>
+              <div className="f-1-sm f-2 py-3 px-1">Size</div>
               <div className="f-1-sm f-2 py-3 px-1">Price</div>
               <div className="f-2 py-3 px-1">Quantity</div>
               <div className="f-2 py-3 px-1">Subtotal</div>
             </div>
           </div>
-          <div className={`${styles["t-body"]} `}>
-            <div className={`${styles["t-row"]} w-100 d-flex`}>
-              <div
-                className={`f-1 py-3 pointer-event ${styles["wrap-icon-close"]} d-flex align-items-center`}
-              >
-                <FontAwesomeIcon
-                  icon={faClose}
-                  className={`${styles["icon-close"]}`}
-                />
-              </div>
-              <div className={`${styles["image"]} f-1 py-3 align-items-center`}>
-                <img
-                  className="w-100"
-                  src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-5.png"
-                />
-              </div>
-              <div className={`f-3  py-3 d-flex align-items-center`}>
-                <span className="f-2">Columnbia Coffe</span>
-              </div>
-              <div className=" f-1-sm f-2 py-3 px-1 d-flex align-items-center">$123</div>
-              <div className={`d-flex py-3 f-2 px-1 d-flex align-items-center`}>
-                <div
-                  className={`d-flex align-items-center ${styles["wrapper-quantity"]}`}
-                >
-                  <input className={`${styles["input-quantity"]}`} value={2} />
-                  <div
-                    className={`d-flex flex-column ${styles["wrapper-btn"]} align-items-center h-100 justify-content-center`}
-                  >
-                    <button className={` ${styles["increase-btn"]}`}>+</button>
-                    <button className={` ${styles["decrease-btn"]}`}>-</button>
-                  </div>
-                </div>
-              </div>
-              <div className="f-2 py-3 d-flex align-items-center">$123</div>
-            </div>
-          </div>
+          <div className={`${styles["t-body"]} `}>{renderCart(products)}</div>
         </div>
         <div className={`${styles["coupon"]} py-5`}>
           <input
+            value={couponCode}
             type="text"
             className={`${styles["input-coupon"]}`}
-            // value=""
             placeholder="Coupon code"
+            onChange={(event) => setCouponCode(event.target.value)}
           />
           <button
             type="submit"
@@ -74,7 +174,15 @@ export default function Cart() {
             Apply coupon
           </button>
         </div>
-        <ProvisionalInvoice />
+        <ProvisionalInvoice
+          handleOrder={() => {
+            order(products);
+          }}
+          subTotal={totalPrice}
+          total={totalPrice}
+          couponCode={couponCode}
+          setCouponCode={setCouponCode}
+        />
       </div>
       <Footer />
     </div>

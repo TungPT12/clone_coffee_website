@@ -5,68 +5,93 @@ import Banner from "@/components/Banner/Banner";
 import Navbar from "@/components/Navbar/Navbar";
 import styles from "./Product.module.scss";
 import Footer from "@/components/Footer/Footer";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Tabs from "@/components/Tab/Tab";
 import { useParams } from "next/navigation";
-import { getProductDetailAPI } from "@/api/product";
+import productService from "@/services/product/product.service";
+import useSWR, { mutate } from "swr";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
-const ProductDetail = () => {
-  interface Product {
-    name: string;
-    price_new: number;
-    images: [string];
-    category: string;
-  }
-  // const { token } = useSelector((state: RootState) => state.authn);
-  const params = useParams();
-  const [product, setProduct] = useState<Product>({
-    name: "",
-    price_new: 0,
-    images: ["sdsdas"],
-    category: "",
-  });
-  const [image, setImage] = useState("");
+import { useDispatch } from "react-redux";
+import { cartActions } from "@/lib/slice/features/cart/cartSlice";
 
-  const getDetailProduct = (id: any) => {
-    getProductDetailAPI(id)
-      .then((response: any) => {
-        if (response.status !== 200) {
-          throw new Error("Lỗi");
-        }
-        const data = response.data;
-        return data;
-      })
-      .then((data: any) => {
-        setProduct(data);
-        setImage(data.images[0]);
-        console.log(data.images[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+const ProductDetail = () => {
+  const params = useParams();
+  const [quantity, setQuantity] = useState(1);
+  const [activeSize, setActiveSize] = useState("N_active");
+  // const [activeSize, setActiveSize] = useState({
+  //   N: true,
+  //   M: false,
+  //   L: false,
+  // });
+  const dispatch = useDispatch();
+
+  const { data: product } = useSWR("GET_PRODUCT_DETAIL", () => {
+    return params.productId
+      ? productService.getProductId(params.productId.toString())
+      : null;
+  });
+  const [currentPrice, setCurrentPrice] = useState(0);
+  const [currentSize, setCurrentSize] = useState("N");
+
+  const [currentImage, setCurrentImage] = useState("");
+
+  const increaseQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
+  };
+  const renderSize = (prices: any) => {
+    return prices.map((price: any) => {
+      return (
+        <span
+          key={price._id}
+          onClick={() => {
+            setActiveSize(`${price.size}_active`);
+            setCurrentPrice(price.new_price);
+            setCurrentSize(price.size);
+          }}
+          className={`${styles["sizeProduct"]} ${
+            activeSize === `${price.size}_active` ? styles[activeSize] : ""
+          }`}
+        >
+          {price.size}
+        </span>
+      );
+    });
   };
 
   useEffect(() => {
-    getDetailProduct(params.productId);
-  }, [params]);
+    setCurrentPrice(product?.price_new ? product?.price_new : 0);
+    setCurrentImage(
+      product ? (product.images.length !== 0 ? product?.images[0] : "") : ""
+    );
+  }, [product]);
+
+  const handleAddToCart = (product: any) => {
+    dispatch(cartActions.addProductToCart(product));
+    alert("Thêm giỏ hàng thành công");
+  };
 
   const renderListImageProducts = (images: any) => {
     return images.map((image: any, index: number) => {
       return (
         <div key={index} className="col-4 mt-4">
-          <div className={`${styles["product"]} w-75`}>
+          <div className={`${styles["product"]} h-100 w-75`}>
             <div
-              className={`position-relative ${styles["wrapper-add-to-cart"]}`}
+              onClick={() => {
+                setCurrentImage(image);
+              }}
+              className={`position-relative h-100 ${styles["wrapper-add-to-cart"]}`}
             >
               <img
-                className={`w-100 ${styles["image-product"]}`}
+                className={`w-100 h-100 ${styles["image-product"]}`}
                 src={
                   image.includes("http")
                     ? image
-                    : `${process.env.base_url}${image}`
+                    : `${process.env.NEXT_PUBLIC_BASE_URL}${image}`
                 }
               />
             </div>
@@ -89,29 +114,31 @@ const ProductDetail = () => {
                 <img
                   className={` ${styles["image-product"]}`}
                   src={
-                    image.includes("http")
-                      ? image
-                      : `${process.env.base_url}${image}`
+                    currentImage
+                      ? currentImage.includes("http")
+                        ? currentImage
+                        : `${process.env.NEXT_PUBLIC_BASE_URL}${product?.images[0]}`
+                      : ""
                   }
-                  alt={image}
+                  alt={product?.name}
                 />
                 <div
                   className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
                 ></div>
               </div>
             </div>
-            <div className="row">{renderListImageProducts(product.images)}</div>
+            <div className="row">
+              {renderListImageProducts(product?.images ? product?.images : [])}
+            </div>
           </div>
 
           <div className={`${styles["detail"]} col-lg-6 col-md-1`}>
             <div className={`${styles["product-list"]}`}>
               <span className={`${styles["title-category"]} text-uppercase`}>
-                {product.name}
+                {product?.name}
               </span>
               <div className={`${styles["category"]} text-capitalize`}>
-                <span className={`${styles["price"]}`}>
-                  {product.price_new} VND
-                </span>
+                <span className={`${styles["price"]}`}>{currentPrice} VND</span>
                 {/* <span>
                   <FontAwesomeIcon icon={faStar} />
                   <FontAwesomeIcon icon={faStar} />
@@ -127,6 +154,26 @@ const ProductDetail = () => {
                   ridiculus mus.
                 </span>
 
+                <div className={`${styles["product-size"]}`}>
+                  Size sản phẩm
+                  {renderSize(product?.prices ? product?.prices : [])}
+                  <span
+                    onClick={(event) => {
+                      setCurrentPrice(product ? product.price_new : 0);
+                      setCurrentSize("N");
+                      setActiveSize("N_active");
+                      setCurrentPrice(
+                        product?.price_new ? product?.price_new : 0
+                      );
+                    }}
+                    className={`${styles["sizeProduct"]} ${
+                      activeSize === "N_active" ? styles[activeSize] : ""
+                    }`}
+                  >
+                    N
+                  </span>
+                </div>
+
                 <span className={`${styles.spanButton} d-flex mt-2`}>
                   <div className={`d-flex   align-items-center`}>
                     <div
@@ -134,15 +181,21 @@ const ProductDetail = () => {
                     >
                       <input
                         className={`${styles["input-quantity"]}`}
-                        value={2}
+                        value={quantity}
                       />
                       <div
                         className={`d-flex flex-column ${styles["wrapper-btn"]} align-items-center h-100 justify-content-center`}
                       >
-                        <button className={` ${styles["increase-btn"]}`}>
+                        <button
+                          onClick={increaseQuantity}
+                          className={` ${styles["increase-btn"]}`}
+                        >
                           +
                         </button>
-                        <button className={` ${styles["decrease-btn"]}`}>
+                        <button
+                          onClick={decreaseQuantity}
+                          className={` ${styles["decrease-btn"]}`}
+                        >
                           -
                         </button>
                       </div>
@@ -150,6 +203,15 @@ const ProductDetail = () => {
                   </div>
                   <div className="text-uppercase h-100">
                     <button
+                      onClick={() =>
+                        handleAddToCart({
+                          ...product,
+                          productId: product?._id,
+                          price_new: currentPrice,
+                          quantity: quantity,
+                          size: currentSize,
+                        })
+                      }
                       className={`${styles["add-to-cart-btn"]} ${styles.minusButton} h-100`}
                       type="button"
                     >
@@ -162,7 +224,7 @@ const ProductDetail = () => {
             <div className={`${styles["tag-category"]} `}>
               <div className={`${styles["tag-tile-category"]} text-capitalize`}>
                 <span>SKU: PR111</span>
-                <span>CATEGORY: {product.category}</span>
+                <span>CATEGORY: {product?.category}</span>
                 <span>TAGS: Black, Casual, Classic</span>
               </div>
               <div className="mt-3">

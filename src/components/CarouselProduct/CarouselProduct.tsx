@@ -3,14 +3,21 @@
 "use client";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
 import styles from "./Carousel.module.scss";
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { cartActions } from "@/lib/slice/features/cart/cartSlice";
+// import { useCartContext } from "../Context/CartContext";
 
 function CarouselProduct({ products }: any) {
-  // let cart: any[] = [];
-  const [cart, setCart] = useState();
+  const dispatch = useDispatch();
+  // const [cart, setCart] = useState<any[]>(() => {
+  //   const storedCart = localStorage.getItem("cart");
+  //   return storedCart ? JSON.parse(storedCart) : [];
+  // });
+
+  // const { addToCart } = useCartContext();
 
   const responsive = {
     desktop: {
@@ -30,18 +37,9 @@ function CarouselProduct({ products }: any) {
     },
   };
 
-  // useEffect(() => {
-
-  // }, [third])
-
-  const addToCart = (product: any) => {
-    setCart(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
+  const handleAddToCart = (product: any) => {
+    dispatch(cartActions.addProductToCart(product));
   };
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
   const renderProducts = (products: any) => {
     return products.map((product: any, index: any) => {
@@ -53,21 +51,26 @@ function CarouselProduct({ products }: any) {
           <div
             className={`position-relative ${styles["wrapper-add-to-cart"]} w-100 d-flex justify-content-center text-center px-3`}
           >
-            {" "}
             <img
               className={` w-100 ${styles["image-product"]} h-100`}
-              alt={product.name}
+              alt={product?.name}
               src={
-                product.images[0].includes("http")
-                  ? product.images[0]
-                  : `${process.env.base_url}/${product.images[0]}`
+                product?.images[0]?.includes("http")
+                  ? product?.images[0]
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
               }
             />
             <div
               className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
             >
               <button
-                onClick={() => addToCart(product)}
+                onClick={() =>
+                  handleAddToCart({
+                    ...product,
+                    quantity: 1,
+                    size: "N",
+                  })
+                }
                 className={`${styles["add-to-cart-btn"]} border-0 text-uppercase `}
               >
                 Add to cart
@@ -76,16 +79,16 @@ function CarouselProduct({ products }: any) {
           </div>
           <div className={`w-100 text-center mt-2`}>
             <Link
-              href={`/product/${product._id}`}
+              href={`/product/${product?._id}`}
               className={`${styles["tiltle"]}`}
             >
-              {product.name}
+              {product?.name}
             </Link>
             <h6 className={`${styles["sub-text"]} ${styles["origin-price"]}`}>
-              {product.price_original} VND
+              {product?.price_original} VND
             </h6>
             <h6 className={`${styles["sub-text"]} ${styles["new-price"]}`}>
-              {product.price_new} VND
+              {product?.price_new} VND
             </h6>
           </div>
         </div>

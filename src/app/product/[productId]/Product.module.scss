@@ -66,7 +66,7 @@
   line-height: 26px;
   font-weight: 300;
   color: #656565;
-  overflow-x: hidden !important;
+  // overflow-x: hidden !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -176,6 +176,36 @@
 .price {
   font-size: 22px;
   font-family: "Open Sans", sans-serif;
+}
+
+.sizeProduct {
+  text-align: center;
+  border: 1px solid $colorButton;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 900;
+  padding: 0.1rem;
+  width: 2rem;
+  &:hover {
+    color: #fff;
+    background-color: $colorButton;
+  }
+}
+
+// .active_size {
+//   color: #fff;
+//   background-color: $colorButton;
+// }
+.N_active,
+.M_active,
+.L_active {
+  color: #fff;
+  background-color: $colorButton;
+}
+
+.product-size {
+  display: flex;
+  gap: 1rem;
 }
 
 @media (max-width: 767px) {

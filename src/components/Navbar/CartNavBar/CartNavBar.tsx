@@ -2,60 +2,75 @@
 "use client";
 import Link from "next/link";
 import styles from "./CartNavBar.module.scss";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useCartContext } from "@/components/Context/CartContext";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 function CartNavBar() {
-  const [cart, setCart] = useState<any[]>([]);
+  // const [cart, setCart] = useState<any[]>([]);
+  const { products, totalPrice } = useSelector(
+    (state: RootState) => state.cart
+  );
+  // useEffect(() => {
+  //   const savedCart = localStorage.getItem("cart");
+  //   if (savedCart) {
+  //     setCart(JSON.parse(savedCart));
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    const cartString = localStorage.getItem("cart");
-    if (cartString) {
-      const cartData = JSON?.parse(cartString);
-      setCart(cartData);
-    }
-  }, []);
+  // const { cart } = useCartContext();
 
-  const cartNull = () => {
-    if (!cart) {
-      return <>Không có sản phẩm trong giỏ hàng</>;
-    } else {
-      renderCartItems(cart);
-    }
+  const renderCartItems = (products: any[]) => {
+    return products.map((product: any) => (
+      <div
+        className={`${styles["cart"]}`}
+        key={`${product._id}-${product.size}`}
+      >
+        <img
+          src={
+            product.image?.includes("http")
+              ? product?.image
+              : `${process.env.NEXT_PUBLIC_BASE_URL}${product?.image}`
+            // ? cartItem.images[0]
+            // : `${process.env.base_url}${cartItem?.images[0]}`
+          }
+          alt={product.name}
+          className={`${styles["image"]}`}
+        />
+        <div className={`${styles["description"]}`}>
+          <span className={`${styles["title"]}`}>{product?.name}</span>
+          <div>
+            <span className="me-3">Quantity:</span>
+            <span>{product?.quantity}</span>
+          </div>
+          <span>${product?.quantity * product.price_original}</span>
+        </div>
+      </div>
+    ));
   };
-  const renderCartItems = (cart: any) => {
-    {
-      cart &&
-        cart.map((cartItem: any, index: number) => {
-          return (
-            <div className={`${styles["cart"]}`} key={index}>
-              <img
-                src={
-                  cartItem?.images[0]?.includes("http")
-                    ? cartItem.images[0]
-                    : `${process.env.base_url}${cartItem?.images[0]}`
-                }
-                alt=""
-                className={`${styles["image"]}`}
-              />
-              <div className={`${styles["description"]}`}>
-                <span className={`${styles["title"]}`}>{cartItem?.name}</span>
-                <span>Quantity: {cartItem?.price_original}</span>
-                <span>${cartItem?.price_original}</span>
-              </div>
-            </div>
-          );
-        });
-    }
-  };
+
+  // const cartNull = () => {
+  //   if (!cart || cart.length === 0) {
+  //     return <p>Không có sản phẩm trong giỏ hàng</p>;
+  //   } else {
+  //     return renderCartItems(cart);
+  //   }
+  // };
 
   return (
     <ul className={`position-relative ${styles["second-navbar"]} p-3`}>
       <div className={`${styles["product"]}`}>
-        {cartNull()}
+        {/* {cartNull()} */}
+        {products.length === 0 ? (
+          <p>Không có sản phẩm trong giỏ hàng</p>
+        ) : (
+          renderCartItems(products)
+        )}
         <div className={`${styles["total-cart"]}`}>
           <div className={`${styles["money-cart"]}`}>
             <span>Total:</span>
-            <span>$21</span>
+            <span>${totalPrice}</span>
           </div>
           <Link href={`/cart`} className={`${styles["btn-view-cart"]} mt-3`}>
             View Cart

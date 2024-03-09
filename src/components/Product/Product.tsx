@@ -1,39 +1,29 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useEffect, useState } from "react";
 import CarouselProduct from "../CarouselProduct/CarouselProduct";
 import styles from "./Product.module.scss";
-import { getCategoryAPI } from "@/api/category";
+import { getCategoryAPI } from "@/services/category";
+import useSWR from "swr";
+import categoryService from "@/services/category/category.service";
+import { KoHo } from "next/font/google";
 const Product = () => {
-  const [categories, setCategories] = useState([]);
-  const getCategories = () => {
-    getCategoryAPI()
-      .then((response) => {
-        if (response.status !== 200) {
-          throw Error();
-        }
-        return response.data;
-      })
-      .then((data) => {
-        setCategories(data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
-
+  const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
   const renderCategories = (categories: any) => {
     return categories.map((category: any) => {
       return (
         <div key={category._id} className={`overflow-hidden`}>
           <h2 className={`${styles["title-category"]} `}>{category.name}</h2>
-          <CarouselProduct products={category.products} />
+          <CarouselProduct products={category?.products} />
         </div>
       );
     });
   };
-  useEffect(() => {
-    getCategories();
-  }, []);
+
+  // useEffect(() => {
+  //   getCategories();
+  // }, []);
 
   return (
     <>
@@ -70,7 +60,7 @@ const Product = () => {
           </div>
         </div>
         <div className={`${styles["desk-product"]} overflow-hidden`}>
-          {renderCategories(categories  )}
+          {renderCategories(categories ? categories : [])}
         </div>
       </div>
     </>

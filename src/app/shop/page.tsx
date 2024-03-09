@@ -8,22 +8,28 @@ import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { getCategoryAPI } from "@/api/category";
+import { getCategoryAPI } from "@/services/category";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import ProductCard from "@/components/ProductCard/ProductCard";
-import { getProductsAPI, getProductsByCategoryAPI } from "@/api/product";
-import useSWR from "swr";
-import axiosInstance from "@/config/axios";
+import { getProductsAPI, getProductsByCategoryAPI } from "@/services/product";
+import useSWR, { mutate } from "swr";
 import paging from "@/utils/paging";
-// import useSWRMutation from "swr/mutation";
+import categoryService from "@/services/category/category.service";
+import productService from "@/services/product/product.service";
+import { Product } from "@/types/entities/product.entity";
 
 const Shop = () => {
-  const { token } = useSelector((state: RootState) => state.authn);
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [currentProducts, setCurrentProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
+  const { data: productByCategory } = useSWR("GET_PRODUCT_BY_CATGORY", () => {
+    return categoryService.getProductByCatgory(filterCatgory);
+  });
+  const { data: products } = useSWR("GET_PRODUCT", productService.getAll);
+
+  const [totalProducts, setTotalProducts] = useState<Product[]>([]);
+  const [filterCatgory, setFilterCatgory] = useState<string>("");
+  const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const numberProducts = useMemo(() => 6, []);
 
   // const { data, error, isMutating } = useSWRMutation();
@@ -38,74 +44,13 @@ const Shop = () => {
   //   return response;
   // };
 
-  // const { data } = useSWR("/category", (url: string) => {
-  //   return fetcher(url, token);
-  // });
-  // console.log(data);
-  // const getCategorys = async (url: string) => {
-  //   await fetch();
-  // };
-
-  const getCategories = (token: string) => {
-    getCategoryAPI()
-      .then((response: any) => {
-        if (response.status !== 200) {
-          throw new Error("Lỗi");
-        }
-        const data = response.data;
-        return data;
-      })
-      .then((data: any) => {
-        setCategories(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getProducts = (token: string) => {
-    getProductsAPI(token)
-      .then((response: any) => {
-        if (response.status !== 200) {
-          throw new Error("Lỗi");
-        }
-        const data = response.data;
-        return data;
-      })
-      .then((data: any) => {
-        setProducts(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const searchByCategory = (name: string) => {
-    getProductsByCategoryAPI(name)
-      .then((response: any) => {
-        if (response.status !== 200) {
-          throw new Error("Lỗi");
-        }
-        const data = response.data;
-        return data;
-      })
-      .then((data: any) => {
-        // console.log(data);
-        // console.log(data[0].products);
-        setProducts(data[0].products);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const renderCategories = (categories: any) => {
-    return categories.map((category: any) => {
+    return categories?.map((category: any) => {
       return (
         <span
           className={`${styles["category"]}`}
           key={category._id}
-          onClick={() => searchByCategory(category.name)}
+          onClick={() => setFilterCatgory(category.name)}
         >
           {category.name}
         </span>
@@ -121,27 +66,23 @@ const Shop = () => {
           id={currentProduct._id}
           imageUrl={currentProduct.images[0]}
           name={currentProduct.name}
-          price={currentProduct.price_original}
+          price={currentProduct.price_new}
         />
       );
     });
   };
 
   useEffect(() => {
-    getCategories(token);
-    getProducts(token);
-  }, [token]);
-  useEffect(() => {
     setCurrentProducts(() => {
-      return paging(products, numberProducts, currentPage);
+      return paging(totalProducts, numberProducts, currentPage);
     });
-  }, [products, currentPage]);
+  }, [totalProducts, currentPage]);
 
-  const renderPage = (products: any) => {
+  const renderPage = (totalProducts: any) => {
     let pages = [];
     for (
       let index = 0;
-      index < Math.ceil(products.length / numberProducts);
+      index < Math.ceil(totalProducts.length / numberProducts);
       index++
     ) {
       pages.push(
@@ -157,6 +98,16 @@ const Shop = () => {
     }
     return pages;
   };
+
+  useEffect(() => {
+    console.log(filterCatgory);
+    if (filterCatgory) {
+      mutate("GET_PRODUCT_BY_CATGORY");
+      setTotalProducts(productByCategory ? productByCategory[0].products : []);
+    } else {
+      setTotalProducts(products ? products : []);
+    }
+  }, [filterCatgory, products, productByCategory]);
 
   return (
     <div className="position-relative">
@@ -185,13 +136,7 @@ const Shop = () => {
               <span className={`${styles.icon} ${styles.smallerIcon}`}>
                 &#8249;
               </span>
-              {/* <div className={styles.pagingItem}>
-                <span>1</span>
-              </div>
-              <div className={styles.pagingItem}>
-                <span>2</span>
-              </div> */}
-              {renderPage(products)}
+              {renderPage(totalProducts)}
               <span className={`${styles.icon} ${styles.smallerIcon}`}>
                 &#8250;
               </span>
@@ -203,6 +148,13 @@ const Shop = () => {
                 product categorys
               </span>
               <div className={`${styles["category"]} text-capitalize`}>
+                <span
+                  onClick={() => {
+                    setFilterCatgory("");
+                  }}
+                >
+                  Tất cả
+                </span>
                 {renderCategories(categories)}
               </div>
             </div>

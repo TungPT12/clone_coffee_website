@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,12 +21,20 @@ import { JwtPayload, jwtDecode } from "jwt-decode";
 
 function Navbar() {
   const [navListOpen, setNavListOpen] = useState(true);
-  const { token } = useSelector((state: RootState) => state.authn);
+  const { access_token } = useSelector((state: RootState) => state.authn);
   const [username, setUsername] = useState<string | null>(null);
+  const { products } = useSelector((state: RootState) => state.cart);
+
+  const totalQuantity = (products: any) => {
+    return products.reduce((totalQuantity: number, product: any) => {
+      return (totalQuantity = totalQuantity + product.quantity);
+    }, 0);
+  };
 
   useEffect(() => {
-    if (token) {
-      const decodedToken: JwtPayload & { username: string } = jwtDecode(token);
+    if (access_token) {
+      const decodedToken: JwtPayload & { username: string } =
+        jwtDecode(access_token);
 
       // Extract the username from the decoded token
       const { username } = decodedToken;
@@ -32,7 +42,7 @@ function Navbar() {
       // Set the username in state
       setUsername(username);
     }
-  }, [token]);
+  }, [access_token]);
 
   const toggleNavList = () => {
     setNavListOpen(!navListOpen);
@@ -143,7 +153,9 @@ function Navbar() {
                   <span
                     className={`d-flex flex-column ${styles["item-outer"]}`}
                   >
-                    <span className={styles["number"]}>0</span>
+                    <span className={styles["number"]}>
+                      {totalQuantity(products)}
+                    </span>
                     <FontAwesomeIcon icon={faCartArrowDown} />
                   </span>
                 </Link>
@@ -168,7 +180,7 @@ function Navbar() {
                   </span>
                 </Link>
               </li>
-              {token ? (
+              {access_token ? (
                 <li
                   className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
                 >
@@ -182,8 +194,8 @@ function Navbar() {
                     <div className="h-10 w-10">
                       <img
                         style={{
-                          height: "40px",
-                          width: "40px",
+                          height: "20px",
+                          width: "20px",
                           backgroundColor: "white",
                         }}
                         src="https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_960_720.png"
