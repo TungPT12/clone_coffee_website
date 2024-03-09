@@ -17,8 +17,8 @@ import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
 const Login = () => {
-  const [password, setPassword] = useState("123");
-  const [username, setUsername] = useState("123");
+  const [password, setPassword] = useState("12345678");
+  const [username, setUsername] = useState("liemro9x@gmail.com");
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const router = useRouter();

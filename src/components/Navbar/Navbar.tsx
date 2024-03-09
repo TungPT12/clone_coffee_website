@@ -165,7 +165,23 @@ function Navbar() {
                   <CartNavBar />
                 </div>
               </li>
-
+              <li
+                className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
+              >
+                <Link
+                  href="/order"
+                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
+                >
+                  <span
+                    className={`d-flex flex-column ${styles["item-outer"]} `}
+                  >
+                    Lịch sự gọi món
+                  </span>
+                </Link>
+                <div
+                  className={` ${styles["second-navbar"]} position-absolute`}
+                ></div>
+              </li>
               <li
                 className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
               >
