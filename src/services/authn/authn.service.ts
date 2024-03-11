@@ -14,7 +14,7 @@ const registerService = ({
   username: string;
   password: string;
 }) => {
-  return axios.post("https://sgarden-v2.onrender.com/register", {
+  return axiosInstance.post("/register", {
     username: username,
     password: password,
   });

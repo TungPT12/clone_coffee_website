@@ -64,13 +64,14 @@ function CarouselProduct({ products }: any) {
               className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
             >
               <button
-                onClick={() =>
+                onClick={() => {
                   handleAddToCart({
                     ...product,
                     quantity: 1,
                     size: "N",
-                  })
-                }
+                    productId: product._id,
+                  });
+                }}
                 className={`${styles["add-to-cart-btn"]} border-0 text-uppercase `}
               >
                 Add to cart

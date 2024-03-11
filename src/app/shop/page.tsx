@@ -67,7 +67,7 @@ const Shop = () => {
           id={currentProduct._id}
           imageUrl={currentProduct.images[0]}
           name={currentProduct.name}
-          price={currentProduct.price_new}
+          price_new={currentProduct.price_new}
         />
       );
     });
@@ -112,9 +112,6 @@ const Shop = () => {
 
   return (
     <div className="position-relative">
-      <Modal>
-        <div>sdsfdsf</div>
-      </Modal>
       <Navbar />
       <Banner title={`shop`} />
       <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
