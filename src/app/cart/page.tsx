@@ -26,9 +26,7 @@ export default function Cart() {
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
-  const [orderData, setOrder] = useState({
-    id: "123",
-  });
+  const [orderData, setOrder] = useState(null);
   // Promise.all(
   //   products.map((product: any) => {
   //     return productService.getProductId(product.productId);
@@ -42,6 +40,21 @@ export default function Cart() {
   //   });
   const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState("");
+  const [isOpenBill, setIsOpenBill] = useState(false);
+
+  const storeIdGuest = (id: string) => {
+    const localStore = localStorage.getItem("orderGuest");
+    if (localStore) {
+      let orderGuest = JSON.parse(localStore);
+      orderGuest.push(id);
+      localStorage.setItem("orderGuest", JSON.stringify(orderGuest));
+    } else {
+      let orderGuest = [];
+      orderGuest.push(id);
+      localStorage.setItem("orderGuest", JSON.stringify(orderGuest));
+    }
+  };
+
   const order = (dataProduct: any) => {
     const formatProduct = dataProduct.reduce(
       (initProducts: any[], product: any) => {
@@ -66,14 +79,23 @@ export default function Cart() {
         return data;
       })
       .then((data: any) => {
-        alert("ban mua hang thanh cong");
+        alert("Bạn đã mua hàng thành công");
+        setOrder(data);
+        if (!data.customer_id) {
+          storeIdGuest(data._id);
+        }
+        dispatch(cartActions.resetCart());
+        localStorage.removeItem("cart");
       })
-      .then(() => {
-        // localStorage.removeItem("cart");
-      })
+      .then(() => {})
       .catch((error: Error) => {
-        alert("ban mua hang that bai");
+        alert("Bạn đã mua hàng thất bại");
       });
+  };
+
+  const closeBill = () => {
+    setOrder(null);
+    setIsOpenBill(false);
   };
   // const order = (dataProduct: any) => {
 
@@ -104,6 +126,12 @@ export default function Cart() {
   //   dispatch(cartActions.decreaseProduct(item));
   // };
 
+  useEffect(() => {
+    if (orderData) {
+      setIsOpenBill(true);
+    }
+  }, [orderData]);
+
   const renderCart = (products: any) => {
     if (products.length === 0) {
       return (
@@ -122,7 +150,6 @@ export default function Cart() {
               cartActions.addProductToCart({
                 ...product,
                 quantity: 1,
-                // productId: product._id,
               })
             )
           }
@@ -132,7 +159,6 @@ export default function Cart() {
                 cartActions.decreaseProduct({
                   ...product,
                   quantity: 1,
-                  // productId: product._id,
                 })
               );
             }
@@ -183,7 +209,7 @@ export default function Cart() {
             Apply coupon
           </button>
         </div>
-        <Bill id="1333weweqwewq23" isOpen={open} setIsOpen={setopen} />
+        {/* <Bill id="1333weweqwewq23" isOpen={open} setIsOpen={setopen} /> */}
 
         <ProvisionalInvoice
           handleOrder={() => {
@@ -194,6 +220,7 @@ export default function Cart() {
           couponCode={couponCode}
           setCouponCode={setCouponCode}
         />
+        <Bill isOpen={isOpenBill} setIsOpen={closeBill} orderData={orderData} />
       </div>
       <Footer />
     </div>

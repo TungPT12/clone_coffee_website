@@ -25,7 +25,6 @@ const Category = () => {
   //       console.log(error.message);
   //     });
   // };
-  console.log(categories);
   const renderCategories = (categories: any) => {
     return categories.map((category: any) => {
       return (

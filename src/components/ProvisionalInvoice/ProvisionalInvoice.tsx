@@ -32,22 +32,6 @@ function ProvisionalInvoice({
     })),
   };
 
-  // const order = (dataProduct: any) => {
-  //   oderService({ dataProduct })
-  //     .then((data: any) => {
-  //       return data;
-  //     })
-  //     .then((data: any) => {
-  //       alert("ban mua hang thanh cong");
-  //     })
-  //     .then(() => {
-  //       localStorage.removeItem("cart");
-  //     })
-  //     .catch((error: Error) => {
-  //       alert("ban mua hang that bai");
-  //     });
-  // };
-
   return (
     <div className={`${styles["cart"]}`}>
       <h1 className={`${styles["title-provisional-invoice"]}`}>CART TOTALS</h1>
@@ -69,25 +53,12 @@ function ProvisionalInvoice({
           <span className={`f-3`}>${total}</span>
         </div>
       </div>
-      {access_token ? (
-        <button
-          onClick={handleOrder}
-          // onClick={() => {
-          //   handleOrder
-          //   // order(dataProduct);
-          // }}
-          className={`${styles["proceed-checkout"]} mt-4 text-white text-decoration-none`}
-        >
-          PROCEED TO CHECKOUT
-        </button>
-      ) : (
-        <Link
-          href={"/login"}
-          className={`${styles["proceed-checkout"]} mt-4 text-white text-decoration-none`}
-        >
-          PROCEED TO CHECKOUT
-        </Link>
-      )}
+      <button
+        onClick={handleOrder}
+        className={`${styles["proceed-checkout"]} mt-4 text-white text-decoration-none`}
+      >
+        PROCEED TO CHECKOUT
+      </button>
     </div>
   );
 }
