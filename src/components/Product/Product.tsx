@@ -4,10 +4,8 @@
 import { useEffect, useState } from "react";
 import CarouselProduct from "../CarouselProduct/CarouselProduct";
 import styles from "./Product.module.scss";
-import { getCategoryAPI } from "@/services/category";
 import useSWR from "swr";
 import categoryService from "@/services/category/category.service";
-import { KoHo } from "next/font/google";
 import productService from "@/services/product/product.service";
 import { useDispatch } from "react-redux";
 import { cartActions } from "@/lib/slice/features/cart/cartSlice";
@@ -15,6 +13,10 @@ const Product = () => {
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
   const { data: products } = useSWR("GET_PRODUCT", productService.getAll);
   const dispatch = useDispatch();
+
+  const handleAddToCart = (product: any) => {
+    dispatch(cartActions.addProductToCart(product));
+  };
   const renderCategories = (categories: any) => {
     return categories.map((category: any) => {
       return (
@@ -26,12 +28,8 @@ const Product = () => {
     });
   };
 
-  const handleAddToCart = (product: any) => {
-    dispatch(cartActions.addProductToCart(product));
-  };
   const renderProduct = (products: any) => {
     return products.map((product: any) => {
-      console.log(product);
       return (
         <div key={product._id} className={`${styles["wrapper-add-to-cart"]}`}>
           <img
@@ -50,7 +48,6 @@ const Product = () => {
               {product.price_new}VND
             </span>
             <button
-              className={`${styles["add-to-cart-btn"]} mb-2 border-0 text-uppercase `}
               onClick={() => {
                 handleAddToCart({
                   ...product,
@@ -59,6 +56,7 @@ const Product = () => {
                   productId: product._id,
                 });
               }}
+              className={`${styles["add-to-cart-btn"]} mb-2 border-0 text-uppercase `}
             >
               Add to cart
             </button>

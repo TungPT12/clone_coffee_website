@@ -19,11 +19,14 @@ import categoryService from "@/services/category/category.service";
 import productService from "@/services/product/product.service";
 import { Product } from "@/types/entities/product.entity";
 import Modal from "@/components/Modal/Modal";
+import { useSearchParams } from "next/navigation";
 
 const Shop = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("category");
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
   const { data: productByCategory } = useSWR("GET_PRODUCT_BY_CATGORY", () => {
-    return categoryService.getProductByCatgory(filterCatgory);
+    return categoryService.getProductByCatgory(search ? search : "");
   });
   const { data: products } = useSWR("GET_PRODUCT", productService.getAll);
 
@@ -48,13 +51,14 @@ const Shop = () => {
   const renderCategories = (categories: any) => {
     return categories?.map((category: any) => {
       return (
-        <span
+        <Link
+          href={`/shop?category=${category.name}`}
           className={`${styles["category"]}`}
           key={category._id}
           onClick={() => setFilterCatgory(category.name)}
         >
           {category.name}
-        </span>
+        </Link>
       );
     });
   };
@@ -101,14 +105,24 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    console.log(filterCatgory);
-    if (filterCatgory) {
+    console.log(search);
+    if (search) {
       mutate("GET_PRODUCT_BY_CATGORY");
-      setTotalProducts(productByCategory ? productByCategory[0].products : []);
+      let productsLits: Product[] = [];
+      productsLits = productByCategory
+        ? productByCategory.length !== 0
+          ? productByCategory[0].products
+            ? productByCategory[0].products
+            : []
+          : []
+        : [];
+      setTotalProducts(productsLits);
+      setCurrentPage(1);
     } else {
+      setCurrentPage(1);
       setTotalProducts(products ? products : []);
     }
-  }, [filterCatgory, products, productByCategory]);
+  }, [products, productByCategory, search]);
 
   return (
     <div className="position-relative">
@@ -149,13 +163,14 @@ const Shop = () => {
                 product categorys
               </span>
               <div className={`${styles["category"]} text-capitalize`}>
-                <span
+                <Link
+                  href={"/shop"}
                   onClick={() => {
                     setFilterCatgory("");
                   }}
                 >
                   Tất cả
-                </span>
+                </Link>
                 {renderCategories(categories)}
               </div>
             </div>

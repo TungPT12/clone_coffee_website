@@ -5,26 +5,10 @@ import styles from "./Category.module.scss";
 import { getCategoryAPI } from "@/services/category";
 import useSWR from "swr";
 import categoryService from "@/services/category/category.service";
+import Link from "next/link";
 const Category = () => {
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
 
-  // const [categories, setCategories] = useState([]);
-  // const getCategories = () => {
-  //   getCategoryAPI()
-  //     .then((response) => {
-  //       if (response.status !== 200) {
-  //         throw Error();
-  //       }
-  //       return response.data;
-  //     })
-  //     .then((data) => {
-  //       setCategories(data);
-  //       // console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // };
   const renderCategories = (categories: any) => {
     return categories.map((category: any) => {
       return (
@@ -41,7 +25,12 @@ const Category = () => {
             />
           </div>
           <div className={`${styles["category-info"]}`}>
-            <h5 className={`${styles["tiltle"]}`}>{category.name}</h5>
+            <Link
+              href={`/shop?category=${category.name}`}
+              className={`${styles["tiltle"]}`}
+            >
+              {category.name}
+            </Link>
             <h6 className={`${styles["sub-text"]}`}>
               Một danh mục trong quán cà phê.
             </h6>

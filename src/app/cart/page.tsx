@@ -200,9 +200,9 @@ export default function Cart() {
           />
           <button
             type="submit"
-            onClick={() => {
-              setopen(true);
-            }}
+            // onClick={() => {
+            //   setopen(true);
+            // }}
             className={`${styles["apply-coupon-btn"]} text-white`}
             value="Apply coupon"
           >

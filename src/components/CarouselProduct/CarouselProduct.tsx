@@ -46,7 +46,7 @@ function CarouselProduct({ products }: any) {
       return (
         <div
           key={product._id}
-          className={`${styles["product"]} h-100 d-flex justify-content-center flex-column align-items-center w-75`}
+          className={`${styles["product"]} h-100 d-flex justify-content-center flex-column align-items-center w-100`}
         >
           <div
             className={`position-relative ${styles["wrapper-add-to-cart"]} w-100 d-flex justify-content-center text-center px-3`}
@@ -55,10 +55,19 @@ function CarouselProduct({ products }: any) {
               className={` w-100 ${styles["image-product"]} h-100`}
               alt={product?.name}
               src={
-                product?.images[0]?.includes("http")
-                  ? product?.images[0]
-                  : `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
+                product.images
+                  ? product.images.length !== 0
+                    ? `${process.env.NEXT_PUBLIC_BASE_URL}${product?.images[0]}`
+                    : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
+                  : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
               }
+              // src={
+              //   product?.images[0]?.includes("http")
+              //     ? product?.images[0]
+              //     : product?.images[0]
+              //     ? `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
+              //     : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
+              // }
             />
             <div
               className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
