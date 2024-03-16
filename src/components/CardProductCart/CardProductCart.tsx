@@ -21,7 +21,11 @@ const CardProductCart = ({
   handleDelete: any;
 }) => {
   const dispatch = useDispatch();
-
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   const [quantity, setQuantity] = useState<number>(
     product.quantity ? product.quantity : 0
   );
@@ -49,6 +53,7 @@ const CardProductCart = ({
                 : `${process.env.NEXT_PUBLIC_BASE_URL}${product.image}`
               : ""
           }
+          onError={handleImageError}
         />
       </div>
       <div className={`f-3  py-3 d-flex align-items-center`}>

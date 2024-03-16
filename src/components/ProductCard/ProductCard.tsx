@@ -19,6 +19,11 @@ const ProductCard = ({
   const handleAddToCart = (product: any) => {
     dispatch(cartActions.addProductToCart(product));
   };
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   return (
     <div className={`${styles["product-item"]} col-4`}>
       <div className={`${styles["product"]} w-100`}>
@@ -33,6 +38,7 @@ const ProductCard = ({
                   : `${process.env.NEXT_PUBLIC_BASE_URL}${imageUrl}`
                 : ""
             }
+            onError={handleImageError}
           />
           <div
             className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}

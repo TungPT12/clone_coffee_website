@@ -20,8 +20,10 @@ import productService from "@/services/product/product.service";
 import { Product } from "@/types/entities/product.entity";
 import Modal from "@/components/Modal/Modal";
 import { useSearchParams } from "next/navigation";
+import BillCart from "@/components/BillCart/BillCart";
 
 const Shop = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const searchParams = useSearchParams();
   const search = searchParams.get("category");
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
@@ -105,7 +107,6 @@ const Shop = () => {
   };
 
   useEffect(() => {
-    console.log(search);
     if (search) {
       mutate("GET_PRODUCT_BY_CATGORY");
       let productsLits: Product[] = [];
@@ -164,6 +165,7 @@ const Shop = () => {
               </span>
               <div className={`${styles["category"]} text-capitalize`}>
                 <Link
+                  style={{ textDecoration: "none", color: "#be9c79" }}
                   href={"/shop"}
                   onClick={() => {
                     setFilterCatgory("");
@@ -174,21 +176,9 @@ const Shop = () => {
                 {renderCategories(categories)}
               </div>
             </div>
-            {/* <div className={`${styles["tag-category"]} text-uppercase`}>
-              <span className={`${styles["title-category"]}`}>
-                PRODUCT TAGS
-              </span>
-              <div className={`${styles["tag-tile-category"]} text-capitalize`}>
-                <span>Coffee</span>
-                <span>Drink</span>
-                <span>Breakfast</span>
-                <span>Tea</span>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

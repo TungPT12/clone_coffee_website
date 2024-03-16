@@ -24,7 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div id="root_root"></div>
+        <div
+          id="root_root"
+          style={{
+            zIndex: 1000,
+          }}
+        ></div>
         <CartProvider>
           <Providers>{children}</Providers>
         </CartProvider>

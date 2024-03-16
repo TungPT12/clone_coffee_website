@@ -1,72 +1,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Open+Sans:wght@300&display=swap");
 li {
-    list-style: none;
+  list-style: none;
 }
 
 .show {
-    display: none;
+  display: none;
 }
 
 .active .show {
-    display: block;
+  display: block;
 }
 
 .active .show {
-    display: block;
+  display: block;
 }
 
 .active .image-slide-show {
-    animation: zoomOut 60s ease;
+  animation: zoomOut 60s ease;
 }
 
 @keyframes zoomOut {
-    0% {
-        scale: 1;
-    }
-    100% {
-        scale: 2;
-    }
+  0% {
+    scale: 1;
+  }
+  100% {
+    scale: 2;
+  }
 }
 
 .f-1 {
-    flex: 1;
+  flex: 1;
 }
 
 .f-2 {
-    flex: 2;
+  flex: 2;
 }
 
 .f-3 {
-    flex: 3;
+  flex: 3;
 }
 
 .f-4 {
-    flex: 4;
+  flex: 4;
 }
 
 .f-5 {
-    flex: 5;
+  flex: 5;
 }
 
 ::selection {
-    background: #be9c79;
-    color: #fff;
+  background: #be9c79;
+  color: #fff;
 }
 
 @media (max-width: 767px) {
-    h1 {
-        font-size: 28px;
-    }
-    body {
-        font-size: 15px;
-    }
-    * {
-        font-size: 15px;
-        margin: 0;
-        padding: 0;
-    }
-    .f-1-sm {
-        flex: 1;
-    }
+  h1 {
+    font-size: 28px;
+  }
+  body {
+    font-size: 15px;
+  }
+  * {
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+  }
+  .f-1-sm {
+    flex: 1;
+  }
+}
+
+.ReactModal__Overlay {
+  z-index: 2;
 }

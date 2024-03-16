@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useMemo } from "react";
 import styles from "./Tab.module.scss";
+import ReviewList from "../Rating/Rating";
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState({
     isShowDescription: true,
@@ -23,15 +24,14 @@ const Tabs = () => {
       return (
         <div className={`${styles.tabContent}`}>
           <h3>Content for Tab 2</h3>
-          <p>This is the content for Tab 2.</p>
+          <p>Dimensions:20 × 10 × 30 cm</p>
+          <p>Dimensions:20 × 10 × 30 cm</p>
         </div>
       );
     } else {
       return (
         <div className={`${styles.tabContent}`}>
-          <h3>Content for Tab 3</h3>
-          <p>Dimensions:20 × 10 × 30 cm</p>
-          <p>Dimensions:20 × 10 × 30 cm</p>
+          <ReviewList />
         </div>
       );
     }

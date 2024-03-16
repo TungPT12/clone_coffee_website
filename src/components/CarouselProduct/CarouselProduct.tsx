@@ -5,20 +5,29 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import styles from "./Carousel.module.scss";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { cartActions } from "@/lib/slice/features/cart/cartSlice";
+import BillCart from "../BillCart/BillCart";
 // import { useCartContext } from "../Context/CartContext";
 
 function CarouselProduct({ products }: any) {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [orderData, setOrder] = useState(null);
+
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
+
   // const [cart, setCart] = useState<any[]>(() => {
   //   const storedCart = localStorage.getItem("cart");
   //   return storedCart ? JSON.parse(storedCart) : [];
   // });
 
   // const { addToCart } = useCartContext();
-
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -38,6 +47,7 @@ function CarouselProduct({ products }: any) {
   };
 
   const handleAddToCart = (product: any) => {
+    setIsOpen(true);
     dispatch(cartActions.addProductToCart(product));
   };
 
@@ -52,22 +62,16 @@ function CarouselProduct({ products }: any) {
             className={`position-relative ${styles["wrapper-add-to-cart"]} w-100 d-flex justify-content-center text-center px-3`}
           >
             <img
-              className={` w-100 ${styles["image-product"]} h-100`}
+              className={`${styles["image-product"]} w-100`}
               alt={product?.name}
               src={
-                product.images
-                  ? product.images.length !== 0
-                    ? `${process.env.NEXT_PUBLIC_BASE_URL}${product?.images[0]}`
-                    : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
+                product?.images[0]?.includes("http")
+                  ? product?.images[0]
+                  : product?.images[0]
+                  ? `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
                   : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
               }
-              // src={
-              //   product?.images[0]?.includes("http")
-              //     ? product?.images[0]
-              //     : product?.images[0]
-              //     ? `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
-              //     : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
-              // }
+              onError={handleImageError}
             />
             <div
               className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
@@ -124,6 +128,12 @@ function CarouselProduct({ products }: any) {
       itemClass="d-flex justify-content-center mx-4"
     >
       {renderProducts(products)}
+      <BillCart
+        isOpenCart={isOpen}
+        setIsOpenCart={() => {
+          setIsOpen(false);
+        }}
+      />
     </Carousel>
   );
 }
