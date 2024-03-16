@@ -13,7 +13,11 @@ const Product = () => {
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
   const { data: products } = useSWR("GET_PRODUCT", productService.getAll);
   const dispatch = useDispatch();
-
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   const handleAddToCart = (product: any) => {
     dispatch(cartActions.addProductToCart(product));
   };
@@ -32,19 +36,28 @@ const Product = () => {
     return products.map((product: any) => {
       return (
         <div key={product._id} className={`${styles["wrapper-add-to-cart"]}`}>
-          <img
-            className={`w-100 ${styles["image-product"]} h-100`}
-            src={
-              product?.images[0]?.includes("http")
-                ? product?.images[0]
-                : `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
-            }
-          />
+          <div style={{ width: "100%" }}>
+            <img
+              className={`w-100 ${styles["image-product"]} h-100`}
+              src={
+                product?.images[0]?.includes("http")
+                  ? product?.images[0]
+                  : `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
+              }
+              onError={handleImageError}
+            />
+          </div>
           <div
             className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 top-0`}
           >
             <h1 className={`${styles["title-product"]}`}>{product.name}</h1>
-            <span className={`${styles["title-price"]}`}>
+
+            <span
+              className={`${styles["sub-text"]} ${styles["new-price"]} tex`}
+            >
+              {product?.price_original} VND
+            </span>
+            <span className={`${styles["title-price"]} mt-2`}>
               {product.price_new}VND
             </span>
             <button

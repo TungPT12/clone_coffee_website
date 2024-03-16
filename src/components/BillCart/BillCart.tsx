@@ -1,45 +1,33 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import Navbar from "@/components/Navbar/Navbar";
-import styles from "./Cart.module.scss";
+import { cartActions } from "@/lib/slice/features/cart/cartSlice";
+import Bill from "../Bill/Bill";
+import CardProductCart from "../CardProductCart/CardProductCart";
+import CustomModal from "../Modal/Modal";
+import ProvisionalInvoice from "../ProvisionalInvoice/ProvisionalInvoice";
+import styles from "./BillCart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faWarning } from "@fortawesome/free-solid-svg-icons";
-import Footer from "@/components/Footer/Footer";
-import ProvisionalInvoice from "@/components/ProvisionalInvoice/ProvisionalInvoice";
-import Banner from "@/components/Banner/Banner";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import oderService from "@/services/order/order.service";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
-import { cartActions } from "@/lib/slice/features/cart/cartSlice";
-import CardProductCart from "@/components/CardProductCart/CardProductCart";
-import oderService from "@/services/order/order.service";
-import { Product } from "@/types/entities/product.entity";
-import productService from "@/services/product/product.service";
-import Modal from "@/components/Modal/Modal";
-import Bill from "@/components/Bill/Bill";
-// import CustomModal from "@/components/Modal/Modal";
-// const cartLocal = localStorage.getItem("cart");
+import Link from "next/link";
 
-export default function Cart() {
-  const [open, setopen] = useState(false);
+const BillCart = ({
+  isOpenCart,
+  setIsOpenCart,
+}: {
+  isOpenCart: boolean;
+  setIsOpenCart: any;
+}) => {
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
-  const [orderData, setOrder] = useState(null);
-  // Promise.all(
-  //   products.map((product: any) => {
-  //     return productService.getProductId(product.productId);
-  //   })
-  // )
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  //   .catch((error: any) => {
-  //     console.log(error);
-  //   });
   const dispatch = useDispatch();
+  const [isOpenOder, setIsOpenOder] = useState(false);
   const [couponCode, setCouponCode] = useState("");
+  const [orderData, setOrder] = useState(null);
   const [isOpenBill, setIsOpenBill] = useState(false);
 
   const storeIdGuest = (id: string) => {
@@ -54,6 +42,11 @@ export default function Cart() {
       localStorage.setItem("orderGuest", JSON.stringify(orderGuest));
     }
   };
+  useEffect(() => {
+    if (orderData) {
+      setIsOpenBill(true);
+    }
+  }, [orderData]);
 
   const order = (dataProduct: any) => {
     const formatProduct = dataProduct.reduce(
@@ -97,46 +90,13 @@ export default function Cart() {
     setOrder(null);
     setIsOpenBill(false);
   };
-  // const order = (dataProduct: any) => {
-
-  //   const orderData = {
-  //     products: dataProduct,
-  //   };
-
-  //   oderService(orderData)
-  //     .then((data: any) => {
-  //       return data;
-  //     })
-  //     .then((data: any) => {
-  //       alert("ban mua hang thanh cong");
-  //     })
-  //     .then(() => {
-  //       // localStorage.removeItem("cart");
-  //     })
-  //     .catch((error: Error) => {
-  //       alert("ban mua hang that bai");
-  //     });
-  // };
-
-  // const inCreaseQuantity = (item: any) => {
-  //   dispatch(cartActions.addProductToCart(item));
-  // };
-
-  // const deCreaseQuantity = (item: any) => {
-  //   dispatch(cartActions.decreaseProduct(item));
-  // };
-
-  useEffect(() => {
-    if (orderData) {
-      setIsOpenBill(true);
-    }
-  }, [orderData]);
 
   const renderCart = (products: any) => {
     if (products.length === 0) {
       return (
         <div className="d-flex text-warning fw-500 align-items-center ps-2 pb-2 mb-1 pt-0  ">
           <FontAwesomeIcon icon={faWarning} className="icon-warning me-2" />
+          Không có sản phẩm trong giỏ hàng
         </div>
       ); // No cart or empty cart
     }
@@ -170,11 +130,42 @@ export default function Cart() {
       );
     });
   };
+
   return (
-    <div className="position-relative">
-      <Navbar />
-      <Banner title={`cart`} />
-      <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
+    <CustomModal
+      isOpen={isOpenCart}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        zIndex: 999,
+      }}
+      background="#00000047"
+    >
+      <div className={`${styles["cart-wrapper"]} `}>
+        <div
+          className={`${styles["close-icon"]}`}
+          onClick={() => {
+            setIsOpenCart(false);
+            setIsOpenOder(false);
+          }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="red"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </div>
+        <h1 className={`${styles["cart-text"]} `}>Chi tiết đơn hàng</h1>
+
         <div className="cart-product">
           <div className={`${styles["t-head"]} `}>
             <div className={`d-flex ${styles["th"]}`}>
@@ -189,39 +180,74 @@ export default function Cart() {
           </div>
           <div className={`${styles["t-body"]} `}>{renderCart(products)}</div>
         </div>
-        <div className={`${styles["coupon"]} py-5`}>
-          <input
-            value={couponCode}
-            type="text"
-            className={`${styles["input-coupon"]}`}
-            placeholder="Coupon code"
-            onChange={(event) => setCouponCode(event.target.value)}
-          />
-          <button
-            type="submit"
-            // onClick={() => {
-            //   setopen(true);
-            // }}
-            className={`${styles["apply-coupon-btn"]} text-white`}
-            value="Apply coupon"
-          >
-            Apply coupon
-          </button>
-        </div>
-        {/* <Bill id="1333weweqwewq23" isOpen={open} setIsOpen={setopen} /> */}
+        {isOpenOder ? (
+          <div>
+            <div className={`${styles["coupon"]} py-5`}>
+              <input
+                value={couponCode}
+                type="text"
+                className={`${styles["input-coupon"]}`}
+                placeholder="Coupon code"
+                onChange={(event) => setCouponCode(event.target.value)}
+              />
+              <button
+                type="submit"
+                // onClick={() => {
+                //   setopen(true);
+                // }}
+                className={`${styles["apply-coupon-btn"]} text-white`}
+                value="Apply coupon"
+              >
+                Apply coupon
+              </button>
+            </div>
+            <ProvisionalInvoice
+              handleOrder={() => {
+                order(products);
+              }}
+              subTotal={totalPrice}
+              total={totalPrice}
+              couponCode={couponCode}
+              setCouponCode={setCouponCode}
+            />
+            <Bill
+              isOpen={isOpenBill}
+              setIsOpen={closeBill}
+              orderData={orderData}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
 
-        <ProvisionalInvoice
-          handleOrder={() => {
-            order(products);
-          }}
-          subTotal={totalPrice}
-          total={totalPrice}
-          couponCode={couponCode}
-          setCouponCode={setCouponCode}
-        />
-        <Bill isOpen={isOpenBill} setIsOpen={closeBill} orderData={orderData} />
+        {isOpenOder ? (
+          <></>
+        ) : (
+          <div className={`${styles["coupon"]} py-5 `}>
+            <button
+              type="submit"
+              onClick={() => {
+                setIsOpenCart(false);
+                setIsOpenOder(false);
+              }}
+              className={`${styles["apply-coupon-btn"]} text-white`}
+              value="Apply coupon"
+            >
+              Tiếp tục mua hàng
+            </button>
+            <button
+              className={`${styles["apply-coupon-btn"]} ms-2 text-white text-decoration-none `}
+              onClick={() => {
+                setIsOpenOder(true);
+              }}
+            >
+              Đến phần thanh toán
+            </button>
+          </div>
+        )}
       </div>
-      <Footer />
-    </div>
+    </CustomModal>
   );
-}
+};
+
+export default BillCart;

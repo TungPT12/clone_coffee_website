@@ -13,31 +13,34 @@ const CustomModal = ({
   background: string;
   style: any;
 }) => {
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  // };
-
   useEffect(() => {
     Modal.setAppElement("#root_root"); // Set the app element to the root element of your application
   }, []);
 
   return (
-    <Modal
+    <div
       style={{
-        content: {
-          width: "100%",
-          height: "100vh",
-          background: `${background ? background : "none"}`,
-          inset: 0,
-          position: "fixed",
-          ...style,
-        },
+        zIndex: 1000,
+        position: "relative",
       }}
-      isOpen={isOpen}
-      contentLabel="Example Modal"
     >
-      {children}
-    </Modal>
+      <Modal
+        style={{
+          content: {
+            width: "100%",
+            height: "100vh",
+            background: `${background ? background : "none"}`,
+            inset: 0,
+            position: "fixed",
+            ...style,
+          },
+        }}
+        isOpen={isOpen}
+        contentLabel="Example Modal"
+      >
+        {children}
+      </Modal>
+    </div>
   );
 };
 

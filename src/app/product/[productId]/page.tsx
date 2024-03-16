@@ -223,9 +223,9 @@ const ProductDetail = () => {
             </div>
             <div className={`${styles["tag-category"]} `}>
               <div className={`${styles["tag-tile-category"]} text-capitalize`}>
-                <span>SKU: PR111</span>
-                <span>CATEGORY: {product?.category}</span>
-                <span>TAGS: Black, Casual, Classic</span>
+                <span style={{ fontWeight: "initial" }}>
+                  CATEGORY: {product?.category}
+                </span>
               </div>
               <div className="mt-3">
                 <Tabs />

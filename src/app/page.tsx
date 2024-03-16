@@ -9,6 +9,8 @@ import SlideShow from "@/components/SlideShow/SlideShow";
 import { getToken } from "@/utils/cookie";
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
+import BillCart from "@/components/BillCart/BillCart";
+import { useState } from "react";
 
 export default function Home() {
   const { token } = useSelector((state: RootState) => state.authn);

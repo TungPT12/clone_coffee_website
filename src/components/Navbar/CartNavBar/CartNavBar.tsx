@@ -6,6 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import { useCartContext } from "@/components/Context/CartContext";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
 
 function CartNavBar() {
   // const [cart, setCart] = useState<any[]>([]);
@@ -63,7 +65,10 @@ function CartNavBar() {
       <div className={`${styles["product"]}`}>
         {/* {cartNull()} */}
         {products.length === 0 ? (
-          <p>Không có sản phẩm trong giỏ hàng</p>
+          <div className={`${styles["no-cart"]}`}>
+            <FontAwesomeIcon icon={faWarning} className="icon-warning me-2" />
+            Giỏ hàng trống
+          </div>
         ) : (
           renderCartItems(products)
         )}
