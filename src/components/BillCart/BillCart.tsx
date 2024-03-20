@@ -13,7 +13,7 @@ import oderService from "@/services/order/order.service";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import Link from "next/link";
-
+import { toast } from "react-toastify";
 const BillCart = ({
   isOpenCart,
   setIsOpenCart,
@@ -72,7 +72,8 @@ const BillCart = ({
         return data;
       })
       .then((data: any) => {
-        alert("Bạn đã mua hàng thành công");
+        console.log(data);
+
         setOrder(data);
         if (!data.customer_id) {
           storeIdGuest(data._id);
