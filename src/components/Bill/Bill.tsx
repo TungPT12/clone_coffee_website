@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomModal from "../Modal/Modal";
 import styles from "./Bill.module.scss";
 
@@ -12,12 +12,31 @@ const Bill = ({
   isOpen: boolean;
   setIsOpen: any;
 }) => {
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
+
+  // const [cart, setCart] = useState<any[]>(() => {
+  //   const storedCart = localStorage.getItem("cart");
+  //   return storedCart ? JSON.parse(storedCart) : [];
+  // });
+
+  // const { addToCart } = useCartContext();
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   const renderProducts = (products: any) => {
     return products.map((product: any) => {
       return (
         <div key={product.product._id} className={styles.product}>
           <img
-            src={product.product.images[0]}
+            src={
+              product?.product.images[0]?.includes("http")
+                ? product?.product.images[0]
+                : product?.product.images[0]
+                ? `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.product.images[0]}`
+                : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
+            }
+            onError={handleImageError}
             alt={product.product.name}
             className={styles.productImage}
           />
@@ -32,7 +51,33 @@ const Bill = ({
       );
     });
   };
-  console.log(orderData);
+
+  const hanldeCopy = () => {
+    var orderCodeElement = document.getElementById("orderCode");
+
+    if (orderCodeElement !== null) {
+      var orderCode = orderCodeElement.textContent;
+
+      // Tạo một phần tử input tạm thời để sao chép nội dung vào clipboard
+      var tempInput = document.createElement("input");
+
+      // Gán giá trị của mã gọi món cho phần tử input
+      tempInput.value = orderCode ?? "";
+
+      // Thêm phần tử input tạm thời vào DOM để có thể sao chép nội dung
+      document.body.appendChild(tempInput);
+
+      // Chọn toàn bộ nội dung trong phần tử input
+      tempInput.select();
+
+      // Sao chép nội dung vào clipboard
+      document.execCommand("copy");
+
+      // Xóa phần tử input tạm thời khỏi DOM
+      document.body.removeChild(tempInput);
+    }
+  };
+
   return (
     <CustomModal
       isOpen={isOpen}
@@ -45,7 +90,17 @@ const Bill = ({
       {orderData ? (
         <div className={styles.bill}>
           <h3 className={`${styles.title} mb-3`}>Thông tin phiếu gọi món</h3>
-          <h6 className={styles.orderCode}>Mã gọi món: {orderData._id}</h6>
+          <h6 id="orderCode" className={styles.orderCode}>
+            Mã gọi món: {orderData._id}
+          </h6>
+          <div className={`${styles.qrcode}`}>
+            <img
+              className="w-100"
+              src={orderData.QRCode.replaceAll('"', "")}
+              alt="star"
+            />
+          </div>
+
           <h6 className={styles.orderCode}>Chi tiết đơn hàng</h6>
           <div className={`${styles["wrapper-product"]}`}>
             {renderProducts(orderData.items)}
@@ -56,8 +111,10 @@ const Bill = ({
           </div>
           <div className={styles.groupButton}>
             <button
+              onClick={() => {
+                hanldeCopy();
+              }}
               className={styles.cancelButton}
-              // onClick={setIsOpen}
             >
               Copy mã gọi món
             </button>

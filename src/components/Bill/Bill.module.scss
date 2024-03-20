@@ -19,6 +19,11 @@
   font-weight: 300;
 }
 
+.qrcode {
+  width: 25%;
+  height: auto;
+}
+
 .product {
   display: flex;
   align-items: center;
@@ -52,6 +57,7 @@
 
 .total {
   display: flex;
+  padding-right: 7rem;
   justify-content: flex-end;
   margin-bottom: 10px;
   width: 100%;

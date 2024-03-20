@@ -30,6 +30,7 @@ export default function RootLayout({
             zIndex: 1000,
           }}
         ></div>
+
         <CartProvider>
           <Providers>{children}</Providers>
         </CartProvider>
