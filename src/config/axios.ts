@@ -1,10 +1,3 @@
-// import axios from "axios";
-
-// const axiosInstance = axios.create({
-// baseURL:"http://localhost:3001/",
-// })
-// export default axiosInstance;
-
 import axios from "axios";
 
 type Token = {
@@ -13,7 +6,7 @@ type Token = {
 };
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
 const token: Token = JSON.parse(
-  localStorage.getItem("token") ||
+  window.localStorage.getItem("token") ||
     JSON.stringify({
       access_token: "",
       refreshToken: "",
