@@ -94,11 +94,13 @@ const Bill = ({
             Mã gọi món: {orderData._id}
           </h6>
           <div className={`${styles.qrcode}`}>
-            <img
-              className="w-100"
-              src={orderData.QRCode.replaceAll('"', "")}
-              alt="star"
-            />
+            <picture>
+              <img
+                className="w-100"
+                src={orderData.QRCode.replaceAll('"', "")}
+                alt="star"
+              />
+            </picture>
           </div>
 
           <h6 className={styles.orderCode}>Chi tiết đơn hàng</h6>

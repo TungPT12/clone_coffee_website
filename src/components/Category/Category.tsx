@@ -14,15 +14,13 @@ const Category = () => {
       return (
         <div key={category._id} className={`${styles["categoy-card"]}`}>
           <div className={`w-100 ${styles["image-category"]}`}>
-            <img
-              className={`w-50 h-100 ${styles["image-cate"]}`}
-              alt={category.name}
-              src={
-                category.image.includes("http")
-                  ? category.image
-                  : `${process.env.NEXT_PUBLIC_BASE_URL}/${category.image}`
-              }
-            />
+            <picture>
+              <img
+                className={`w-50 h-100 ${styles["image-cate"]}`}
+                alt={category.name}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL}${category.image}`}
+              />
+            </picture>
           </div>
           <div className={`${styles["category-info"]}`}>
             <Link
@@ -47,10 +45,12 @@ const Category = () => {
           <h2 className={`${styles["title-big"]} wpb_wrapper`}>
             Danh mục sản phẩm
           </h2>
-          <img
-            src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
-            alt=""
-          />
+          <picture>
+            <img
+              src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
+              alt=""
+            />
+          </picture>
           <div className={`w-100 d-flex justify-content-center`}>
             <h6 className={`${styles["sub"]} wpb_wrapper w-50`}>
               Tất cả danh mục có trong cửa hàng

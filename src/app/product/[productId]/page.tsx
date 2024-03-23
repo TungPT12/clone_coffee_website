@@ -86,14 +86,12 @@ const ProductDetail = () => {
               }}
               className={`position-relative h-100 ${styles["wrapper-add-to-cart"]}`}
             >
-              <img
-                className={`w-100 h-100 ${styles["image-product"]}`}
-                src={
-                  image.includes("http")
-                    ? image
-                    : `${process.env.NEXT_PUBLIC_BASE_URL}${image}`
-                }
-              />
+              <picture>
+                <img
+                  className={`w-100 h-100 ${styles["image-product"]}`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_URL}${image}`}
+                />
+              </picture>
             </div>
           </div>
         </div>
@@ -111,17 +109,13 @@ const ProductDetail = () => {
               <div
                 className={`position-relative ${styles["wrapper-add-to-cart"]}`}
               >
-                <img
-                  className={` ${styles["image-product"]}`}
-                  src={
-                    currentImage
-                      ? currentImage.includes("http")
-                        ? currentImage
-                        : `${process.env.NEXT_PUBLIC_BASE_URL}${product?.images[0]}`
-                      : ""
-                  }
-                  alt={product?.name}
-                />
+                <picture>
+                  <img
+                    className={` ${styles["image-product"]}`}
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${currentImage}`}
+                    alt={product?.name}
+                  />
+                </picture>
                 <div
                   className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
                 ></div>
@@ -243,10 +237,12 @@ const ProductDetail = () => {
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
                 >
-                  <img
-                    className={`w-100 ${styles["image-product"]}`}
-                    src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-                  />
+                  <picture>
+                    <img
+                      className={`w-100 ${styles["image-product"]}`}
+                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
+                    />
+                  </picture>
                   <div
                     className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
                   >
@@ -268,10 +264,12 @@ const ProductDetail = () => {
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
                 >
-                  <img
-                    className={`w-100 ${styles["image-product"]}`}
-                    src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-                  />
+                  <picture>
+                    <img
+                      className={`w-100 ${styles["image-product"]}`}
+                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
+                    />
+                  </picture>
                   <div
                     className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
                   >
@@ -293,10 +291,12 @@ const ProductDetail = () => {
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
                 >
-                  <img
-                    className={`w-100 ${styles["image-product"]}`}
-                    src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-                  />
+                  <picture>
+                    <img
+                      className={`w-100 ${styles["image-product"]}`}
+                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
+                    />
+                  </picture>
                   <div
                     className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
                   >
@@ -318,10 +318,12 @@ const ProductDetail = () => {
                 <div
                   className={`position-relative ${styles["wrapper-add-to-cart"]}`}
                 >
-                  <img
-                    className={`${styles["image-product"]}`}
-                    src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
-                  />
+                  <picture>
+                    <img
+                      className={`${styles["image-product"]}`}
+                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-1.png"
+                    />
+                  </picture>
                   <div
                     className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
                   >

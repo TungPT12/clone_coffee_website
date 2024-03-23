@@ -28,18 +28,14 @@ const ProductCard = ({
     <div className={`${styles["product-item"]} col-4`}>
       <div className={`${styles["product"]} w-100`}>
         <div className={`position-relative ${styles["wrapper-add-to-cart"]}`}>
-          <img
-            alt="áds"
-            className={`w-100 ${styles["image-product"]}`}
-            src={
-              imageUrl
-                ? imageUrl?.includes("http")
-                  ? imageUrl
-                  : `${process.env.NEXT_PUBLIC_BASE_URL}${imageUrl}`
-                : ""
-            }
-            onError={handleImageError}
-          />
+          <picture>
+            <img
+              alt="áds"
+              className={`w-100 ${styles["image-product"]}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}${imageUrl}`}
+              onError={handleImageError}
+            />
+          </picture>
           <div
             className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 position-absolute top-0`}
           >

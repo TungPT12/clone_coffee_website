@@ -1,10 +1,8 @@
-import { getToken, setToken } from "@/utils/cookie";
-
 const { createSlice } = require("@reduxjs/toolkit");
 
 type Token = {
   access_token: "";
-  refreshe_token: "";
+  refresh_token: "";
 };
 
 const token: Token = JSON.parse(localStorage.getItem("token") || "{}");

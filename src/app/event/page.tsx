@@ -15,10 +15,12 @@ const PageEvent = () => {
       <Banner title={`Event`} />
       <div className={`${styles["event-des"]}`}>
         <div className={`${styles["image-div"]}`}>
-          <img
-            className={`${styles["event-image"]}`}
-            src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/anh-tay-cam-tra-sua-dep-24-23-13-45-09.jpg"
-          />
+          <picture>
+            <img
+              className={`${styles["event-image"]}`}
+              src="https://inkythuatso.com/uploads/thumbnails/800/2022/03/anh-tay-cam-tra-sua-dep-24-23-13-45-09.jpg"
+            />
+          </picture>
         </div>
         <div className={`${styles["text-div"]}`}>
           <p className={`${styles["title-author"]}`}>

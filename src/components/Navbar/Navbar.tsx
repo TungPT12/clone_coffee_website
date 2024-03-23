@@ -74,11 +74,13 @@ function Navbar() {
             <li
               className={`h-100 d-flex align-items-center ${styles["wrap-logo"]}`}
             >
-              <img
-                className={`h-75 ${styles["logo"]}`}
-                src="https://corretto.qodeinteractive.com/wp-content/themes/corretto/assets/img/logo-light.png"
-                alt="light logo"
-              />
+              <picture>
+                <img
+                  className={`h-75 ${styles["logo"]}`}
+                  src="https://corretto.qodeinteractive.com/wp-content/themes/corretto/assets/img/logo-light.png"
+                  alt="light logo"
+                />
+              </picture>
             </li>
             <li className={`${styles["nav-container"]}h-100`}>
               <ul className={`${styles["nav-list"]}`}>
@@ -216,14 +218,16 @@ function Navbar() {
                       className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white gap-2`}
                     >
                       <div className="h-10 w-10">
-                        <img
-                          style={{
-                            height: "20px",
-                            width: "20px",
-                            backgroundColor: "white",
-                          }}
-                          src="https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_960_720.png"
-                        />
+                        <picture>
+                          <img
+                            style={{
+                              height: "20px",
+                              width: "20px",
+                              backgroundColor: "white",
+                            }}
+                            src="https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_960_720.png"
+                          />
+                        </picture>
                       </div>
                       <span
                         className={`d-flex flex-column mt-1 ${styles["item-outer"]} `}

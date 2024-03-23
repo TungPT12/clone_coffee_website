@@ -8,10 +8,12 @@ const Gallery = () => {
           <h2 className={`${styles["title-big"]} wpb_wrapper`}>
             OUR SWEET GALLERY
           </h2>
-          <img
-            src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
-            alt=""
-          />
+          <picture>
+            <img
+              src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
+              alt=""
+            />
+          </picture>
           <div className={`w-100 d-flex justify-content-center`}>
             <h6 className={`${styles["sub"]} wpb_wrapper w-50`}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

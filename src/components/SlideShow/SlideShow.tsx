@@ -55,11 +55,13 @@ function SlideShow() {
           <div
             className={`position-relative ${styles["wrapper-content"]} overflow-hidden`}
           >
-            <img
-              className={`${styles["image-slide-show"]} image-slide-show`}
-              src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
-              alt="Description of the image"
-            />
+            <picture>
+              <img
+                className={`${styles["image-slide-show"]} image-slide-show`}
+                src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
+                alt="Description of the image"
+              />
+            </picture>
             <Content
               title={"coffee sgarden"}
               text={
@@ -72,11 +74,13 @@ function SlideShow() {
           <div
             className={`position-relative ${styles["wrapper-content"]} overflow-hidden`}
           >
-            <img
-              className={`${styles["image-slide-show"]} image-slide-show`}
-              src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
-              alt="Description of the image"
-            />
+            <picture>
+              <img
+                className={`${styles["image-slide-show"]} image-slide-show`}
+                src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
+                alt="Description of the image"
+              />
+            </picture>
             <Content
               title={"coffee sgarden"}
               text={
@@ -89,11 +93,13 @@ function SlideShow() {
           <div
             className={`position-relative overflow-hidden ${styles["wrapper-content"]}`}
           >
-            <img
-              className={`${styles["image-slide-show"]} image-slide-show`}
-              src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
-              alt="Description of the image"
-            />
+            <picture>
+              <img
+                className={`${styles["image-slide-show"]} image-slide-show`}
+                src="https://png.pngtree.com/background/20210711/original/pngtree-coffee-fresh-brown-poster-banner-background-picture-image_1069397.jpg"
+                alt="Description of the image"
+              />
+            </picture>
             <Content
               title={"coffee sgarden"}
               text={
