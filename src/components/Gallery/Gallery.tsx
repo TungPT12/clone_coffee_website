@@ -12,6 +12,7 @@ const Gallery = () => {
             <img
               src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
               alt=""
+              loading="lazy"
             />
           </picture>
           <div className={`w-100 d-flex justify-content-center`}>

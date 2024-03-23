@@ -44,6 +44,7 @@ const Product = () => {
                   ? product?.images[0]
                   : `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
               }
+              loading="lazy"
               onError={handleImageError}
             />
           </div>

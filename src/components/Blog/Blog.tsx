@@ -17,6 +17,7 @@ const Blog = () => {
             <img
               className={`${styles["image-blog"]}`}
               src={`${process.env.NEXT_PUBLIC_BASE_URL}${introduction.image}`}
+              loading="lazy"
             />
           </picture>
           <div

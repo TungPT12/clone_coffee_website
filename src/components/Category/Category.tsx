@@ -18,7 +18,11 @@ const Category = () => {
               <img
                 className={`w-50 h-100 ${styles["image-cate"]}`}
                 alt={category.name}
-                src={`${process.env.NEXT_PUBLIC_BASE_URL}${category.image}`}
+                src={
+                  category.image.includes("http")
+                    ? category.image
+                    : `${process.env.NEXT_PUBLIC_BASE_URL}/${category.image}`
+                }
               />
             </picture>
           </div>
