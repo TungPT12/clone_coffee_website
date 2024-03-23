@@ -1,11 +1,27 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 type Token = {
-  access_token: "";
-  refresh_token: "";
+  access_token: string;
+  refresh_token: string;
 };
 
-const token: Token = JSON.parse(localStorage.getItem("token") || "{}");
+let token: Token = {
+  access_token: "",
+  refresh_token: "",
+};
+if (typeof window !== "undefined") {
+  token = JSON.parse(
+    localStorage.getItem("token") ||
+      JSON.stringify({
+        access_token: "",
+        refresh_token: "",
+      })
+  );
+}
+
+if (typeof window !== "undefined") {
+}
+
 let initAuthnSlice = token;
 // let initAuthnSlice = {
 //   isAuthn: token ? true : false,

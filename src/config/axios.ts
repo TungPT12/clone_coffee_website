@@ -1,17 +1,24 @@
+"use client";
 import axios from "axios";
 
 type Token = {
   access_token: string;
   refreshToken: string;
 };
+let token: Token = {
+  access_token: "",
+  refreshToken: "",
+};
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-const token: Token = JSON.parse(
-  window.localStorage.getItem("token") ||
-    JSON.stringify({
-      access_token: "",
-      refreshToken: "",
-    })
-);
+if (typeof window !== "undefined") {
+  token = JSON.parse(
+    window.localStorage.getItem("token") ||
+      JSON.stringify({
+        access_token: "",
+        refreshToken: "",
+      })
+  );
+}
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
