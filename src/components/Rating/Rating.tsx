@@ -27,7 +27,11 @@ const ReviewList: React.FC = () => {
           {reviews.map((review, index) => (
             <li key={index} className="review-item">
               <div className="avatar user-avatar">
-                {review.avatar && <img src={review.avatar} alt="Avatar" />}
+                {review.avatar && (
+                  <picture>
+                    <img src={review.avatar} alt="Avatar" />
+                  </picture>
+                )}
               </div>
               <div className="comment">
                 <div className="rating">

@@ -14,15 +14,9 @@ import { RootState } from "@/lib/store";
 import { cartActions } from "@/lib/slice/features/cart/cartSlice";
 import CardProductCart from "@/components/CardProductCart/CardProductCart";
 import oderService from "@/services/order/order.service";
-// import { Product } from "@/types/entities/product.entity";
-// import productService from "@/services/product/product.service";
-// import Modal from "@/components/Modal/Modal";
 import Bill from "@/components/Bill/Bill";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// import CustomModal from "@/components/Modal/Modal";
-// const cartLocal = localStorage.getItem("cart");
 
 export default function Cart() {
   const notifySuccess = () => toast.success("Mua hàng thành công");

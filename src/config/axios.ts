@@ -12,11 +12,13 @@ type Token = {
   refreshToken: string;
 };
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-const token: Token = JSON.parse(localStorage.getItem("token") || "{}");
-// const token: Token = {
-//   accessToken: "",
-//   refreshToken: "",
-// };
+const token: Token = JSON.parse(
+  localStorage.getItem("token") ||
+    JSON.stringify({
+      access_token: "",
+      refreshToken: "",
+    })
+);
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
@@ -28,11 +30,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   (config) => {
     if (!config.headers["Authorization"]) {
-      // const token: Token =
-      //   // localStorage.getItem(authConfig.storageTokenKeyName) || "";
-      //   JSON.parse(localStorage.getItem("token") || "{}");
       config.headers["Authorization"] = `Bearer ${token.access_token}`;
-      // config.headers["Authorization"] = `${authConfig.TOKEN_TYPE} ${token}`;
     }
     return config;
   },
