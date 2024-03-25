@@ -46,11 +46,13 @@ const CardProductCart = ({
         />
       </div>
       <div className={`${styles["image"]} f-1 py-3 align-items-center`}>
-        <img
-          className="w-100"
-          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product.image}`}
-          onError={handleImageError}
-        />
+        <picture>
+          <img
+            className="w-100"
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}${product.image}`}
+            onError={handleImageError}
+          />
+        </picture>
       </div>
       <div className={`f-3  py-3 d-flex align-items-center`}>
         <span className="f-2">{product.name}</span>

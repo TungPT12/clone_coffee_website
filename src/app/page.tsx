@@ -6,7 +6,6 @@ import Gallery from "@/components/Gallery/Gallery";
 import Navbar from "@/components/Navbar/Navbar";
 import Product from "@/components/Product/Product";
 import SlideShow from "@/components/SlideShow/SlideShow";
-import { getToken } from "@/utils/cookie";
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import BillCart from "@/components/BillCart/BillCart";

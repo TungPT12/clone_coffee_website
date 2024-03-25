@@ -8,11 +8,13 @@ function Content({ title, text }: any) {
     <div
       className={`${styles["content"]} show position-absolute align-items-center h-100 justify-content-center  text-white text-decoration-none`}
     >
-      <img
-        className={`${styles["logo"]} ${styles["top-to-bottom"]}`}
-        src="./avatar.svg"
-        alt="helo"
-      />
+      <picture>
+        <img
+          className={`${styles["logo"]} ${styles["top-to-bottom"]}`}
+          src="./avatar.svg"
+          alt=""
+        />
+      </picture>
 
       <h1
         className={`${styles["title"]} text-uppercase ${styles["top-to-bottom-first"]}`}

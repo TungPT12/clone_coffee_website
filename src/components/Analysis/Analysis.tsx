@@ -5,10 +5,12 @@ const Analysis = () => {
       <div className={`${styles["container"]}`}>
         <div className={`${styles["header"]}`}>
           <h2 className={`${styles["title-big"]} wpb_wrapper`}>Analaysis</h2>
-          <img
-            src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
-            alt=""
-          />
+          <picture>
+            <img
+              src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
+              alt="abc"
+            />
+          </picture>
         </div>
 
         <div

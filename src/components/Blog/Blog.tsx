@@ -19,17 +19,14 @@ const Blog = () => {
     return introduction?.map((introduction: any) => {
       return (
         <div className={`${styles["blog-image"]}`} key={introduction._id}>
-          <img
-            className={`${styles["image-blog"]}`}
-            src={
-              introduction.image
-                ? introduction.image?.includes("http")
-                  ? introduction.image
-                  : `${process.env.NEXT_PUBLIC_BASE_URL}${introduction.image}`
-                : ""
-            }
-            onError={handleImageError}
-          ></img>
+
+          <picture>
+            <img
+              className={`${styles["image-blog"]}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}${introduction.image}`}
+              loading="lazy"
+            />
+          </picture>
           <div
             className={`${styles["text-blog"]}justify-content-center text-center`}
           >
@@ -48,10 +45,12 @@ const Blog = () => {
           <h2 className={`${styles["title-big"]} wpb_wrapper`}>
             THE COFFE GRADEN
           </h2>
-          <img
-            src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
-            alt="icon"
-          />
+          <picture>
+            <img
+              src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
+              alt="icon"
+            />
+          </picture>
           <div className={`w-100 d-flex justify-content-center`}>
             <h6 className={`${styles["sub"]} wpb_wrapper w-50`}>
               Những bài viết về kỷ niệm cùng quán cà phê COFFE GRADEN

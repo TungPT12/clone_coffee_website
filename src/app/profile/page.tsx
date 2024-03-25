@@ -42,7 +42,9 @@ const Profile = () => {
         <div className={`${styles["backgroud"]}`}></div>
         <div className={`${styles["avatar-image"]}`}>
           <div className={`${styles["image-user"]}`}>
-            <img className={`${styles["avatar"]}`} src={profile?.avatar} />
+            <picture>
+              <img className={`${styles["avatar"]}`} src={profile?.avatar} />
+            </picture>
           </div>
           <div className={`${styles["main-detail"]}`}>
             <div>
@@ -242,10 +244,12 @@ const Profile = () => {
             <div className={`${styles["t-body"]} `}>
               <div className={`${styles["t-row"]} w-100 d-flex`}>
                 <div className={`f-1 py-3 d-flex align-items-center`}>
-                  <img
-                    className="w-100"
-                    src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-5.png"
-                  />
+                  <picture>
+                    <img
+                      className="w-100"
+                      src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/product-img-5.png"
+                    />
+                  </picture>
                 </div>
                 <div className={`f-3  py-3 d-flex align-items-center`}>
                   <span className="f-2">Columnbia Coffe</span>

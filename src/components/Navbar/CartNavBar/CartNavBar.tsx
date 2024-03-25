@@ -35,16 +35,15 @@ function CartNavBar() {
         className={`${styles["cart"]}`}
         key={`${product._id}-${product.size}`}
       >
-        <img
-          src={
-            `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.image}`
 
-            // : `${process.env.base_url}${cartItem?.images[0]}`
-          }
-          alt={product.name}
-          onError={handleImageError}
-          className={`${styles["image"]}`}
-        />
+        <picture>
+          <img
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}${product?.image}`}
+            alt={product.name}
+            className={`${styles["image"]}`}
+          />
+        </picture>
+
         <div className={`${styles["description"]}`}>
           <span className={`${styles["title"]}`}>{product?.name}</span>
           <div>

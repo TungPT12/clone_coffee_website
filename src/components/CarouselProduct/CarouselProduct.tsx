@@ -110,27 +110,33 @@ function CarouselProduct({ products }: any) {
   };
 
   return (
-    <Carousel
-      className="d-flex justify-content-between gap-2"
-      swipeable={true}
-      draggable={true}
-      responsive={responsive}
-      ssr={true} // means to render carousel on server-side.
-      keyBoardControl={true}
-      customTransition="all .7s"
-      transitionDuration={500}
-      containerClass="carousel-container"
-      removeArrowOnDeviceType={["tablet", "mobile"]}
-      itemClass="d-flex justify-content-center mx-4"
-    >
-      {renderProducts(products)}
+
+    <>
+      <Carousel
+        className="d-flex justify-content-center gap-2 align-items-center"
+        swipeable={true}
+        draggable={true}
+        autoPlay
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={true}
+        autoPlaySpeed={3000}
+        keyBoardControl={true}
+        customTransition="all .7s"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        itemClass="d-flex justify-content-center mx-4"
+      >
+        {renderProducts(products)}
+      </Carousel>
       <BillCart
         isOpenCart={isOpen}
         setIsOpenCart={() => {
           setIsOpen(false);
         }}
       />
-    </Carousel>
+    </>
   );
 }
 

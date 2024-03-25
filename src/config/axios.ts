@@ -1,22 +1,24 @@
-// import axios from "axios";
-
-// const axiosInstance = axios.create({
-// baseURL:"http://localhost:3001/",
-// })
-// export default axiosInstance;
-
+"use client";
 import axios from "axios";
 
 type Token = {
   access_token: string;
   refreshToken: string;
 };
+let token: Token = {
+  access_token: "",
+  refreshToken: "",
+};
 const BASE_URL = `${process.env.NEXT_PUBLIC_BASE_URL}`;
-const token: Token = JSON.parse(localStorage.getItem("token") || "{}");
-// const token: Token = {
-//   accessToken: "",
-//   refreshToken: "",
-// };
+if (typeof window !== "undefined") {
+  token = JSON.parse(
+    window.localStorage.getItem("token") ||
+      JSON.stringify({
+        access_token: "",
+        refreshToken: "",
+      })
+  );
+}
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
@@ -28,11 +30,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   (config) => {
     if (!config.headers["Authorization"]) {
-      // const token: Token =
-      //   // localStorage.getItem(authConfig.storageTokenKeyName) || "";
-      //   JSON.parse(localStorage.getItem("token") || "{}");
       config.headers["Authorization"] = `Bearer ${token.access_token}`;
-      // config.headers["Authorization"] = `${authConfig.TOKEN_TYPE} ${token}`;
     }
     return config;
   },
