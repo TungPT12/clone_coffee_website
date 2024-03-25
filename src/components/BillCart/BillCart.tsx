@@ -9,11 +9,12 @@ import styles from "./BillCart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import oderService from "@/services/order/order.service";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
-import Link from "next/link";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import orderService from "@/services/order/order.service";
+
 const BillCart = ({
   isOpenCart,
   setIsOpenCart,
@@ -21,24 +22,28 @@ const BillCart = ({
   isOpenCart: boolean;
   setIsOpenCart: any;
 }) => {
+  const notifySuccess = () => toast.success("Mua hàng thành công");
+  const notifyFail = () => toast.error("Mua hàng thất bại");
+
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
   const dispatch = useDispatch();
+
   const [isOpenOder, setIsOpenOder] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [orderData, setOrder] = useState(null);
   const [isOpenBill, setIsOpenBill] = useState(false);
 
-  const storeIdGuest = (id: string) => {
+  const storeIdGuest = (data: any) => {
     const localStore = localStorage.getItem("orderGuest");
     if (localStore) {
       let orderGuest = JSON.parse(localStore);
-      orderGuest.push(id);
+      orderGuest.push(data);
       localStorage.setItem("orderGuest", JSON.stringify(orderGuest));
     } else {
       let orderGuest = [];
-      orderGuest.push(id);
+      orderGuest.push(data);
       localStorage.setItem("orderGuest", JSON.stringify(orderGuest));
     }
   };
@@ -51,7 +56,6 @@ const BillCart = ({
   const order = (dataProduct: any) => {
     const formatProduct = dataProduct.reduce(
       (initProducts: any[], product: any) => {
-        console.log(initProducts);
         let newProduct = product;
         if (newProduct.size === "N") {
           newProduct = {
@@ -67,23 +71,24 @@ const BillCart = ({
       products: formatProduct,
     };
 
-    oderService(orderData)
+    orderService
+      .createOrder(orderData)
       .then((data: any) => {
         return data;
       })
       .then((data: any) => {
-        console.log(data);
-
         setOrder(data);
-        if (!data.customer_id) {
-          storeIdGuest(data._id);
-        }
+
+        storeIdGuest(data);
+
         dispatch(cartActions.resetCart());
         localStorage.removeItem("cart");
       })
-      .then(() => {})
+      .then(() => {
+        notifySuccess();
+      })
       .catch((error: Error) => {
-        alert("Bạn đã mua hàng thất bại");
+        notifyFail();
       });
   };
 
@@ -133,121 +138,131 @@ const BillCart = ({
   };
 
   return (
-    <CustomModal
-      isOpen={isOpenCart}
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        zIndex: 999,
-      }}
-      background="#00000047"
-    >
-      <div className={`${styles["cart-wrapper"]} `}>
-        <div
-          className={`${styles["close-icon"]}`}
-          onClick={() => {
-            setIsOpenCart(false);
-            setIsOpenOder(false);
-          }}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="red"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+    <>
+      <CustomModal
+        isOpen={isOpenCart}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          zIndex: 999,
+        }}
+        background="#00000047"
+      >
+        <div className={`${styles["cart-wrapper"]} `}>
+          <div
+            className={`${styles["close-icon"]}`}
+            onClick={() => {
+              setIsOpenCart(false);
+              setIsOpenOder(false);
+            }}
           >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </div>
-        <h1 className={`${styles["cart-text"]} `}>Chi tiết đơn hàng</h1>
-
-        <div className="cart-product">
-          <div className={`${styles["t-head"]} `}>
-            <div className={`d-flex ${styles["th"]}`}>
-              <div className={`f-1 py-3 ${styles[""]}`}></div>
-              <div className={`f-1 py-3 ${styles["image-header"]}`}></div>
-              <div className="f-3 py-3">Product</div>
-              <div className="f-1-sm f-2 py-3 px-1">Size</div>
-              <div className="f-1-sm f-2 py-3 px-1">Price</div>
-              <div className="f-2 py-3 px-1">Quantity</div>
-              <div className="f-2 py-3 px-1">Subtotal</div>
-            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="red"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
           </div>
-          <div className={`${styles["t-body"]} `}>{renderCart(products)}</div>
-        </div>
-        {isOpenOder ? (
-          <div>
-            <div className={`${styles["coupon"]} py-5`}>
-              <input
-                value={couponCode}
-                type="text"
-                className={`${styles["input-coupon"]}`}
-                placeholder="Coupon code"
-                onChange={(event) => setCouponCode(event.target.value)}
+          <h1 className={`${styles["cart-text"]} `}>Chi tiết gọi món</h1>
+
+          <div className="cart-product">
+            <div className={`${styles["t-head"]} `}>
+              <div className={`d-flex ${styles["th"]}`}>
+                <div className={`f-1 py-3 ${styles[""]}`}></div>
+                <div className={`f-1 py-3 ${styles["image-header"]}`}></div>
+                <div className={`f-3 py-3 ${styles["th-title"]}`}>Product</div>
+                <div className={`f-1-sm f-2 py-3 px-1 ${styles["th-title"]}`}>
+                  Size
+                </div>
+                <div className={`f-1-sm f-2 py-3 px-1 ${styles["th-title"]}`}>
+                  Price
+                </div>
+                <div className={`f-2 py-3 ${styles["th-title"]}`}>Quantity</div>
+                <div
+                  className={`f-2 py-3 px-1 d-none-sm ${styles["th-title"]}`}
+                >
+                  Subtotal
+                </div>
+              </div>
+            </div>
+            <div className={`${styles["t-body"]} `}>{renderCart(products)}</div>
+          </div>
+          {isOpenOder ? (
+            <div>
+              <div className={`${styles["coupon"]} py-5`}>
+                <input
+                  value={couponCode}
+                  type="text"
+                  className={`${styles["input-coupon"]}`}
+                  placeholder="Coupon code"
+                  onChange={(event) => setCouponCode(event.target.value)}
+                />
+                <button
+                  type="submit"
+                  // onClick={() => {
+                  //   setopen(true);
+                  // }}
+                  className={`${styles["apply-coupon-btn"]} text-white`}
+                  value="Apply coupon"
+                >
+                  Apply coupon
+                </button>
+              </div>
+              <ProvisionalInvoice
+                handleOrder={() => {
+                  order(products);
+                }}
+                subTotal={totalPrice}
+                total={totalPrice}
+                couponCode={couponCode}
+                setCouponCode={setCouponCode}
               />
+              <Bill
+                isOpen={isOpenBill}
+                setIsOpen={closeBill}
+                orderData={orderData}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {isOpenOder ? (
+            <></>
+          ) : (
+            <div className={`${styles["coupon"]} py-5 `}>
               <button
                 type="submit"
-                // onClick={() => {
-                //   setopen(true);
-                // }}
+                onClick={() => {
+                  setIsOpenCart(false);
+                  setIsOpenOder(false);
+                }}
                 className={`${styles["apply-coupon-btn"]} text-white`}
                 value="Apply coupon"
               >
-                Apply coupon
+                Tiếp tục mua hàng
+              </button>
+              <button
+                className={`${styles["apply-coupon-btn"]}  text-white text-decoration-none `}
+                onClick={() => {
+                  setIsOpenOder(true);
+                }}
+              >
+                Đến phần thanh toán
               </button>
             </div>
-            <ProvisionalInvoice
-              handleOrder={() => {
-                order(products);
-              }}
-              subTotal={totalPrice}
-              total={totalPrice}
-              couponCode={couponCode}
-              setCouponCode={setCouponCode}
-            />
-            <Bill
-              isOpen={isOpenBill}
-              setIsOpen={closeBill}
-              orderData={orderData}
-            />
-          </div>
-        ) : (
-          <></>
-        )}
-
-        {isOpenOder ? (
-          <></>
-        ) : (
-          <div className={`${styles["coupon"]} py-5 `}>
-            <button
-              type="submit"
-              onClick={() => {
-                setIsOpenCart(false);
-                setIsOpenOder(false);
-              }}
-              className={`${styles["apply-coupon-btn"]} text-white`}
-              value="Apply coupon"
-            >
-              Tiếp tục mua hàng
-            </button>
-            <button
-              className={`${styles["apply-coupon-btn"]} ms-2 text-white text-decoration-none `}
-              onClick={() => {
-                setIsOpenOder(true);
-              }}
-            >
-              Đến phần thanh toán
-            </button>
-          </div>
-        )}
-      </div>
-    </CustomModal>
+          )}
+        </div>
+      </CustomModal>
+    </>
   );
 };
 

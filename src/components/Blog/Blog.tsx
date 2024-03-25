@@ -5,14 +5,21 @@ import useSWR from "swr";
 import styles from "./Blog.module.scss";
 import introductionService from "@/services/introduction/introduction.service";
 const Blog = () => {
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
   const { data: introduction } = useSWR(
     "GET_INTRODUCTION",
     introductionService.getAll
   );
+
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   const renderIntroduction = (introduction: any) => {
     return introduction?.map((introduction: any) => {
       return (
         <div className={`${styles["blog-image"]}`} key={introduction._id}>
+
           <picture>
             <img
               className={`${styles["image-blog"]}`}

@@ -28,6 +28,7 @@ const ProductCard = ({
     <div className={`${styles["product-item"]} col-4`}>
       <div className={`${styles["product"]} w-100`}>
         <div className={`position-relative ${styles["wrapper-add-to-cart"]}`}>
+
           <picture>
             <img
               alt="áds"

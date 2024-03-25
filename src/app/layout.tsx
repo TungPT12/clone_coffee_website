@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import Providers from "@/lib/StoreProvider";
 import { CartProvider } from "@/components/Context/CartContext";
+import { ToastContainer } from "react-toastify";
 
 const isAdmin = true;
 
@@ -32,6 +33,7 @@ export default function RootLayout({
         ></div>
 
         <CartProvider>
+          <ToastContainer autoClose={2000} />
           <Providers>{children}</Providers>
         </CartProvider>
       </body>

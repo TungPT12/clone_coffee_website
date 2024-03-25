@@ -166,7 +166,10 @@ function Navbar() {
                       <span className={styles["number"]}>
                         {totalQuantity(products)}
                       </span>
-                      <FontAwesomeIcon icon={faCartArrowDown} />
+                      <FontAwesomeIcon
+                        icon={faCartArrowDown}
+                        onClick={() => setIsOpen(true)}
+                      />
                     </span>
                   </p>
                   <div
