@@ -32,6 +32,8 @@ const CardProductCart = ({
   useEffect(() => {
     setQuantity(product.quantity);
   }, [product]);
+
+  console.log("product", product);
   return (
     <div key={product._id} className={`${styles["t-row"]} w-100 d-flex`}>
       <div
@@ -46,13 +48,7 @@ const CardProductCart = ({
       <div className={`${styles["image"]} f-1 py-3 align-items-center`}>
         <img
           className="w-100"
-          src={
-            product.image
-              ? product.image?.includes("http")
-                ? product.image
-                : `${process.env.NEXT_PUBLIC_BASE_URL}${product.image}`
-              : ""
-          }
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product.image}`}
           onError={handleImageError}
         />
       </div>

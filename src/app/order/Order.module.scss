@@ -92,6 +92,23 @@
   padding: 1.2rem;
 }
 
+.button-view {
+  color: #fff;
+  background-color: #be9c79;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 1.15em;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  transition: color 0.3s ease, background-color 0.3s ease,
+    border-color 0.3s ease;
+  padding: 19px 35px;
+  &:hover {
+    color: #fff;
+    background-color: #262626;
+  }
+}
+
 @media (max-width: 767px) {
   .cart-wrapper {
     color: #262626;
@@ -113,7 +130,6 @@
   .image-header {
     display: none;
   }
-
   .tabCtroll {
     display: flex;
     flex-direction: column;

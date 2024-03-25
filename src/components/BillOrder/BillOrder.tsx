@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import CustomModal from "../Modal/Modal";
-import styles from "./Bill.module.scss";
+import styles from "./BillOrder.module.scss";
+import useSWR from "swr";
+import orderService from "@/services/order/order.service";
 
-const Bill = ({
+const BillOrder = ({
   orderData,
   isOpen,
   setIsOpen,
@@ -15,12 +17,6 @@ const Bill = ({
   const DefaultImage =
     "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
 
-  // const [cart, setCart] = useState<any[]>(() => {
-  //   const storedCart = localStorage.getItem("cart");
-  //   return storedCart ? JSON.parse(storedCart) : [];
-  // });
-
-  // const { addToCart } = useCartContext();
   const handleImageError = (event: any) => {
     event.target.src = DefaultImage;
   };
@@ -30,11 +26,12 @@ const Bill = ({
         <div key={product.product._id} className={styles.product}>
           <img
             src={
-              product?.product.images[0]?.includes("http")
-                ? product?.product.images[0]
-                : product?.product.images[0]
-                ? `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.product.images[0]}`
-                : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
+              "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
+              // product?.product.images[0]?.includes("http")
+              //   ? product?.product.images[0]
+              //   : product?.product.images[0]
+              //   ? `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.product.images[0]}`
+              //   : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
             }
             onError={handleImageError}
             alt={product.product.name}
@@ -45,7 +42,7 @@ const Bill = ({
             <p className={styles.productQuantity}>
               Số lượng: {product.quantity}
             </p>
-            {/* <p className={styles.productQuantity}>Kích thước: {product.size}</p> */}
+            <p className={styles.productQuantity}>Kích thước: {product.size}</p>
           </div>
         </div>
       );
@@ -117,12 +114,21 @@ const Bill = ({
               <h6>{orderData.slug}</h6>
             </div>
           </h6>
-          <div className={`${styles.qrcode}`}>
-            <img
-              className="w-100"
-              src={orderData.QRCode.replaceAll('"', "")}
-              alt="star"
-            />
+          <div className={styles.orderCode} style={{ display: "flex", gap: 2 }}>
+            <h6>Trạng thái: </h6>
+            {orderData.status === "pending" ? (
+              <>
+                <p style={{ color: "orange", marginTop: "-3px" }}>
+                  Chưa thanh toán
+                </p>
+              </>
+            ) : (
+              <>
+                <p style={{ color: "green", marginTop: "-3px" }}>
+                  Đã thanh toán
+                </p>
+              </>
+            )}
           </div>
 
           <h6 className={styles.orderCode}>Chi tiết đơn hàng</h6>
@@ -142,7 +148,7 @@ const Bill = ({
               }}
               className={styles.cancelButton}
             >
-              Copy mã gọi món
+              Sao chép mã
             </button>
 
             <button className={styles.cancelButton} onClick={setIsOpen}>
@@ -157,4 +163,4 @@ const Bill = ({
   );
 };
 
-export default Bill;
+export default BillOrder;

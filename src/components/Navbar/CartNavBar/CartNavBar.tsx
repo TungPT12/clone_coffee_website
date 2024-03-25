@@ -10,10 +10,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
 
 function CartNavBar() {
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
   // const [cart, setCart] = useState<any[]>([]);
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
+
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   // useEffect(() => {
   //   const savedCart = localStorage.getItem("cart");
   //   if (savedCart) {
@@ -31,13 +37,12 @@ function CartNavBar() {
       >
         <img
           src={
-            product.image?.includes("http")
-              ? product?.image
-              : `${process.env.NEXT_PUBLIC_BASE_URL}${product?.image}`
-            // ? cartItem.images[0]
+            `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.image}`
+
             // : `${process.env.base_url}${cartItem?.images[0]}`
           }
           alt={product.name}
+          onError={handleImageError}
           className={`${styles["image"]}`}
         />
         <div className={`${styles["description"]}`}>
@@ -77,7 +82,10 @@ function CartNavBar() {
             <span>Total:</span>
             <span>${totalPrice}</span>
           </div>
-          <Link href={`/cart`} className={`${styles["btn-view-cart"]} mt-3`}>
+          <Link
+            href={`/cart?scrollToElement=cart`}
+            className={`${styles["btn-view-cart"]} mt-3`}
+          >
             View Cart
           </Link>
         </div>

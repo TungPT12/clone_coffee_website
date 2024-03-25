@@ -5,10 +5,16 @@ import useSWR from "swr";
 import styles from "./Blog.module.scss";
 import introductionService from "@/services/introduction/introduction.service";
 const Blog = () => {
+  const DefaultImage =
+    "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
   const { data: introduction } = useSWR(
     "GET_INTRODUCTION",
     introductionService.getAll
   );
+
+  const handleImageError = (event: any) => {
+    event.target.src = DefaultImage;
+  };
   const renderIntroduction = (introduction: any) => {
     return introduction?.map((introduction: any) => {
       return (
@@ -22,6 +28,7 @@ const Blog = () => {
                   : `${process.env.NEXT_PUBLIC_BASE_URL}${introduction.image}`
                 : ""
             }
+            onError={handleImageError}
           ></img>
           <div
             className={`${styles["text-blog"]}justify-content-center text-center`}

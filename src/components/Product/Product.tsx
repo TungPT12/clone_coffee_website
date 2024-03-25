@@ -9,7 +9,10 @@ import categoryService from "@/services/category/category.service";
 import productService from "@/services/product/product.service";
 import { useDispatch } from "react-redux";
 import { cartActions } from "@/lib/slice/features/cart/cartSlice";
+import BillCart from "../BillCart/BillCart";
+import Link from "next/link";
 const Product = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
   const { data: products } = useSWR("GET_PRODUCT", productService.getAll);
   const dispatch = useDispatch();
@@ -19,6 +22,7 @@ const Product = () => {
     event.target.src = DefaultImage;
   };
   const handleAddToCart = (product: any) => {
+    setIsOpen(true);
     dispatch(cartActions.addProductToCart(product));
   };
   const renderCategories = (categories: any) => {
@@ -50,7 +54,12 @@ const Product = () => {
           <div
             className={`${styles["overlay-add-to-cart"]} d-flex justify-content-center align-items-center h-100 w-100 top-0`}
           >
-            <h1 className={`${styles["title-product"]}`}>{product.name}</h1>
+            <Link
+              href={`/product/${product?._id}`}
+              className={`${styles["tiltle"]}`}
+            >
+              {product?.name}
+            </Link>
 
             <span
               className={`${styles["sub-text"]} ${styles["new-price"]} tex`}
@@ -74,6 +83,12 @@ const Product = () => {
               Add to cart
             </button>
           </div>
+          <BillCart
+            isOpenCart={isOpen}
+            setIsOpenCart={() => {
+              setIsOpen(false);
+            }}
+          />
         </div>
       );
     });

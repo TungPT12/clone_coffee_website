@@ -59,6 +59,9 @@ function ProvisionalInvoice({
       >
         PROCEED TO CHECKOUT
       </button>
+      <div style={{ visibility: "hidden" }}>
+        <h1>Đây là thanh toán</h1>
+      </div>
     </div>
   );
 }

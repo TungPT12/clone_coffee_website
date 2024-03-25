@@ -18,8 +18,10 @@ import oderService from "@/services/order/order.service";
 // import productService from "@/services/product/product.service";
 // import Modal from "@/components/Modal/Modal";
 import Bill from "@/components/Bill/Bill";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import orderService from "@/services/order/order.service";
+import { useParams, useRouter } from "next/navigation";
 
 // import CustomModal from "@/components/Modal/Modal";
 // const cartLocal = localStorage.getItem("cart");
@@ -27,12 +29,15 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Cart() {
   const notifySuccess = () => toast.success("Mua hàng thành công");
   const notifyFail = () => toast.error("Mua hàng thất bại");
-
   const [open, setopen] = useState(false);
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
   const [orderData, setOrder] = useState(null);
+
+  const params = useParams();
+  console.log(params);
+
   // Promise.all(
   //   products.map((product: any) => {
   //     return productService.getProductId(product.productId);
@@ -80,7 +85,8 @@ export default function Cart() {
       products: formatProduct,
     };
 
-    oderService(orderData)
+    orderService
+      .createOrder(orderData)
       .then((data: any) => {
         return data;
       })
@@ -139,6 +145,15 @@ export default function Cart() {
     }
   }, [orderData]);
 
+  useEffect(() => {
+    if (params) {
+      const targetElement = document.getElementById(params.toString());
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [params]);
+
   const renderCart = (products: any) => {
     if (products.length === 0) {
       return (
@@ -181,7 +196,7 @@ export default function Cart() {
     <div className="position-relative">
       <Navbar />
       <Banner title={`cart`} />
-      <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
+      <div id="cart" className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
         <div className="cart-product">
           <div className={`${styles["t-head"]} `}>
             <div className={`d-flex ${styles["th"]}`}>
@@ -229,7 +244,6 @@ export default function Cart() {
         <Bill isOpen={isOpenBill} setIsOpen={closeBill} orderData={orderData} />
       </div>
       <Footer />
-      <ToastContainer />
     </div>
   );
 }

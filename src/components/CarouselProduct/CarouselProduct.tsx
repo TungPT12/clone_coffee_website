@@ -14,7 +14,6 @@ import BillCart from "../BillCart/BillCart";
 function CarouselProduct({ products }: any) {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const [orderData, setOrder] = useState(null);
 
   const DefaultImage =
     "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
@@ -115,11 +114,8 @@ function CarouselProduct({ products }: any) {
       className="d-flex justify-content-between gap-2"
       swipeable={true}
       draggable={true}
-      autoPlay
       responsive={responsive}
       ssr={true} // means to render carousel on server-side.
-      infinite={true}
-      autoPlaySpeed={3000}
       keyBoardControl={true}
       customTransition="all .7s"
       transitionDuration={500}

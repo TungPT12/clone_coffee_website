@@ -31,13 +31,7 @@ const ProductCard = ({
           <img
             alt="áds"
             className={`w-100 ${styles["image-product"]}`}
-            src={
-              imageUrl
-                ? imageUrl?.includes("http")
-                  ? imageUrl
-                  : `${process.env.NEXT_PUBLIC_BASE_URL}${imageUrl}`
-                : ""
-            }
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${imageUrl}`}
             onError={handleImageError}
           />
           <div
