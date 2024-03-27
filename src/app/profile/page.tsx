@@ -15,6 +15,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import useSWR from "swr";
 import profileService from "@/services/profile/profile.service";
+import { useState } from "react";
+import EditProfile from "@/components/EditProfile/EditProfile";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ranks = {
   copper: 100,
@@ -24,8 +28,10 @@ const ranks = {
 };
 
 const Profile = () => {
+  const notifyFail = () => toast.error("Có lỗi xảy ra");
+  const notifySucess = () => toast.success("Cap nhat thanh cong");
+  const [isOpen, setIsOpen] = useState(false);
   const checkRanksClass = (score: number) => {
-    console.log(score);
     if (score > 100 && score <= 500) {
       return "item-siler";
     } else if (score > 500 && score <= 1000) {
@@ -38,13 +44,16 @@ const Profile = () => {
   const { data: profile } = useSWR("GET_PROFILE", profileService.getProfile);
   return (
     <div>
+      <ToastContainer />
+
       <div className={`${styles["profile"]}`}>
         <div className={`${styles["backgroud"]}`}></div>
         <div className={`${styles["avatar-image"]}`}>
           <div className={`${styles["image-user"]}`}>
-            <picture>
-              <img className={`${styles["avatar"]}`} src={profile?.avatar} />
-            </picture>
+            <img
+              className={`${styles["avatar"]}`}
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${profile?.avatar}`}
+            />
           </div>
           <div className={`${styles["main-detail"]}`}>
             <div>
@@ -52,7 +61,12 @@ const Profile = () => {
                 <h2 className={`${styles["title-name"]} `}>
                   {profile?.username}
                 </h2>
-                <div className={`${styles["icon-container"]} `}>
+                <div
+                  className={`${styles["icon-container"]} `}
+                  onClick={() => {
+                    setIsOpen(true);
+                  }}
+                >
                   <FontAwesomeIcon
                     icon={faPenAlt}
                     className={`${styles["icon-pen"]} `}
@@ -171,7 +185,7 @@ const Profile = () => {
                           : 0
                         : 0
                     }
-                    max={ranks.silver}
+                    max={ranks.silver - ranks.copper}
                   ></progress>
                 </div>
                 <div
@@ -193,7 +207,7 @@ const Profile = () => {
                           : 0
                         : 0
                     }
-                    max={ranks.gold}
+                    max={ranks.gold - ranks.silver}
                   ></progress>
                 </div>
                 <div
@@ -215,7 +229,7 @@ const Profile = () => {
                           : 0
                         : 0
                     }
-                    max={ranks.plantium}
+                    max={ranks.plantium - ranks.gold}
                   ></progress>
                 </div>
               </div>
@@ -268,6 +282,29 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      {isOpen ? (
+        <EditProfile
+          notifySucess={notifySucess}
+          notifyFail={notifyFail}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          dataUser={
+            profile
+              ? profile
+              : {
+                  _id: "",
+                  fullname: "",
+                  email: "",
+                  avatar: "",
+                  phone: "",
+                  birthday: "",
+                  sex: "",
+                }
+          }
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

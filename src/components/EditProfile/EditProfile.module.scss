@@ -56,16 +56,9 @@
   // margin-top: 5px;
 }
 
-.close-icon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-}
-
 .total {
   display: flex;
-  padding-right: 2rem;
+  padding-right: 6rem;
   justify-content: flex-end;
   margin-bottom: 10px;
   width: 100%;
@@ -78,6 +71,13 @@
 
 .totalAmount {
   font-weight: bold;
+}
+
+.close-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
 
 .cancelButton {
@@ -104,9 +104,20 @@
   }
 }
 
+.check {
+  display: flex;
+  gap: 1rem;
+}
+
+.accounts {
+  display: flex;
+  flex-direction: column;
+}
+
 .groupButton {
   display: flex;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .wrapper-product {
