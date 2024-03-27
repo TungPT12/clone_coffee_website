@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { getCategoryAPI } from "@/services/category";
 import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
@@ -37,19 +37,6 @@ const Shop = () => {
   const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const numberProducts = useMemo(() => 6, []);
-
-  // const { data, error, isMutating } = useSWRMutation();
-
-  // const fetcher = async (url: string, token: string) => {
-  //   console.log(token);
-  //   const response = await axiosInstance.get(url, {
-  //     headers: {
-  //       Authorization: "Bearer " + token,
-  //     },
-  //   });
-  //   return response;
-  // };
-
   const renderCategories = (categories: any) => {
     return categories?.map((category: any) => {
       return (
@@ -126,61 +113,63 @@ const Shop = () => {
   }, [products, productByCategory, search]);
 
   return (
-    <div className="position-relative">
-      <Navbar />
-      <Banner title={`shop`} />
-      <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
-        <div className="row">
-          <div className={`${styles["cart"]} col-10`}>
-            <div className={styles["search-container"]}>
-              <input
-                type="text"
-                className={styles["search-input"]}
-                placeholder="Search"
-              />
-              <span className={styles["search-icon"]}>
-                <FontAwesomeIcon
-                  icon={faSearch}
-                  className={`fa fa-search ${styles["fa-search"]}`}
+    <Suspense>
+      <div className="position-relative">
+        <Navbar />
+        <Banner title={`shop`} />
+        <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
+          <div className="row">
+            <div className={`${styles["cart"]} col-10`}>
+              <div className={styles["search-container"]}>
+                <input
+                  type="text"
+                  className={styles["search-input"]}
+                  placeholder="Search"
                 />
-              </span>
+                <span className={styles["search-icon"]}>
+                  <FontAwesomeIcon
+                    icon={faSearch}
+                    className={`fa fa-search ${styles["fa-search"]}`}
+                  />
+                </span>
+              </div>
+              <div className={`${styles["list-product"]} row g-lg-5 mt-1`}>
+                {renderCurrentProducts(currentProducts)}
+              </div>
+              <div className={styles.paging}>
+                <span className={`${styles.icon} ${styles.smallerIcon}`}>
+                  &#8249;
+                </span>
+                {renderPage(totalProducts)}
+                <span className={`${styles.icon} ${styles.smallerIcon}`}>
+                  &#8250;
+                </span>
+              </div>
             </div>
-            <div className={`${styles["list-product"]} row g-lg-5 mt-1`}>
-              {renderCurrentProducts(currentProducts)}
-            </div>
-            <div className={styles.paging}>
-              <span className={`${styles.icon} ${styles.smallerIcon}`}>
-                &#8249;
-              </span>
-              {renderPage(totalProducts)}
-              <span className={`${styles.icon} ${styles.smallerIcon}`}>
-                &#8250;
-              </span>
-            </div>
-          </div>
-          <div className={`${styles["category-item"]} col-2`}>
-            <div>
-              <span className={`${styles["title-category"]} text-uppercase`}>
-                product categorys
-              </span>
-              <div className={`${styles["category"]} text-capitalize`}>
-                <Link
-                  style={{ textDecoration: "none", color: "#be9c79" }}
-                  href={"/shop"}
-                  onClick={() => {
-                    setFilterCatgory("");
-                  }}
-                >
-                  Tất cả
-                </Link>
-                {renderCategories(categories)}
+            <div className={`${styles["category-item"]} col-2`}>
+              <div>
+                <span className={`${styles["title-category"]} text-uppercase`}>
+                  product categorys
+                </span>
+                <div className={`${styles["category"]} text-capitalize`}>
+                  <Link
+                    style={{ textDecoration: "none", color: "#be9c79" }}
+                    href={"/shop"}
+                    onClick={() => {
+                      setFilterCatgory("");
+                    }}
+                  >
+                    Tất cả
+                  </Link>
+                  {renderCategories(categories)}
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Suspense>
   );
 };
 export default Shop;
