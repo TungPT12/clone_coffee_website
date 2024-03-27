@@ -7,23 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
-import { Suspense, useEffect, useMemo, useState } from "react";
-import { getCategoryAPI } from "@/services/category";
-import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store";
+import { useEffect, useMemo, useState } from "react";
+
 import ProductCard from "@/components/ProductCard/ProductCard";
-import { getProductsAPI, getProductsByCategoryAPI } from "@/services/product";
 import useSWR, { mutate } from "swr";
 import paging from "@/utils/paging";
 import categoryService from "@/services/category/category.service";
 import productService from "@/services/product/product.service";
 import { Product } from "@/types/entities/product.entity";
-import Modal from "@/components/Modal/Modal";
 import { useSearchParams } from "next/navigation";
-import BillCart from "@/components/BillCart/BillCart";
 
 const Shop = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const searchParams = useSearchParams();
   const search = searchParams.get("category");
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
@@ -113,63 +107,61 @@ const Shop = () => {
   }, [products, productByCategory, search]);
 
   return (
-    <Suspense>
-      <div className="position-relative">
-        <Navbar />
-        <Banner title={`shop`} />
-        <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
-          <div className="row">
-            <div className={`${styles["cart"]} col-10`}>
-              <div className={styles["search-container"]}>
-                <input
-                  type="text"
-                  className={styles["search-input"]}
-                  placeholder="Search"
+    <div className="position-relative">
+      <Navbar />
+      <Banner title={`shop`} />
+      <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
+        <div className="row">
+          <div className={`${styles["cart"]} col-10`}>
+            <div className={styles["search-container"]}>
+              <input
+                type="text"
+                className={styles["search-input"]}
+                placeholder="Search"
+              />
+              <span className={styles["search-icon"]}>
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className={`fa fa-search ${styles["fa-search"]}`}
                 />
-                <span className={styles["search-icon"]}>
-                  <FontAwesomeIcon
-                    icon={faSearch}
-                    className={`fa fa-search ${styles["fa-search"]}`}
-                  />
-                </span>
-              </div>
-              <div className={`${styles["list-product"]} row g-lg-5 mt-1`}>
-                {renderCurrentProducts(currentProducts)}
-              </div>
-              <div className={styles.paging}>
-                <span className={`${styles.icon} ${styles.smallerIcon}`}>
-                  &#8249;
-                </span>
-                {renderPage(totalProducts)}
-                <span className={`${styles.icon} ${styles.smallerIcon}`}>
-                  &#8250;
-                </span>
-              </div>
+              </span>
             </div>
-            <div className={`${styles["category-item"]} col-2`}>
-              <div>
-                <span className={`${styles["title-category"]} text-uppercase`}>
-                  product categorys
-                </span>
-                <div className={`${styles["category"]} text-capitalize`}>
-                  <Link
-                    style={{ textDecoration: "none", color: "#be9c79" }}
-                    href={"/shop"}
-                    onClick={() => {
-                      setFilterCatgory("");
-                    }}
-                  >
-                    Tất cả
-                  </Link>
-                  {renderCategories(categories)}
-                </div>
+            <div className={`${styles["list-product"]} row g-lg-5 mt-1`}>
+              {renderCurrentProducts(currentProducts)}
+            </div>
+            <div className={styles.paging}>
+              <span className={`${styles.icon} ${styles.smallerIcon}`}>
+                &#8249;
+              </span>
+              {renderPage(totalProducts)}
+              <span className={`${styles.icon} ${styles.smallerIcon}`}>
+                &#8250;
+              </span>
+            </div>
+          </div>
+          <div className={`${styles["category-item"]} col-2`}>
+            <div>
+              <span className={`${styles["title-category"]} text-uppercase`}>
+                product categorys
+              </span>
+              <div className={`${styles["category"]} text-capitalize`}>
+                <Link
+                  style={{ textDecoration: "none", color: "#be9c79" }}
+                  href={"/shop"}
+                  onClick={() => {
+                    setFilterCatgory("");
+                  }}
+                >
+                  Tất cả
+                </Link>
+                {renderCategories(categories)}
               </div>
             </div>
           </div>
         </div>
-        <Footer />
       </div>
-    </Suspense>
+      <Footer />
+    </div>
   );
 };
 export default Shop;

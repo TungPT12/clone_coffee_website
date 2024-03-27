@@ -9,6 +9,7 @@ import { RootState } from "@/lib/store";
 import Providers from "@/lib/StoreProvider";
 import { CartProvider } from "@/components/Context/CartContext";
 import { ToastContainer } from "react-toastify";
+import { Suspense } from "react";
 
 const isAdmin = true;
 
@@ -32,10 +33,12 @@ export default function RootLayout({
           }}
         ></div>
 
-        <CartProvider>
-          <ToastContainer autoClose={2000} />
-          <Providers>{children}</Providers>
-        </CartProvider>
+        <Suspense>
+          <CartProvider>
+            <ToastContainer autoClose={2000} />
+            <Providers>{children}</Providers>
+          </CartProvider>
+        </Suspense>
       </body>
     </html>
   );
