@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import styles from "./AuthorNavBar.module.scss";
 import { useDispatch } from "react-redux";

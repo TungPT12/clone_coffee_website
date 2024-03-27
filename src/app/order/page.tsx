@@ -169,7 +169,7 @@ export default function Cart() {
               {moment(slug.createdAt).format("YYYY-MM-DD HH:mm:ss")}
             </div>
             <div className="f-1 py-3 d-flex align-items-center ">
-              {slug.total_price.toLocaleString("vi-VN")} VND
+              {slug.total_price} VND
             </div>
 
             <div className="f-1 py-3 d-flex align-items-center">

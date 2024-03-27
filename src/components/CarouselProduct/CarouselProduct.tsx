@@ -63,13 +63,7 @@ function CarouselProduct({ products }: any) {
             <img
               className={`${styles["image-product"]} w-100`}
               alt={product?.name}
-              src={
-                product?.images[0]?.includes("http")
-                  ? product?.images[0]
-                  : product?.images[0]
-                  ? `${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`
-                  : "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg"
-              }
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product?.images[0]}`}
               onError={handleImageError}
             />
             <div
@@ -110,7 +104,6 @@ function CarouselProduct({ products }: any) {
   };
 
   return (
-
     <>
       <Carousel
         className="d-flex justify-content-center gap-2 align-items-center"

@@ -26,6 +26,7 @@ function Navbar() {
   const [username, setUsername] = useState<string | null>(null);
   const { products } = useSelector((state: RootState) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
+
   const totalQuantity = (products: any) => {
     return products.reduce((totalQuantity: number, product: any) => {
       return (totalQuantity = totalQuantity + product.quantity);
@@ -74,7 +75,7 @@ function Navbar() {
             <li
               className={`h-100 d-flex align-items-center ${styles["wrap-logo"]}`}
             >
-              <picture>
+              <picture className={`h-100 mt-4`}>
                 <img
                   className={`h-75 ${styles["logo"]}`}
                   src="https://corretto.qodeinteractive.com/wp-content/themes/corretto/assets/img/logo-light.png"

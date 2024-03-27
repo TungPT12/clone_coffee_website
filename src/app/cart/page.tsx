@@ -153,6 +153,7 @@ export default function Cart() {
       return (
         <div className="d-flex text-warning fw-500 align-items-center ps-2 pb-2 mb-1 pt-0  ">
           <FontAwesomeIcon icon={faWarning} className="icon-warning me-2" />
+          No cart or empty cart
         </div>
       ); // No cart or empty cart
     }
