@@ -4,7 +4,7 @@
 import useSWR from "swr";
 import styles from "./Blog.module.scss";
 import introductionService from "@/services/introduction/introduction.service";
-import { Translation } from "react-i18next";
+import Translation from "../Translation/Translation";
 const Blog = () => {
   const DefaultImage =
     "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
@@ -42,13 +42,16 @@ const Blog = () => {
     <>
       <div className={`${styles["container"]}`}>
         <div className={`${styles["header"]}`}>
-          <Translation>
+          <h2 className={`${styles["title-big"]} wpb_wrapper`}>
+            <Translation text="THE BLOGS COFFE GRADEN" />
+          </h2>
+          {/* <Translation>
             {(t) => (
               <h2 className={`${styles["title-big"]} wpb_wrapper`}>
                 {t("THE BLOGS COFFE GRADEN")}
               </h2>
             )}
-          </Translation>
+          </Translation> */}
           {/* <h2 className={`${styles["title-big"]} wpb_wrapper`}>
             THE COFFE GRADEN
           </h2> */}

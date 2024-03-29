@@ -18,11 +18,9 @@ import { RootState } from "@/lib/store";
 import AuthorNavBar from "./AuthorNavBar/AuthorNavBar";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import BillCart from "../BillCart/BillCart";
-import { useTranslation } from "react-i18next";
+import Translation from "../Translation/Translation";
 
 function Navbar() {
-  const { t } = useTranslation();
-
   const [navListOpen, setNavListOpen] = useState(true);
   const { access_token } = useSelector((state: RootState) => state.authn);
   const [username, setUsername] = useState<string | null>(null);
@@ -99,34 +97,14 @@ function Navbar() {
                     <span
                       className={`d-flex flex-column ${styles["item-outer"]} `}
                     >
-                      {t("Home")}
+                      <Translation text="Home" />
                     </span>
                   </Link>
                   <div
                     className={` ${styles["second-navbar"]} position-absolute`}
-                  >
-                    {/* <SecondNavBar /> */}
-                  </div>
+                  ></div>
                 </li>
-                {/* <li
-                className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
-              >
-                <Link
-                  href="/"
-                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-decoration-none`}
-                >
-                  <span
-                    className={`d-flex flex-column ${styles["item-outer"]} `}
-                  >
-                    Menu
-                  </span>
-                </Link>
-                <div
-                  className={` ${styles["second-navbar"]} position-absolute`}
-                >
-                  <SecondNavBar />
-                </div>
-              </li> */}
+
                 <li
                   className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
                 >
@@ -137,27 +115,14 @@ function Navbar() {
                     <span
                       className={`d-flex flex-column ${styles["item-outer"]} `}
                     >
-                      {t("Shop")}
+                      {/* {t("Shop")} */}
+                      <Translation text="Shop" />
                     </span>
                   </Link>
                   <div
                     className={` ${styles["second-navbar"]} position-absolute`}
                   ></div>
                 </li>
-                {/* <li
-                className={`${styles["nav-item"]} position-relative text-uppercase h-100`}
-              >
-                <Link
-                  href="/"
-                  className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-decoration-none`}
-                >
-                  <span
-                    className={`d-flex flex-column ${styles["item-outer"]} `}
-                  >
-                    About
-                  </span>
-                </Link>
-              </li> */}
                 <li
                   className={`${styles["nav-item"]} ${styles["cart-icon"]}  position-relative text-uppercase h-100`}
                 >
@@ -193,7 +158,8 @@ function Navbar() {
                     <span
                       className={`d-flex flex-column ${styles["item-outer"]} `}
                     >
-                      {t("Order")}
+                      {/* {t("Order")} */}
+                      <Translation text="Order" />
                     </span>
                   </Link>
                   <div
@@ -265,7 +231,7 @@ function Navbar() {
                       <span
                         className={`d-flex flex-column ${styles["item-outer"]} `}
                       >
-                        {t("Login")}
+                        <Translation text="Login" />
                       </span>
                     </Link>
                   </li>

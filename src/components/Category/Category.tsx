@@ -3,9 +3,8 @@ import styles from "./Category.module.scss";
 import useSWR from "swr";
 import categoryService from "@/services/category/category.service";
 import Link from "next/link";
-import { Translation, useTranslation } from "react-i18next";
+import Translation from "../Translation/Translation";
 const Category = () => {
-  const { t } = useTranslation();
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
 
   const renderCategories = (categories: any) => {
@@ -53,7 +52,7 @@ const Category = () => {
             )}
           </Translation> */}
           <h2 className={`${styles["title-big"]} wpb_wrapper`}>
-            {t("CATEGORY OF PRODUCT")}
+            <Translation text="CATEGORY OF PRODUCT" />
           </h2>
           <picture>
             <img

@@ -1,13 +1,14 @@
 "use client";
-import { Translation, useTranslation } from "react-i18next";
+import Translation from "../Translation/Translation";
 import Collect from "./Collect/Collect";
 import styles from "./Gallery.module.scss";
 const Gallery = () => {
-  const { t } = useTranslation();
   return (
     <div className={`${styles["container"]}`}>
       <div className={`${styles["header"]} `}>
-        <h2 className={`${styles["title-big"]} wpb_wrapper`}>{t("GALLERY")}</h2>
+        <h2 className={`${styles["title-big"]} wpb_wrapper`}>
+          <Translation text="GALLERY" />
+        </h2>
         <picture>
           <img
             src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"

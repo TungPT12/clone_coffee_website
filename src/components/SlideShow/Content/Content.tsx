@@ -1,12 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import logo from "../../../assets/avatar.svg";
 import "react-slideshow-image/dist/styles.css";
 import styles from "./Content.module.scss";
-import { useTranslation } from "react-i18next";
+import Translation from "@/components/Translation/Translation";
 
 function Content({ title, text }: any) {
-  const { t } = useTranslation();
   return (
     <div
       className={`${styles["content"]} show position-absolute align-items-center h-100 justify-content-center  text-white text-decoration-none`}
@@ -29,7 +27,9 @@ function Content({ title, text }: any) {
         {text}
       </h2>
       <div className={`${styles["button"]} ${styles["top-to-bottom-third"]}`}>
-        <button className="">{t("SHOP HERE")}</button>
+        <button>
+          <Translation text="SHOP HERE" />
+        </button>
       </div>
     </div>
   );
