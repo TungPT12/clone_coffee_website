@@ -8,7 +8,7 @@ import { faClose, faWarning } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import ProvisionalInvoice from "@/components/ProvisionalInvoice/ProvisionalInvoice";
 import Banner from "@/components/Banner/Banner";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { cartActions } from "@/lib/slice/features/cart/cartSlice";
@@ -30,7 +30,6 @@ export default function Cart() {
   const [orderData, setOrder] = useState(null);
 
   const params = useParams();
-  console.log(params);
 
   // Promise.all(
   //   products.map((product: any) => {
@@ -46,7 +45,7 @@ export default function Cart() {
   const dispatch = useDispatch();
   const [couponCode, setCouponCode] = useState("");
   const [isOpenBill, setIsOpenBill] = useState(false);
-
+  const refToCart = useRef<any>();
   const storeIdGuest = (id: string) => {
     const localStore = localStorage.getItem("orderGuest");
     if (localStore) {
@@ -148,6 +147,10 @@ export default function Cart() {
     }
   }, [params]);
 
+  useEffect(() => {
+    refToCart.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   const renderCart = (products: any) => {
     if (products.length === 0) {
       return (
@@ -191,7 +194,11 @@ export default function Cart() {
     <div className="position-relative">
       <Navbar />
       <Banner title={`cart`} />
-      <div id="cart" className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
+      <div
+        ref={refToCart}
+        id="cart"
+        className={`${styles["cart-wrapper"]} mt-4 pb-5`}
+      >
         <div className="cart-product">
           <div className={`${styles["t-head"]} `}>
             <div className={`d-flex ${styles["th"]}`}>

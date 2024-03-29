@@ -47,6 +47,19 @@ const BillCart = ({
       localStorage.setItem("orderGuest", JSON.stringify(orderGuest));
     }
   };
+
+  const storeSlugGuest = (data: any) => {
+    const localStore = localStorage.getItem("listSlug");
+    if (localStore) {
+      let orderGuest = JSON.parse(localStore);
+      orderGuest.push(data);
+      localStorage.setItem("listSlug", JSON.stringify(orderGuest));
+    } else {
+      let orderGuest = [];
+      orderGuest.push(data);
+      localStorage.setItem("listSlug", JSON.stringify(orderGuest));
+    }
+  };
   useEffect(() => {
     if (orderData) {
       setIsOpenBill(true);
@@ -78,9 +91,8 @@ const BillCart = ({
       })
       .then((data: any) => {
         setOrder(data);
-
         storeIdGuest(data);
-
+        storeSlugGuest(data.slug);
         dispatch(cartActions.resetCart());
         localStorage.removeItem("cart");
       })

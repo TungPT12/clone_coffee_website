@@ -10,6 +10,14 @@ const orderService = {
   getOrder: async (id: any): Promise<Order> => {
     return axiosClient.get(`/order/history/${id}`);
   },
+
+  getOrdersBySlug: async (listId: string[]) => {
+    return Promise.all(
+      listId.map((id: string) => {
+        return axiosClient.get(`/order/history/${id}`);
+      })
+    );
+  },
 };
 
 export default orderService;

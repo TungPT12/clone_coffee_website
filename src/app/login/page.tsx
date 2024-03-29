@@ -1,10 +1,14 @@
 "use client";
 import Link from "next/link";
 import style from "./login.module.scss";
-import Navbar from "@/components/Navbar/Navbar";
+const Navbar = dynamic(() => import("../../components/Navbar/Navbar"), {
+  ssr: false,
+});
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   fa2,
+  faEye,
+  faEyeSlash,
   faLock,
   faUser,
   faWarning,
@@ -15,8 +19,17 @@ import { useDispatch } from "react-redux";
 import { authnAction } from "@/lib/slice/features/authn/authnSlice";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import dynamic from "next/dynamic";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handlePasswordChange = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const [password, setPassword] = useState("12345678");
   const [username, setUsername] = useState("liemro9x@gmail.com");
   const dispatch = useDispatch();
@@ -24,7 +37,7 @@ const Login = () => {
   const router = useRouter();
   // const {data} = useSWR('LOGIN', )
   const login = (username: string, password: string) => {
-    loginService({ username: username, password: password })
+    loginService({ loginIdentifier: username, password: password })
       .then((data: any) => {
         return data;
       })
@@ -77,15 +90,24 @@ const Login = () => {
                 icon={faLock}
                 className={`${style["icon"]} text-white`}
               />
-              <input
-                className={`${style["input-password"]} text-white`}
-                type="password"
-                value={password}
-                placeholder="Mật khẩu"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
+              <div className={style["password-input-wrapper"]}>
+                <input
+                  className={`${style["input-password"]} text-white`}
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  placeholder="Mật khẩu"
+                  onChange={handlePasswordChange}
+                />
+                <button
+                  className={style["password-toggle-button"]}
+                  onClick={togglePasswordVisibility}
+                >
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeSlash : faEye}
+                    className={style["password-toggle-icon"]}
+                  />
+                </button>
+              </div>
             </div>
           </div>
           {error ? (

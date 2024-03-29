@@ -4,19 +4,18 @@ import Banner from "@/components/Banner/Banner";
 import Navbar from "@/components/Navbar/Navbar";
 import styles from "./Shop.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Footer from "@/components/Footer/Footer";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-
+import { useEffect, useMemo, useRef, useState } from "react";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import useSWR, { mutate } from "swr";
 import paging from "@/utils/paging";
 import categoryService from "@/services/category/category.service";
 import productService from "@/services/product/product.service";
 import { Product } from "@/types/entities/product.entity";
-import { useSearchParams } from "next/navigation";
-
+import { useParams, useSearchParams } from "next/navigation";
+import useDebounced from "@/hooks/useDebounced";
 const Shop = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get("category");
@@ -25,12 +24,56 @@ const Shop = () => {
     return categoryService.getProductByCatgory(search ? search : "");
   });
   const { data: products } = useSWR("GET_PRODUCT", productService.getAll);
-
+  const params = useParams();
   const [totalProducts, setTotalProducts] = useState<Product[]>([]);
+  // const [totalCurrentTotalProducts, setCurrentTotalProducts] = useState<Product[]>([]);
   const [filterCatgory, setFilterCatgory] = useState<string>("");
   const [currentProducts, setCurrentProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const numberProducts = useMemo(() => 6, []);
+  const [searchValue, setSearchValue] = useState("");
+  const refToShop = useRef<any>();
+
+  const handleSearchChange = (event: any) => {
+    if (event.target.value.trim()) setSearchValue(event.target.value);
+    else setSearchValue(event.target.value.trim());
+  };
+
+  // const filteredProducts = currentProducts.filter((product) => {
+  //   return product.name.toLowerCase().includes(searchValue.toLowerCase());
+  // });
+  const debounced = useDebounced(searchValue, 1000);
+  useEffect(() => {
+    // const waitForSearch = setTimeout(() => {
+    setCurrentPage(1);
+    if (debounced) {
+      const filteredProducts = products?.filter((product) => {
+        return product.name.toLowerCase().includes(searchValue.toLowerCase());
+      });
+      setTotalProducts(filteredProducts ? filteredProducts : []);
+    } else {
+      setTotalProducts(products ? products : []);
+    }
+    // }, 1000);
+
+    // return () => {
+    //   clearTimeout(waitForSearch);
+    // };
+  }, [debounced]);
+
+  useEffect(() => {
+    if (params) {
+      const targetElement = document.getElementById(params.toString());
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [params]);
+
+  useEffect(() => {
+    refToShop.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   const renderCategories = (categories: any) => {
     return categories?.map((category: any) => {
       return (
@@ -112,12 +155,14 @@ const Shop = () => {
       <Banner title={`shop`} />
       <div className={`${styles["cart-wrapper"]} mt-4 pb-5`}>
         <div className="row">
-          <div className={`${styles["cart"]} col-10`}>
+          <div ref={refToShop} className={`${styles["cart"]} col-10`}>
             <div className={styles["search-container"]}>
               <input
                 type="text"
                 className={styles["search-input"]}
                 placeholder="Search"
+                value={searchValue}
+                onChange={handleSearchChange}
               />
               <span className={styles["search-icon"]}>
                 <FontAwesomeIcon

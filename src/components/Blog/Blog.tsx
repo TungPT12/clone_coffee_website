@@ -4,6 +4,7 @@
 import useSWR from "swr";
 import styles from "./Blog.module.scss";
 import introductionService from "@/services/introduction/introduction.service";
+import { Translation } from "react-i18next";
 const Blog = () => {
   const DefaultImage =
     "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
@@ -19,7 +20,6 @@ const Blog = () => {
     return introduction?.map((introduction: any) => {
       return (
         <div className={`${styles["blog-image"]}`} key={introduction._id}>
-
           <picture>
             <img
               className={`${styles["image-blog"]}`}
@@ -42,9 +42,16 @@ const Blog = () => {
     <>
       <div className={`${styles["container"]}`}>
         <div className={`${styles["header"]}`}>
-          <h2 className={`${styles["title-big"]} wpb_wrapper`}>
+          <Translation>
+            {(t) => (
+              <h2 className={`${styles["title-big"]} wpb_wrapper`}>
+                {t("THE BLOGS COFFE GRADEN")}
+              </h2>
+            )}
+          </Translation>
+          {/* <h2 className={`${styles["title-big"]} wpb_wrapper`}>
             THE COFFE GRADEN
-          </h2>
+          </h2> */}
           <picture>
             <img
               src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"
