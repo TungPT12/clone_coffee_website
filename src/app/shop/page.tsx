@@ -16,9 +16,7 @@ import productService from "@/services/product/product.service";
 import { Product } from "@/types/entities/product.entity";
 import { useParams, useSearchParams } from "next/navigation";
 import useDebounced from "@/hooks/useDebounced";
-
 const Shop = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const searchParams = useSearchParams();
   const search = searchParams.get("category");
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
