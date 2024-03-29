@@ -1,8 +1,8 @@
 import axiosInstance from "@/config/axios";
 
-const loginService = async ({ username, password }: any) =>
+const loginService = async ({ loginIdentifier, password }: any) =>
   axiosInstance.post("/auth/login", {
-    username: username,
+    loginIdentifier: loginIdentifier,
     password: password,
   });
 

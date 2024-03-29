@@ -1,12 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
-import { useEffect, useState } from "react";
 import styles from "./Category.module.scss";
-import { getCategoryAPI } from "@/services/category";
 import useSWR from "swr";
 import categoryService from "@/services/category/category.service";
 import Link from "next/link";
+import { Translation, useTranslation } from "react-i18next";
 const Category = () => {
+  const { t } = useTranslation();
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
 
   const renderCategories = (categories: any) => {
@@ -46,8 +45,15 @@ const Category = () => {
     <>
       <div className={`${styles["container"]}`}>
         <div className={`${styles["header"]}`}>
+          {/* <Translation>
+            {(t) => (
+              <h2 className={`${styles["title-big"]} wpb_wrapper`}>
+                {t("CATEGORY OF PRODUCT")}
+              </h2>
+            )}
+          </Translation> */}
           <h2 className={`${styles["title-big"]} wpb_wrapper`}>
-            Danh mục sản phẩm
+            {t("CATEGORY OF PRODUCT")}
           </h2>
           <picture>
             <img

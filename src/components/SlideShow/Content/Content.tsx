@@ -3,7 +3,10 @@
 import logo from "../../../assets/avatar.svg";
 import "react-slideshow-image/dist/styles.css";
 import styles from "./Content.module.scss";
+import { useTranslation } from "react-i18next";
+
 function Content({ title, text }: any) {
+  const { t } = useTranslation();
   return (
     <div
       className={`${styles["content"]} show position-absolute align-items-center h-100 justify-content-center  text-white text-decoration-none`}
@@ -26,7 +29,7 @@ function Content({ title, text }: any) {
         {text}
       </h2>
       <div className={`${styles["button"]} ${styles["top-to-bottom-third"]}`}>
-        <button className="">SHOP HERE</button>
+        <button className="">{t("SHOP HERE")}</button>
       </div>
     </div>
   );

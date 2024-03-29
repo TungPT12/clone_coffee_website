@@ -1,144 +1,164 @@
 @import "../variable.scss";
 @media (min-width: 768px) {
-    .form h3 {
-        color: white;
-        text-align: center;
+  .form h3 {
+    color: white;
+    text-align: center;
+  }
+  .form {
+    .icon {
+      display: none;
     }
-    .form {
-        .icon {
-            display: none;
-        }
-    }
-    .form {
-        width: 28%;
-        display: flex;
-        flex-direction: column;
-        background-color: #0000008f;
-        height: fit-content;
-        padding: 3rem 1.5rem;
-        border-radius: 10px;
-    }
-    .form input {
-        background: none;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid #dfdee0;
-        margin-bottom: 2rem;
-        padding-left: 0.5rem;
-        padding-bottom: 1rem;
-        padding-top: 1rem;
-        width: 100%;
-    }
-    .loginpage {
-        background-image: url("../../assets/4536e153-5357-4018-8902-dfbd62e9985d.png");
-        //   background-color: aqua;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-    .button-login {
-        background: $colorButton;
-        border: none;
-        border-radius: 1rem;
-        font-weight: 600;
-    }
-    .forgot {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-    }
-    .accounts {
-        display: flex;
-        flex-direction: column;
-    }
-    .passwords {
-        display: flex;
-        flex-direction: column;
-    }
+  }
+  .form {
+    width: 28%;
+    display: flex;
+    flex-direction: column;
+    background-color: #0000008f;
+    height: fit-content;
+    padding: 3rem 1.5rem;
+    border-radius: 10px;
+  }
+  .form input {
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #dfdee0;
+    margin-bottom: 2rem;
+    padding-left: 0.5rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    width: 100%;
+  }
+  .loginpage {
+    background-image: url("../../assets/4536e153-5357-4018-8902-dfbd62e9985d.png");
+    //   background-color: aqua;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .button-login {
+    background: $colorButton;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 600;
+  }
+  .forgot {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .accounts {
+    display: flex;
+    flex-direction: column;
+  }
+  .passwords {
+    display: flex;
+    flex-direction: column;
+  }
+  .password-input-wrapper {
+    position: relative;
+  }
+  .input-password {
+    padding-right: 40px;
+    /* Khoảng cách để chứa biểu tượng mắt */
+  }
+  .password-toggle-button {
+    position: absolute;
+    top: 48%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .password-toggle-icon {
+    color: #888;
+    font-size: 20px;
+  }
 }
 
 @media (max-width: 767px) {
-    .loginpage {
-        background-image: url("../../assets/backgroud_login_mobile.jpg");
-        height: 100vh;
-        background-size: cover;
-        background-repeat: no-repeat;
-        padding-left: 3rem;
-        padding-right: 3rem;
-        text-wrap: nowrap;
+  .loginpage {
+    background-image: url("../../assets/backgroud_login_mobile.jpg");
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    text-wrap: nowrap;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 60%;
+    gap: 1rem;
+  }
+  .button-login {
+    margin-top: 2rem;
+    background: $colorButton;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 700;
+  }
+  .input-account {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid wheat;
+    font-size: 15px;
+    outline: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    &::placeholder {
+      color: white;
+      opacity: 0.8;
     }
-    .form {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding-top: 60%;
-        gap: 1rem;
+    width: 90%;
+  }
+  .input-password {
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    &::placeholder {
+      color: white;
+      opacity: 0.8;
     }
-    .button-login {
-        margin-top: 2rem;
-        background: $colorButton;
-        border: none;
-        border-radius: 1rem;
-        font-weight: 700;
-    }
-    .input-account {
-        background-color: transparent;
-        border: none;
-        border-bottom: 1px solid wheat;
-        font-size: 15px;
-        outline: none;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0.5rem;
-        &::placeholder {
-            color: white;
-            opacity: 0.8;
-        }
-        width: 90%;
-    }
-    .input-password {
-        background-color: transparent;
-        border: none;
-        font-size: 15px;
-        outline: none;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        padding-left: 0.5rem;
-        &::placeholder {
-            color: white;
-            opacity: 0.8;
-        }
-        width: 90%;
-    }
-    .account {
-        display: none;
-    }
-    .password {
-        display: none;
-    }
-    .text {
-        color: white;
-        font-size: 30px;
-    }
-    .forgot {
-        color: white;
-        display: flex;
-        flex-direction: column;
-    }
-    .button-login {
-        background: $colorButton;
-        border: none;
-        border-radius: 1rem;
-        font-weight: 600;
-        margin-right: 2rem;
-    }
-    .link {
-        font-size: 15px;
-    }
-    .input {
-        border-bottom: 1px solid wheat;
-    }
+    width: 90%;
+  }
+  .account {
+    display: none;
+  }
+  .password {
+    display: none;
+  }
+  .text {
+    color: white;
+    font-size: 30px;
+  }
+  .forgot {
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  .button-login {
+    background: $colorButton;
+    border: none;
+    border-radius: 1rem;
+    font-weight: 600;
+    margin-right: 2rem;
+  }
+  .link {
+    font-size: 15px;
+  }
+  .input {
+    border-bottom: 1px solid wheat;
+  }
 }

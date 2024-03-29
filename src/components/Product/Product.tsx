@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { cartActions } from "@/lib/slice/features/cart/cartSlice";
 import BillCart from "../BillCart/BillCart";
 import Link from "next/link";
+import { Translation } from "react-i18next";
 const Product = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: categories } = useSWR("GET_CATEGORY", categoryService.getAll);
@@ -102,7 +103,13 @@ const Product = () => {
     <>
       <div className={`${styles["container"]}`}>
         <div className={`${styles["header"]}`}>
-          <h2 className={`${styles["title-big"]} wpb_wrapper`}>MENU GRADEN</h2>
+          <Translation>
+            {(t) => (
+              <h2 className={`${styles["title-big"]} wpb_wrapper`}>
+                {t("MENU")}
+              </h2>
+            )}
+          </Translation>
           <picture>
             <img
               src="https://corretto.qodeinteractive.com/wp-content/uploads/2018/04/title-separator.png"

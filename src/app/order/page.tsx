@@ -12,6 +12,7 @@ import orderService from "@/services/order/order.service";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
+import useSWR, { mutate } from "swr";
 
 export default function Cart() {
   const [activeTab, setActiveTab] = useState({
@@ -19,21 +20,37 @@ export default function Cart() {
     pending: false,
   });
   const [isOpenBillOrder, setIsOpenBillOrder] = useState(false);
+  const [listSlug, setlistSlug] = useState([]);
   const [listId, setlistId] = useState();
   const notifyFail = () => toast.error("Có lỗi xảy ra");
   const [orderData, setOrder] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    var item = localStorage.getItem("orderGuest");
+    let item = localStorage.getItem("orderGuest");
+    let slugs = localStorage.getItem("listSlug");
     if (item) {
       var myObject = JSON.parse(item);
       setlistId(myObject);
     }
+    if (slugs) {
+      let myObject = JSON.parse(slugs);
+      setlistSlug(myObject);
+    }
+    // console.log(listSlug.length)
   }, []);
 
   const closeBillOrder = () => {
     setIsOpenBillOrder(false);
   };
+
+  // const { data: listOrders } = useSWR("GET_LIST_ORDER", () => {
+  //   return orderService.getOrdersBySlug(listSlug);
+  // });
+  const { data: listOrders } = useSWR("GET_LIST_ORDER", () => {
+    console.log(listSlug);
+    return orderService.getOrdersBySlug(listSlug);
+  });
 
   const viewOrder = (slug: any) => {
     orderService
@@ -154,10 +171,10 @@ export default function Cart() {
   //     );
   //   }
   // };
-  const renderProduct = (listId: any) => {
+  const renderProduct = (listOrders: any) => {
     return (
       <div>
-        {listId?.map((slug: any, index: number) => (
+        {listOrders?.map((slug: any, index: number) => (
           <div key={slug.slug} className={`${styles["t-row"]} w-100 d-flex`}>
             <div className="f-1 py-3 d-flex align-items-center">
               {index + 1}
@@ -200,6 +217,10 @@ export default function Cart() {
     );
   };
 
+  useEffect(() => {
+    mutate("GET_LIST_ORDER");
+  }, [listSlug]);
+
   return (
     <div className="position-relative">
       <Navbar />
@@ -236,7 +257,7 @@ export default function Cart() {
         </div>
 
         <div className={`${styles.tabContent}`}>
-          {listId ? (
+          {listOrders ? (
             <div className={`${styles["cart-wrapper"]}`}>
               <div className="cart-product">
                 <div className={`${styles["t-head"]} `}>
@@ -263,7 +284,11 @@ export default function Cart() {
                   </div>
                 </div>
                 <div className={`${styles["t-body"]} `}>
-                  {renderProduct(listId)}
+                  {!listOrders ? (
+                    <h1>Đang load thằng ngủ chờ tí!</h1>
+                  ) : (
+                    renderProduct(listOrders)
+                  )}
                 </div>
               </div>
             </div>

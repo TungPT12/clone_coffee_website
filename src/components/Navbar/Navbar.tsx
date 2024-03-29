@@ -9,8 +9,7 @@ import SecondNavBar from "./SecondNavBar/SecondNavBar";
 import {
   faAlignJustify,
   faCartArrowDown,
-  faList,
-  faSearch,
+  faEarth,
 } from "@fortawesome/free-solid-svg-icons";
 import CartNavBar from "./CartNavBar/CartNavBar";
 import { useEffect, useState } from "react";
@@ -19,8 +18,11 @@ import { RootState } from "@/lib/store";
 import AuthorNavBar from "./AuthorNavBar/AuthorNavBar";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import BillCart from "../BillCart/BillCart";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
+  const { t } = useTranslation();
+
   const [navListOpen, setNavListOpen] = useState(true);
   const { access_token } = useSelector((state: RootState) => state.authn);
   const [username, setUsername] = useState<string | null>(null);
@@ -35,14 +37,14 @@ function Navbar() {
 
   useEffect(() => {
     if (access_token) {
-      const decodedToken: JwtPayload & { username: string } =
+      const decodedToken: JwtPayload & { email: string } =
         jwtDecode(access_token);
 
       // Extract the username from the decoded token
-      const { username } = decodedToken;
+      const { email } = decodedToken;
 
       // Set the username in state
-      setUsername(username);
+      setUsername(email);
     }
   }, [access_token]);
 
@@ -75,13 +77,15 @@ function Navbar() {
             <li
               className={`h-100 d-flex align-items-center ${styles["wrap-logo"]}`}
             >
-              <picture className={`h-100 mt-4`}>
-                <img
-                  className={`h-75 ${styles["logo"]}`}
-                  src="https://corretto.qodeinteractive.com/wp-content/themes/corretto/assets/img/logo-light.png"
-                  alt="light logo"
-                />
-              </picture>
+              <Link className={`h-100 mt-4`} href={"/"}>
+                <picture>
+                  <img
+                    className={`h-75 ${styles["logo"]}`}
+                    src="https://corretto.qodeinteractive.com/wp-content/themes/corretto/assets/img/logo-light.png"
+                    alt="light logo"
+                  />
+                </picture>
+              </Link>
             </li>
             <li className={`${styles["nav-container"]}h-100`}>
               <ul className={`${styles["nav-list"]}`}>
@@ -95,7 +99,7 @@ function Navbar() {
                     <span
                       className={`d-flex flex-column ${styles["item-outer"]} `}
                     >
-                      Home
+                      {t("Home")}
                     </span>
                   </Link>
                   <div
@@ -133,7 +137,7 @@ function Navbar() {
                     <span
                       className={`d-flex flex-column ${styles["item-outer"]} `}
                     >
-                      Shop
+                      {t("Shop")}
                     </span>
                   </Link>
                   <div
@@ -189,7 +193,7 @@ function Navbar() {
                     <span
                       className={`d-flex flex-column ${styles["item-outer"]} `}
                     >
-                      Order
+                      {t("Order")}
                     </span>
                   </Link>
                   <div
@@ -199,16 +203,20 @@ function Navbar() {
                 <li
                   className={`${styles["nav-item"]} position-relative text-uppercase text-white h-100`}
                 >
-                  <Link
-                    href="/"
+                  <div
                     className={`${styles["nav-link"]} align-items-center h-100 justify-content-center d-flex text-white text-decoration-none`}
                   >
                     <span
                       className={`d-flex flex-column ${styles["item-outer"]} `}
                     >
-                      <FontAwesomeIcon icon={faSearch} />
+                      <FontAwesomeIcon icon={faEarth} />
                     </span>
-                  </Link>
+                  </div>
+                  <div
+                    className={` ${styles["second-navbar"]} position-absolute`}
+                  >
+                    <SecondNavBar />
+                  </div>
                 </li>
                 {access_token ? (
                   <li
@@ -257,7 +265,7 @@ function Navbar() {
                       <span
                         className={`d-flex flex-column ${styles["item-outer"]} `}
                       >
-                        Login
+                        {t("Login")}
                       </span>
                     </Link>
                   </li>

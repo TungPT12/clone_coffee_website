@@ -4,6 +4,8 @@ import styles from "./EditProfile.module.scss";
 import profileService from "@/services/profile/profile.service";
 import { ToastContainer, toast } from "react-toastify";
 import { mutate } from "swr";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
 const EditProfile = ({
   dataUser,
 
@@ -20,6 +22,7 @@ const EditProfile = ({
 }) => {
   const [gender, setGender] = useState("");
   const [dataUpdateUser, setdataUpdateUser] = useState(dataUser);
+  const [error, setError] = useState("");
 
   const handleUpdate = () => {
     const formData = new FormData();
@@ -138,13 +141,32 @@ const EditProfile = ({
               </label>
               <input
                 onChange={(e) => {
-                  setdataUpdateUser({
-                    ...dataUpdateUser,
-                    phone: e.target.value,
-                  });
+                  const phoneNumber = e.target.value;
+                  const phoneNumberRegex = /^[0-9]{10}$/;
+
+                  if (phoneNumberRegex.test(phoneNumber)) {
+                    setError("");
+                    setdataUpdateUser({
+                      ...dataUpdateUser,
+                      phone: phoneNumber,
+                    });
+                  } else {
+                    setError("Vui long nhap dung dinh dang");
+                  }
                 }}
                 type="text"
               />
+              {error ? (
+                <div className="d-flex text-warning fw-500 align-items-center ps-2 pb-2 mb-1 pt-0 ">
+                  <FontAwesomeIcon
+                    icon={faWarning}
+                    className="icon-warning me-2"
+                  />
+                  {error}
+                </div>
+              ) : (
+                ""
+              )}
             </div>
             <div className={`${styles.accounts}`}>
               <label

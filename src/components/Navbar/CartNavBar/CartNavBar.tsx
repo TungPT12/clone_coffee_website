@@ -12,7 +12,7 @@ import { faWarning } from "@fortawesome/free-solid-svg-icons";
 function CartNavBar() {
   const DefaultImage =
     "https://q8laser.com/wp-content/uploads/2021/08/ly-cafe-vector.jpg";
-  // const [cart, setCart] = useState<any[]>([]);
+
   const { products, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
@@ -35,12 +35,12 @@ function CartNavBar() {
         className={`${styles["cart"]}`}
         key={`${product._id}-${product.size}`}
       >
-
         <picture>
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}${product?.image}`}
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}/${product?.image}`}
             alt={product.name}
             className={`${styles["image"]}`}
+            onError={handleImageError}
           />
         </picture>
 
@@ -50,7 +50,10 @@ function CartNavBar() {
             <span className="me-3">Quantity:</span>
             <span>{product?.quantity}</span>
           </div>
-          <span>${product?.quantity * product.price_new}</span>
+          <span>
+            {(product?.quantity * product.price_new).toLocaleString("vi-VN")}{" "}
+            VND
+          </span>
         </div>
       </div>
     ));
@@ -79,7 +82,7 @@ function CartNavBar() {
         <div className={`${styles["total-cart"]}`}>
           <div className={`${styles["money-cart"]}`}>
             <span>Total:</span>
-            <span>${totalPrice}</span>
+            <span>{totalPrice.toLocaleString("vi-VN")} VND</span>
           </div>
           <Link
             href={`/cart?scrollToElement=cart`}

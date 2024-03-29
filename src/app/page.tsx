@@ -1,15 +1,28 @@
 "use client";
-import Blog from "@/components/Blog/Blog";
-import Category from "@/components/Category/Category";
-import Footer from "@/components/Footer/Footer";
-import Gallery from "@/components/Gallery/Gallery";
-// import Navbar from "@/components/Navbar/Navbar";
-const Navbar = dynamic(() => import("../components/Navbar/Navbar"), {
+
+const Blog = dynamic(() => import("../components/Blog/Blog"), {
   ssr: false,
 });
 
-import Product from "@/components/Product/Product";
-import SlideShow from "@/components/SlideShow/SlideShow";
+const Navbar = dynamic(() => import("../components/Navbar/Navbar"), {
+  ssr: false,
+});
+const Category = dynamic(() => import("../components/Category/Category"), {
+  ssr: false,
+});
+const Product = dynamic(() => import("../components/Product/Product"), {
+  ssr: false,
+});
+const SlideShow = dynamic(() => import("../components/SlideShow/SlideShow"), {
+  ssr: false,
+});
+const Gallery = dynamic(() => import("../components/Gallery/Gallery"), {
+  ssr: false,
+});
+const Footer = dynamic(() => import("../components/Footer/Footer"), {
+  ssr: false,
+});
+
 import { RootState } from "@/lib/store";
 import dynamic from "next/dynamic";
 import { useSelector } from "react-redux";
