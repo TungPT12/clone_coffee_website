@@ -28,7 +28,6 @@ import dynamic from "next/dynamic";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  const { token } = useSelector((state: RootState) => state.authn);
   return (
     <main>
       <Navbar />

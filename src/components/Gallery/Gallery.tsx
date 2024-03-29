@@ -7,7 +7,7 @@ const Gallery = () => {
     <div className={`${styles["container"]}`}>
       <div className={`${styles["header"]} `}>
         <h2 className={`${styles["title-big"]} wpb_wrapper`}>
-          <Translation text="GALLERY" />
+          <Translation text="GALLERIES" />
         </h2>
         <picture>
           <img
